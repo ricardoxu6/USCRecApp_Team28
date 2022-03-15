@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.USCRecApp_Team28">
         <activity
+            android:name=".MapActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
