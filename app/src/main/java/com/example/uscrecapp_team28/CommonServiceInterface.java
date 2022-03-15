@@ -1,5 +1,7 @@
 package com.example.uscrecapp_team28;
 
+import java.util.Map;
+
 public abstract class CommonServiceInterface implements ActivitySwitchingHelperInterface {
     public boolean to_login_page() {
         return false;
@@ -26,7 +28,7 @@ public abstract class CommonServiceInterface implements ActivitySwitchingHelperI
     abstract public boolean view_profile();
     abstract public boolean view_all_timeslots();
     abstract public boolean make_reservation();
-    abstract public boolean cancel_reservation();
+    abstract public boolean cancel_reservation(String reservation_id);
     abstract public boolean join_waitlist();
-    abstract public boolean view_all_reservations();
+    abstract public Map view_all_reservations();
 }

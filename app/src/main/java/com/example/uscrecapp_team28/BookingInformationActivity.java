@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,7 +19,9 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class BookingInformationActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
@@ -39,64 +42,23 @@ public class BookingInformationActivity extends AppCompatActivity {
         mHistoryRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mHistoryLayoutManager = new LinearLayoutManager(this);
-        new GetBookingInformation().execute();
+        //call agent to display reservation
+        Agent agent_curr = ((MyApplication) this.getApplication()).getAgent();
+        HashMap<String,ArrayList<BookingItem>> m = agent_curr.view_all_reservations();
+        ArrayList<BookingItem> futureList = (ArrayList<BookingItem>) m.get("future");
+        ArrayList<BookingItem> historyList = (ArrayList<BookingItem>) m.get("history");
+        //set up adapter
+        mAdapter = new BookingInformationAdapter(futureList,agent_curr);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+        mHistoryAdapter = new PastBookingInformationAdapter(historyList);
+        mHistoryRecyclerView.setLayoutManager(mHistoryLayoutManager);
+        mHistoryRecyclerView.setAdapter(mHistoryAdapter);
 
     }
 
-    class GetBookingInformation extends AsyncTask<Void, Void, Void> {
-        ArrayList<BookingItem> futureList = new ArrayList<>();
-        ArrayList<BookingItem> historyList = new ArrayList<>();
-        @Override
-        protected Void doInBackground(Void... voids){
-            try{
-                //connect to sql database
-                Class.forName("com.mysql.jdbc.Driver");
-                String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
-                Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
-                Statement s = connection.createStatement();
-//                String userId = sp1.getString("user_id",null);
-                String userId = "0";
-                //query the database for all user's reservation
-                String query = String.format("SELECT \n" +
-                        "\treservation.reservation_id,datelist.date,center.name AS center_name,timeslot.start_time,timeslot.finish_time \n" +
-                        "FROM reservation \n" +
-                        "JOIN user \n" +
-                        "JOIN timeslot \n" +
-                        "JOIN center\n" +
-                        "JOIN datelist\n" +
-                        "ON user.user_id=%s \n" +
-                        "\tAND reservation.user_id=user.user_id \n" +
-                        "    AND reservation.timeslot_id=timeslot.timeslot_id\n" +
-                        "\tAND center.center_id=timeslot.center_id\n" +
-                        "    AND datelist.date_id=timeslot.date_id;", userId);
-                ResultSet result = s.executeQuery(query);
-                Date cur_time = new Date();
-                while (result.next()){
-                    //compare with current date and time
-                    Date timeslot_time =  new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.ENGLISH)
-                            .parse(result.getString("date")+" "+result.getString("finish_time"));
-                    //if the endtime is after the current time, future booking
-                    if(timeslot_time.compareTo(cur_time)>0){
-                        futureList.add(new BookingItem(result.getString("reservation_id"),result.getString("center_name"),result.getString("date")+" "+result.getString("start_time")));
-                    }else{
-                        historyList.add(new BookingItem(result.getString("reservation_id"),result.getString("center_name"),result.getString("date")+" "+result.getString("start_time")));
-                    }
-                }
-            } catch (Exception e){
-                System.out.println("Exception");
-            }
-            return null;
-        }
-        @Override
-        protected void onPostExecute(Void aVoid){
-            mAdapter = new BookingInformationAdapter(futureList);
-            mRecyclerView.setLayoutManager(mLayoutManager);
-            mRecyclerView.setAdapter(mAdapter);
-            mHistoryAdapter = new PastBookingInformationAdapter(historyList);
-            mHistoryRecyclerView.setLayoutManager(mHistoryLayoutManager);
-            mHistoryRecyclerView.setAdapter(mHistoryAdapter);
-            super.onPostExecute(aVoid);
-        }
+    public void onClickReturn(View view){
+        startActivity(new Intent(this,MapActivity.class));
     }
 
 }

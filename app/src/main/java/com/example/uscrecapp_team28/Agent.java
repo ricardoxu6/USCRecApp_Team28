@@ -1,5 +1,9 @@
 package com.example.uscrecapp_team28;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Agent extends CommonServiceInterface{
 
     private String device_id;
@@ -90,8 +94,10 @@ public class Agent extends CommonServiceInterface{
     }
 
     @Override
-    public boolean cancel_reservation() {
-        return false;
+    public boolean cancel_reservation(String reservation_id) {
+        ReservationInterface r = new Reservation();
+        r.cancel_reservation(reservation_id);
+        return true;
     }
 
     @Override
@@ -100,7 +106,8 @@ public class Agent extends CommonServiceInterface{
     }
 
     @Override
-    public boolean view_all_reservations() {
-        return false;
+    public HashMap<String, ArrayList<BookingItem>> view_all_reservations() {
+        ReservationInterface r = new Reservation();
+        return r.display_all_reservation_info();
     }
 }
