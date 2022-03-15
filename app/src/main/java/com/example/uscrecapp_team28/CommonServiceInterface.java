@@ -22,7 +22,8 @@ public abstract class CommonServiceInterface implements ActivitySwitchingHelperI
     }
 
     abstract public boolean user_login();
-    abstract public boolean check_profile();
+    abstract public boolean check_loggedin();
+    abstract public boolean view_profile();
     abstract public boolean view_all_timeslots();
     abstract public boolean make_reservation();
     abstract public boolean cancel_reservation();

@@ -2,15 +2,15 @@ package com.example.uscrecapp_team28;
 
 public class Agent extends CommonServiceInterface{
 
-    String unique_userid;
-    String username;  // get from user
-    String password;  // get from user
-    String unique_center_id;  // change when click button
-    String unique_timeslot_id;  // change when click button
+    private String device_id;
+    private String unique_userid;
+    private String username;  // get from user
+    private String password;  // get from user
+    private String unique_center_id;  // change when click button
+    private String unique_timeslot_id;  // change when click button
 
-    public Agent(String uid) {
-        this.unique_userid = uid;
-    }
+    // public Agent(String device_id_param) { this.device_id = device_id_param; }
+    public Agent() {}
 
     public String getUnique_userid() {
         return unique_userid;
@@ -30,6 +30,10 @@ public class Agent extends CommonServiceInterface{
 
     public String getUnique_timeslot_id() {
         return unique_timeslot_id;
+    }
+
+    public String getDevice_id() {
+        return device_id;
     }
 
     public void setUnique_userid(String unique_userid) {
@@ -52,13 +56,26 @@ public class Agent extends CommonServiceInterface{
         this.unique_timeslot_id = unique_timeslot_id;
     }
 
-    @Override
-    public boolean user_login() {
-        return false;
+    public void setDevice_id(String device_id) {
+        this.device_id = device_id;
     }
 
     @Override
-    public boolean check_profile() {
+    public boolean user_login() {
+        LoginCheckerInterface l = new LoginChecker(this.username, this.password);
+        boolean x = l.check_login();
+        System.out.println(x);
+        return x;
+    }
+
+    @Override
+    public boolean check_loggedin() {
+        AuthenticationInterface a = new Authentication(this.device_id);
+        return a.if_already_login();
+    }
+
+    @Override
+    public boolean view_profile() {
         return false;
     }
 
