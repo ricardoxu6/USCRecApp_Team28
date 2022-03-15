@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         android_id = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         // Agent agent_curr = new Agent(android_id);
+        System.out.println("AndroidID" + android_id);
         Agent agent_curr = ((MyApplication) this.getApplication()).getAgent();
         agent_curr.setDevice_id(android_id);
         // check if wifi is connected
