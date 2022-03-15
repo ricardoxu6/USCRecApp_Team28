@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:id="@+id/uscmapLL"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginRight="0dp"
+    android:layout_marginLeft="0dp"
     tools:context=".MapActivity"
     android:background="@color/white"
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/profilesection"
         android:layout_width="match_parent"
         android:layout_height="80dp">
 
@@ -24,10 +29,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Profile"
-            android:layout_toRightOf="@+id/profileButton"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/profileButton"
+            android:text="Profile"
             android:textColor="@color/black"
             android:textSize="21sp"
             android:textStyle="bold" />
@@ -35,62 +40,61 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/uscmapRL"
+        android:layout_below="@id/profilesection"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="1000dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:orientation="horizontal"
-        android:weightSum="100">
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="0dp">
 
         <ImageView
-            android:layout_width="410dp"
-            android:layout_height="500dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="0dp"
+            android:id="@+id/uscmap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
             android:src="@drawable/uscmap" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button1"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="157dp"
             android:layout_marginTop="135dp"
-            android:background="@android:drawable/ic_menu_mylocation"
-            android:onClick="onClickLyon"/>
+            android:background="@drawable/gymicon"
+            android:onClick="onClickLyon" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button2"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="269dp"
             android:layout_marginTop="112dp"
-            android:background="@android:drawable/ic_menu_mylocation"
-            android:onClick="onClickVill"/>
+            android:background="@drawable/gymicon"
+            android:onClick="onClickVill" />
 
         <Space
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
     </RelativeLayout>
 
-    <Space
+    <RelativeLayout
+        android:id="@+id/window"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
-        android:layout_width="360dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp">
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true">
 
         <Button
             android:id="@+id/summaryButton"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:text="View All Booking Information"
-            android:onClick="onClickSummary"/>
+            android:layout_marginLeft="10dp"
+            android:onClick="onClickSummary"
+            android:text="View All Booking Information" />
 
-    </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
 
-</LinearLayout>
