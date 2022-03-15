@@ -60,7 +60,6 @@ public class Authentication implements AuthenticationInterface{
                 String query = String.format("SELECT * FROM user WHERE device_id='%s';", device_id);
                 ResultSet result = s.executeQuery(query);
                 System.out.println("Query Complete");
-                connection.close();
                 while (result.next()){
                     String temp = result.getString("user_id") + "\n";
                     setUnique_userid(temp);
