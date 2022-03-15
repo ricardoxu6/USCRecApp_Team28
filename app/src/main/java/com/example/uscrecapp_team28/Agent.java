@@ -25,18 +25,28 @@ public class Agent extends CommonServiceInterface{
     private String unique_center_id;  // change when click button
     private String unique_timeslot_id;  // change when click button
 
-    // public Agent(String device_id_param) { this.device_id = device_id_param; }
+    private Profile profile = null;
+
     public Agent() {}
 
     // init everything in user, should be called when user open map page
     @Override
-    public boolean init_info() {
+    public void init_info() {
+        profile = new Profile(this.device_id);
+        ResultSet result = profile.getResult();
         try {
-            new InitAgentTask().execute().get();
+            while (result.next()) {
+                setUnique_userid(result.getString("user_id"));
+                setUscid(result.getString("usc_id"));
+                setReal_username(result.getString("username"));
+                setReal_password(result.getString("password"));
+                setPhotourl(result.getString("photourl"));
+                setName(result.getString("name"));
+                setEmail(result.getString("email"));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
     }
 
     public String getUnique_userid() {
@@ -150,8 +160,12 @@ public class Agent extends CommonServiceInterface{
     }
 
     @Override
-    public boolean view_profile() {
-        return false;
+    public ArrayList<String> view_profile() {
+        // make sure the profile is not empty
+        while (this.profile == null) {
+            init_info();
+        }
+        return profile.display_profile();
     }
 
     @Override
@@ -163,7 +177,6 @@ public class Agent extends CommonServiceInterface{
     public boolean make_reservation() {
         return false;
     }
-
 
     @Override
     public boolean cancel_reservation(String reservation_id) {
@@ -186,33 +199,5 @@ public class Agent extends CommonServiceInterface{
     @Override
     public String toString() {
         return unique_userid + uscid + real_username + real_password + photourl + name + email + device_id;
-    }
-
-    class InitAgentTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... voids){
-            try{
-                Class.forName("com.mysql.jdbc.Driver");
-                String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
-                Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
-                Statement s = connection.createStatement();
-                String query = String.format("SELECT * FROM user WHERE device_id='%s';", device_id);
-                ResultSet result = s.executeQuery(query);
-                System.out.println("Query Complete");
-                while (result.next()){
-                    setUnique_userid(result.getString("user_id"));
-                    setUscid(result.getString("usc_id"));
-                    setReal_username(result.getString("username"));
-                    setReal_password(result.getString("password"));
-                    setPhotourl(result.getString("photourl"));
-                    setName(result.getString("name"));
-                    setEmail(result.getString("email"));
-                }
-            } catch (Exception e){
-                e.printStackTrace();
-                System.out.println("Exception");
-            }
-            return null;
-        }
     }
 }
