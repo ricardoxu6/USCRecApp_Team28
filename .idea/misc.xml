@@ -8,6 +8,9 @@
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.17472534179687502" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.317481884057971" />
         <entry key="app/src/main/res/layout/activity_view_timeslot.xml" value="0.317481884057971" />
+        <entry key="app/src/main/res/layout/activity_booking_information.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/booking_item.xml" value="0.42816500711237554" />
+        <entry key="app/src/main/res/layout/content_scrolling.xml" value="0.246875" />
       </map>
     </option>
   </component>
