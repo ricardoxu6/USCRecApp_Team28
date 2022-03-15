@@ -38,10 +38,12 @@
         android:layout_height="500dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp">
+        android:layout_marginRight="0dp"
+        android:orientation="horizontal"
+        android:weightSum="100">
 
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="410dp"
             android:layout_height="500dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="0dp"
