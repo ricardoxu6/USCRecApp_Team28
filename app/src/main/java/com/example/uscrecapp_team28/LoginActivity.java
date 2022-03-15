@@ -18,7 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Agent agent_curr = ((MyApplication) this.getApplication()).getAgent();
+        this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
     }
 
     public void onLoginClick(View view) {
@@ -26,12 +26,12 @@ public class LoginActivity extends AppCompatActivity {
         EditText passwordView = (EditText)findViewById(R.id.password);
         String usernameStr = usernameView.getText().toString();
         String passwordStr = passwordView.getText().toString();
-        agent_curr = ((MyApplication) this.getApplication()).getAgent();
-        agent_curr.setUsername(usernameStr);
-        agent_curr.setPassword(passwordStr);
-        System.out.println(usernameStr);
-        System.out.println(passwordStr);
-        if (agent_curr.user_login()) {
+        this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
+        this.agent_curr.setUsername(usernameStr);
+        this.agent_curr.setPassword(passwordStr);
+//        System.out.println(usernameStr);
+//        System.out.println(passwordStr);
+        if (this.agent_curr.user_login()) {
             System.out.println("LOGIN SUCCESS");
             Intent i = new Intent(LoginActivity.this, MapActivity.class);
             startActivity(i);
@@ -41,12 +41,5 @@ public class LoginActivity extends AppCompatActivity {
             findViewById(R.id.wrong).setVisibility(View.VISIBLE);
             System.out.println("WRONG USERNAME / PASSWORD");
         }
-
-
-
-
-
     }
-
-
 }

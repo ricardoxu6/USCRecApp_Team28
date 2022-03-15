@@ -3,7 +3,6 @@ package com.example.uscrecapp_team28;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 
@@ -23,15 +22,16 @@ public class MainActivity extends AppCompatActivity {
         agent_curr.setDevice_id(android_id);
         // check if the current user device is already logged in, if yes, to Map
         if (agent_curr.check_loggedin()) {
+            agent_curr.init_info();
+            System.out.println(agent_curr);
             Intent i = new Intent(MainActivity.this, MapActivity.class);
             startActivity(i);
-            finish();
         }
         // if no, to login page to login
         else {
             Intent i = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(i);
-            finish();
         }
+        finish();
     }
 }

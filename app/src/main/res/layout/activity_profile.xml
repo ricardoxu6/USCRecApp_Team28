@@ -20,7 +20,8 @@
             android:layout_marginLeft="5dp"
             android:background="@drawable/ic_launcher_background"
             android:text="Back"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:onClick="onClickBack"/>
 
         <LinearLayout
             android:layout_width="match_parent"

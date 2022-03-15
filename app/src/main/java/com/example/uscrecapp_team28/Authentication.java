@@ -46,7 +46,6 @@ public class Authentication implements AuthenticationInterface{
             System.out.println("ALREADY LOGIN");
             return true;
         }
-
     }
 
     class AuthenticationTask extends AsyncTask<Void, Void, Void> {

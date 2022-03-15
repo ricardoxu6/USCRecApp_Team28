@@ -5,12 +5,13 @@ import java.util.ArrayList;
 public class Profile implements ProfileInterface{
 
     String unique_userid;
+    String uscid;
     String username;
     String password;
+    String photourl;
     String name;
     String email;
-    String uscid;
-    String photourl;
+    String device_id;
 
     public Profile(String uid) {
         this.unique_userid = uid;

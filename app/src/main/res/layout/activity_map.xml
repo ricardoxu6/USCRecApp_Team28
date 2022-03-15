@@ -18,7 +18,8 @@
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:text="View Profile" />
+            android:text="View Profile"
+            android:onClick="onClickProfile"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,7 +56,8 @@
             android:layout_height="30dp"
             android:layout_marginLeft="157dp"
             android:layout_marginTop="135dp"
-            android:background="@android:drawable/ic_menu_mylocation" />
+            android:background="@android:drawable/ic_menu_mylocation"
+            android:onClick="onClickLyon"/>
 
         <Button
             android:id="@+id/button2"
@@ -63,7 +65,8 @@
             android:layout_height="30dp"
             android:layout_marginLeft="269dp"
             android:layout_marginTop="112dp"
-            android:background="@android:drawable/ic_menu_mylocation" />
+            android:background="@android:drawable/ic_menu_mylocation"
+            android:onClick="onClickVill"/>
 
         <Space
             android:layout_width="wrap_content"
@@ -85,8 +88,8 @@
             android:id="@+id/summaryButton"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:text="View All Booking Information" />
-
+            android:text="View All Booking Information"
+            android:onClick="onClickSummary"/>
 
     </LinearLayout>
 
