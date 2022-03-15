@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -19,15 +20,30 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
         ArrayList<String> profile_result = agent_curr.view_profile();
-        String unique_userid = profile_result.get(0);
+//        String unique_userid = profile_result.get(0);
+
         String uscid = profile_result.get(1);
+        final TextView profile_uscid = (TextView) findViewById(R.id.profile_uscid);
+        profile_uscid.setText(uscid);
+
         String username = profile_result.get(2);
-        String password = profile_result.get(3);
-        String photourl = profile_result.get(4);
+        final TextView profile_username = (TextView) findViewById(R.id.profile_username);
+        profile_username.setText(username);
+
+//        String password = profile_result.get(3);
+//        String photourl = profile_result.get(4);
+
         String name = profile_result.get(5);
+        final TextView profile_name = (TextView) findViewById(R.id.profile_name);
+        profile_name.setText(name);
+
         String email = profile_result.get(6);
+        final TextView profile_email = (TextView) findViewById(R.id.profile_email);
+        profile_email.setText(email);
+
         String device_id = profile_result.get(7);
-        // change the profile display using these information
+        final TextView profile_dvid = (TextView) findViewById(R.id.profile_deviceid);
+        profile_dvid.setText(device_id);
     }
 
     public void onClickBack(View view) {
