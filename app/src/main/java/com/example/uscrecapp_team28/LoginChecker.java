@@ -85,6 +85,7 @@ public class LoginChecker implements LoginCheckerInterface{
                     setLoginFlag(true);
                     return null;
                 }
+                connection.close();
             } catch (Exception e){
                 e.printStackTrace();
                 System.out.println("Exception");
@@ -104,6 +105,7 @@ public class LoginChecker implements LoginCheckerInterface{
                 String update = String.format("UPDATE user SET device_id='%s' WHERE username='%s' AND password='%s';", device_id, username, password);
                 int i = s.executeUpdate(update);
                 System.out.println("Update Complete");
+                connection.close();
             } catch (Exception e){
                 e.printStackTrace();
                 System.out.println("Exception");

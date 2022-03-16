@@ -99,10 +99,10 @@
             android:text="View All Booking Information" />
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="top">
 
             <TextView
                 android:layout_width="match_parent"
@@ -123,15 +123,6 @@
                 android:scrollbars="vertical" />
 
         </LinearLayout>
-
-
-
-
-
-
-
-
-
     </RelativeLayout>
 </RelativeLayout>
 

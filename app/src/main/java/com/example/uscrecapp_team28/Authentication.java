@@ -64,6 +64,7 @@ public class Authentication implements AuthenticationInterface{
                     String temp = result.getString("user_id") + "\n";
                     setUnique_userid(temp);
                 }
+                connection.close();
             } catch (Exception e){
                 e.printStackTrace();
                 System.out.println("Exception");
