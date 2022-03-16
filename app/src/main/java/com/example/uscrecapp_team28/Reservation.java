@@ -1,6 +1,25 @@
 package com.example.uscrecapp_team28;
 
+import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,6 +32,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+
 
 public class Reservation implements ReservationInterface{
 
@@ -49,6 +69,7 @@ public class Reservation implements ReservationInterface{
 
     @Override
     public void cancel_reservation(String reservation_id) {
+        //cancel the reservation from sql database
         try {
             new CancelBooking(reservation_id).execute().get();
         } catch (ExecutionException e) {
@@ -56,6 +77,8 @@ public class Reservation implements ReservationInterface{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        //else do not need to notify
 
     }
 

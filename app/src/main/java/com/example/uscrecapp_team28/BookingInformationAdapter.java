@@ -1,5 +1,6 @@
 package com.example.uscrecapp_team28;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.sql.Connection;
@@ -60,7 +63,7 @@ public class BookingInformationAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View view) {
                 String reservation_id = (String)view.getTag();
-                mAgent.cancel_reservation(reservation_id);;
+                mAgent.cancel_reservation(reservation_id);
                 context.startActivity(new Intent(context,BookingInformationActivity.class));
             }
         });
