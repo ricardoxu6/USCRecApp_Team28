@@ -20,14 +20,6 @@ public class Profile implements ProfileInterface{
     String device_id;
     ResultSet profile_result;
 
-    public ResultSet getResult() {
-        return profile_result;
-    }
-
-    public void setResult(ResultSet result) {
-        this.profile_result = result;
-    }
-
     public Profile(String did) {
         this.device_id = did;
         // set all other attributes from the database
@@ -36,6 +28,14 @@ public class Profile implements ProfileInterface{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public ResultSet getResult() {
+        return profile_result;
+    }
+
+    public void setResult(ResultSet result) {
+        this.profile_result = result;
     }
 
     public String getUnique_userid() {
@@ -129,6 +129,7 @@ public class Profile implements ProfileInterface{
                 System.out.println("Query Complete");
                 while (result.next()){
                     setUnique_userid(result.getString("user_id"));
+                    System.out.println("PROFILE: SET UNIQUE USERID: " + unique_userid);
                     setUscid(result.getString("usc_id"));
                     setUsername(result.getString("username"));
                     setPassword(result.getString("password"));

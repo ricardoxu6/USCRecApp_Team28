@@ -18,8 +18,6 @@ public class Reservation implements ReservationInterface{
 
     String unique_userid;
 
-    public Reservation(){}
-
     public Reservation(String uid) {
         this.unique_userid = uid;
     }
@@ -107,8 +105,10 @@ public class Reservation implements ReservationInterface{
                 String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
                 Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
                 Statement s = connection.createStatement();
-//                String userId = sp1.getString("user_id",null);
-                String userId = "0";
+//              String userId = sp1.getString("user_id",null);
+                // String userId = "0";
+                String userId = getUnique_userid();
+                System.out.println("User Unique ID: " + userId);
                 //query the database for all user's reservation
                 String query = String.format("SELECT \n" +
                         "\treservation.reservation_id,datelist.date,center.name AS center_name,timeslot.start_time,timeslot.finish_time \n" +
