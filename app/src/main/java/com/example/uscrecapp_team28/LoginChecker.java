@@ -81,11 +81,11 @@ public class LoginChecker implements LoginCheckerInterface{
                 ResultSet result = s.executeQuery(query);
                 System.out.println("Query Complete");
                 System.out.println(result);
-                connection.close();
                 while (result.next()) {
                     setLoginFlag(true);
                     return null;
                 }
+                connection.close();
             } catch (Exception e){
                 e.printStackTrace();
                 System.out.println("Exception");
