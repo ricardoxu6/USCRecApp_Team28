@@ -34,6 +34,7 @@ import java.util.concurrent.ExecutionException;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class BookingActivity extends AppCompatActivity {
     private RecyclerView tRecyclerView;
@@ -61,6 +62,7 @@ public class BookingActivity extends AppCompatActivity {
         Button button1 = (Button) findViewById(R.id.todaybutton);
         Button button2 = (Button) findViewById(R.id.tomorrowbutton);
         Button button3 = (Button) findViewById(R.id.thirdbutton);
+        TextView center_name = (TextView) findViewById(R.id.center_name);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
         String today = sdf.format(cal.getTime());
@@ -76,12 +78,17 @@ public class BookingActivity extends AppCompatActivity {
         tLayoutManager = new LinearLayoutManager(this);
         intent = getIntent();
         center_id = intent.getStringExtra("gym");
+        if (center_id.equals("1")) {
+            center_name.setText("@ Lyon Recreation Center");
+        } else {
+            center_name.setText("@ USC Village Fitness Center");
+        }
         String curr_date = intent.getStringExtra("datechoice");
         System.out.println("Center Id:" + center_id);
         agent_curr = ((MyApplication) this.getApplication()).getAgent();
         usid = agent_curr.getUnique_userid();
         System.out.println("User Id: "+ usid);
-        ArrayList<TimeslotItem> mylist = agent_curr.view_all_timeslots(center_id,curr_date);
+        ArrayList<TimeslotItem> mylist = agent_curr.view_all_timeslots(center_id, curr_date);
         System.out.println(mylist.size());
         for(int i = 0; i < mylist.size();i++){
             mylist.get(i).setUser_id(usid);

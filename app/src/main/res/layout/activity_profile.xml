@@ -68,101 +68,114 @@
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="400dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="275dp"
-            android:backgroundTint="#CDAEAE"
-            android:alpha="1">
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:alpha="1"
+            android:backgroundTint="#F1D4D4">
+
             <TextView
-                android:layout_marginTop="5dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
                 android:text="Booking Statistics"
                 android:textColor="@color/uscRed"
-                android:textStyle="bold"
-                android:textSize="21sp"/>
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="15dp"
                 android:orientation="horizontal"
                 android:weightSum="3">
+
                 <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_height="match_parent">
+                    android:gravity="center"
+                    android:orientation="vertical">
+
                     <TextView
-                        android:layout_marginTop="25dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
                         android:text="Total"
-                        android:textStyle="bold"
                         android:textColor="#373636"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/profile_total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="125"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
-                        android:textColor="@color/uscRed"/>
+                        android:text="125"
+                        android:textColor="@color/uscRed"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_height="match_parent">
+                    android:gravity="center"
+                    android:orientation="vertical">
+
                     <TextView
-                        android:layout_marginTop="25dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
                         android:text="Upcoming"
-                        android:textStyle="bold"
                         android:textColor="#373636"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/profile_upcoming"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="100"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
-                        android:textColor="@color/uscRed"/>
+                        android:text="100"
+                        android:textColor="@color/uscRed"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_height="match_parent">
+                    android:gravity="center"
+                    android:orientation="vertical">
+
                     <TextView
-                        android:layout_marginTop="25dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
                         android:text="History"
-                        android:textStyle="bold"
                         android:textColor="#373636"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
                     <TextView
                         android:id="@+id/profile_history"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="25"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
-                        android:textColor="@color/uscRed"/>
+                        android:text="25"
+                        android:textColor="@color/uscRed"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
