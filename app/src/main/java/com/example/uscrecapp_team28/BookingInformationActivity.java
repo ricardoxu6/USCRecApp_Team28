@@ -54,7 +54,6 @@ public class BookingInformationActivity extends AppCompatActivity {
         mHistoryAdapter = new PastBookingInformationAdapter(historyList);
         mHistoryRecyclerView.setLayoutManager(mHistoryLayoutManager);
         mHistoryRecyclerView.setAdapter(mHistoryAdapter);
-
     }
 
     public void onClickReturn(View view){

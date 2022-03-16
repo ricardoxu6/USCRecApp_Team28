@@ -109,7 +109,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     class AddPhotoTask extends AsyncTask<Void, Void, Void> {
         @Override
-        protected Void doInBackground(Void... voids){
+        protected Void doInBackground(Void... voids) {
             try {
                 ImageView i = (ImageView)findViewById(R.id.profile_photo);
                 Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL(photourl).getContent());

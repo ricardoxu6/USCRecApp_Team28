@@ -85,6 +85,7 @@ public class Reservation implements ReservationInterface{
                 s.executeUpdate(query);
                 System.out.println(String.format("after execution of query delete %s from database",reservation_id));
                 //also notify the user
+                connection.close();
             } catch (Exception e){
                 System.out.println("Exception");
                 e.printStackTrace();
@@ -135,6 +136,7 @@ public class Reservation implements ReservationInterface{
                         listMap.get("history").add(new BookingItem(result.getString("reservation_id"),result.getString("center_name"),result.getString("date")+" "+result.getString("start_time")));
                     }
                 }
+                connection.close();
             } catch (Exception e){
                 System.out.println("Exception");
             }

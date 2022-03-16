@@ -138,6 +138,7 @@ public class Profile implements ProfileInterface{
                     setEmail(result.getString("email"));
                 }
                 setResult(result);
+                connection.close();
             } catch (Exception e){
                 e.printStackTrace();
                 System.out.println("Exception");
