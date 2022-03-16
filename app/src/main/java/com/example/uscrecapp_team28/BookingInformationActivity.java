@@ -30,11 +30,9 @@ public class BookingInformationActivity extends AppCompatActivity {
     private RecyclerView.Adapter mHistoryAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.LayoutManager mHistoryLayoutManager;
-    private SharedPreferences sp1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sp1=this.getSharedPreferences("Login", MODE_PRIVATE);
         setContentView(R.layout.activity_booking_information);
         mRecyclerView = findViewById(R.id.recyclerView);
         mHistoryRecyclerView = findViewById(R.id.HistoryrecyclerView);
