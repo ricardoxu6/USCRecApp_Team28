@@ -113,6 +113,14 @@ public class Reservation implements ReservationInterface{
                 while(timeResult.next()){
                     time_id = timeResult.getInt("timeslot_id");
                 }
+                //get the date
+                String getDateQuery = String.format("SELECT date_id FROM timeslot \n" +
+                        "\tWHERE timeslot_id=;",time_id);
+                ResultSet dateResult = s.executeQuery(getDateQuery);
+                int date_id=-1;
+                while(dateResult.next()){
+                    date_id = dateResult.getInt("date_id");
+                }
                 //update the database by delete the reservation
                 String query = String.format(
                         "DELETE from reservation\n" +
@@ -120,6 +128,9 @@ public class Reservation implements ReservationInterface{
 
                 s.executeUpdate(query);
                 System.out.println(String.format("after execution of query delete %s from database",reservation_id));
+                String deleteAvaiQuery = String.format("DELETE FROM availability\n" +
+                        "\tWHERE user_id=%s AND date_id=%s;",getUnique_userid(),date_id);
+                s.executeUpdate(deleteAvaiQuery);
                 String lastcheck = String.format(
                         "SELECT COUNT(reservation.timeslot_id) AS count FROM reservation WHERE reservation.timeslot_id = %s;",  time_id);
                 ResultSet result2 = s.executeQuery(lastcheck);
