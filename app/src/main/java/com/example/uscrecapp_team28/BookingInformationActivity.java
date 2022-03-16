@@ -47,6 +47,7 @@ public class BookingInformationActivity extends AppCompatActivity {
         mHistoryLayoutManager = new LinearLayoutManager(this);
         //call agent to display reservation
         Agent agent_curr = ((MyApplication) this.getApplication()).getAgent();
+
         HashMap<String,ArrayList<BookingItem>> m = agent_curr.view_all_reservations();
         ArrayList<BookingItem> futureList = (ArrayList<BookingItem>) m.get("future");
         ArrayList<BookingItem> historyList = (ArrayList<BookingItem>) m.get("history");

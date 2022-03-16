@@ -179,8 +179,10 @@ public class Agent extends CommonServiceInterface{
     }
 
     @Override
-    public boolean view_all_timeslots() {
-        return false;
+    public ArrayList<TimeslotItem> view_all_timeslots(String center_id, String thisdate) {
+        TimeSlotInterface t = new TimeSlot();
+        return t.display_all_timeslot_info(center_id, thisdate);
+
     }
 
     @Override

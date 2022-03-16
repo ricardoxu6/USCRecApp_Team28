@@ -17,6 +17,9 @@ import android.widget.RelativeLayout;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MapActivity extends AppCompatActivity {
 
     private Agent agent_curr;
@@ -109,7 +112,11 @@ public class MapActivity extends AppCompatActivity {
             return;
         }
         Intent i = new Intent(MapActivity.this, BookingActivity.class);
-        i.putExtra("gym", 1);
+        i.putExtra("gym", "1");
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+        Date now = new Date();
+        String strDate = sdfDate.format(now);
+        i.putExtra("datechoice", strDate);
         startActivity(i);
         finish();
     }
@@ -123,7 +130,11 @@ public class MapActivity extends AppCompatActivity {
             return;
         }
         Intent i = new Intent(MapActivity.this, BookingActivity.class);
-        i.putExtra("gym", 2);
+        i.putExtra("gym", "2");
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");
+        Date now = new Date();
+        String strDate = sdfDate.format(now);
+        i.putExtra("datechoice", strDate);
         startActivity(i);
         finish();
     }
