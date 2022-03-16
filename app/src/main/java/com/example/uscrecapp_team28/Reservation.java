@@ -77,13 +77,14 @@ public class Reservation implements ReservationInterface{
                 Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
                 Statement s = connection.createStatement();
                 System.out.println("after connection");
-                //query the database for all user's reservation
+                //update the database by delete the reservation
                 String query = String.format(
                         "DELETE from reservation\n" +
                                 "\tWHERE reservation.reservation_id=%s;", reservation_id);
 
                 s.executeUpdate(query);
-                System.out.println(String.format("after execution of query delete %s from database", reservation_id));
+                System.out.println(String.format("after execution of query delete %s from database",reservation_id));
+                //also notify the user
             } catch (Exception e){
                 System.out.println("Exception");
                 e.printStackTrace();
