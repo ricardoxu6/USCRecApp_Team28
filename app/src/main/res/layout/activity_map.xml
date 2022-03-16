@@ -17,25 +17,27 @@
         android:layout_width="match_parent"
         android:layout_height="80dp">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/profileButton"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:text="View Profile"
+            android:background="@drawable/viewpro"
+            android:backgroundTint="@color/uscRed"
             android:onClick="onClickProfile"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="25dp"
             android:layout_toRightOf="@+id/profileButton"
-            android:text="Profile"
-            android:textColor="@color/black"
-            android:textSize="21sp"
-            android:textStyle="bold" />
+            android:text="View Profile"
+            android:textColor="@color/uscRed"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:onClick="onClickProfile"/>
 
     </RelativeLayout>
 
