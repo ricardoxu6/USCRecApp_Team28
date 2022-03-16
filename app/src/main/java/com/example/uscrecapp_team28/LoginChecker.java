@@ -77,7 +77,7 @@ public class LoginChecker implements LoginCheckerInterface{
                 String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
                 Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
                 Statement s = connection.createStatement();
-                String query = String.format("SELECT * FROM user WHERE username='%s' AND password='%s';", username, password);
+                String query = String.format("SELECT * FROM user WHERE username='%s' AND password='%s';", getUsername(), getPassword());
                 ResultSet result = s.executeQuery(query);
                 System.out.println("Query Complete");
                 System.out.println(result);

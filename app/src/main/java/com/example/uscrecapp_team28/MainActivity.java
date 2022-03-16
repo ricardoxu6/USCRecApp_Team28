@@ -34,8 +34,9 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("WIFI CONNECTED SUCCESS");
         // check if the current user device is already logged in, if yes, to Map
         if (agent_curr.check_loggedin()) {
+            System.out.println("CALL AGENT INIT");
             agent_curr.init_info();
-            System.out.println(agent_curr);
+            System.out.println(agent_curr.getUnique_userid());
             Intent i = new Intent(MainActivity.this, MapActivity.class);
             startActivity(i);
         }

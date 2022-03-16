@@ -33,20 +33,25 @@ public class Agent extends CommonServiceInterface{
     @Override
     public void init_info() {
         profile = new Profile(this.device_id);
-        ResultSet result = profile.getResult();
-        try {
-            while (result.next()) {
-                setUnique_userid(result.getString("user_id"));
-                setUscid(result.getString("usc_id"));
-                setReal_username(result.getString("username"));
-                setReal_password(result.getString("password"));
-                setPhotourl(result.getString("photourl"));
-                setName(result.getString("name"));
-                setEmail(result.getString("email"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        ArrayList<String> result = profile.display_profile();
+        System.out.println("RESULT: " + result);
+        setUnique_userid(result.get(0));
+        setUscid(result.get(1));
+        setReal_username(result.get(2));
+        setReal_password(result.get(3));
+        setPhotourl(result.get(4));
+        setName(result.get(5));
+        setEmail(result.get(6));
+        System.out.println("AGENT: SET UNIQUE USERID: " + unique_userid);
+    }
+
+    @Override
+    public void logout() {
+        LogoutInterface a = new Logout(this.device_id);
+        if (a.user_logout()) {
+            return;
         }
+        logout();
     }
 
     public String getUnique_userid() {
@@ -155,14 +160,19 @@ public class Agent extends CommonServiceInterface{
 
     @Override
     public boolean check_loggedin() {
+        System.out.println("LOGGED IN");
         AuthenticationInterface a = new Authentication(this.device_id);
-        return a.if_already_login();
+        boolean already_login = a.if_already_login();
+        while (already_login && this.profile == null) {
+            init_info();
+        }
+        return already_login;
     }
 
     @Override
     public ArrayList<String> view_profile() {
         // make sure the profile is not empty
-        while (this.profile == null) {
+        if (this.profile == null) {
             init_info();
         }
         return profile.display_profile();
@@ -180,7 +190,8 @@ public class Agent extends CommonServiceInterface{
 
     @Override
     public boolean cancel_reservation(String reservation_id) {
-        ReservationInterface r = new Reservation();
+        System.out.println("AGENT: User Unique ID: " + unique_userid);
+        ReservationInterface r = new Reservation(unique_userid);
         r.cancel_reservation(reservation_id);
         return true;
     }
@@ -192,7 +203,8 @@ public class Agent extends CommonServiceInterface{
 
     @Override
     public HashMap<String, ArrayList<BookingItem>> view_all_reservations() {
-        ReservationInterface r = new Reservation();
+        System.out.println("AGENT: User Unique ID: " + unique_userid);
+        ReservationInterface r = new Reservation(unique_userid);
         return r.display_all_reservation_info();
     }
 

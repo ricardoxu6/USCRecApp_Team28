@@ -90,6 +90,23 @@ public class ProfileActivity extends AppCompatActivity {
         finish();
     }
 
+    public void onClickLogout(View view) {
+        System.out.println("LOGOUT");
+        if (!this.agent_curr.check_loggedin()) {
+            Intent i = new Intent(ProfileActivity.this, MainActivity.class);
+            startActivity(i);
+            finish();
+            return;
+        }
+        this.agent_curr.logout();
+        if (!this.agent_curr.check_loggedin()) {
+            Intent i = new Intent(ProfileActivity.this, MainActivity.class);
+            startActivity(i);
+            finish();
+            return;
+        }
+    }
+
     class AddPhotoTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids){

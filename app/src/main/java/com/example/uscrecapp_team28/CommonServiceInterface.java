@@ -33,4 +33,5 @@ public abstract class CommonServiceInterface implements ActivitySwitchingHelperI
     abstract public boolean join_waitlist();
     abstract public HashMap<String, ArrayList<BookingItem>> view_all_reservations();
     abstract public void init_info();
+    abstract public void logout();
 }

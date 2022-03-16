@@ -12,10 +12,10 @@ import java.util.concurrent.ExecutionException;
 public class Authentication implements AuthenticationInterface{
 
     private String device_id;
-    String unique_userid = "";
+    private String unique_userid = "";
 
-    public Authentication(String uid) {
-        this.device_id = uid;
+    public Authentication(String did) {
+        this.device_id = did;
     }
 
     public String getDevice_id() {
