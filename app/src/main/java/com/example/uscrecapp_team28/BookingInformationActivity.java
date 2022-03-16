@@ -9,7 +9,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -53,7 +58,23 @@ public class BookingInformationActivity extends AppCompatActivity {
         mHistoryRecyclerView.setLayoutManager(mHistoryLayoutManager);
         mHistoryRecyclerView.setAdapter(mHistoryAdapter);
     }
-
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        // this method relocate the two buttons (two gyms) relative to different screens
+        super.onWindowFocusChanged(hasFocus);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        // small window
+        View window = findViewById(R.id.recyclerView);
+        View historyWindow = findViewById(R.id.HistoryrecyclerView);
+        LinearLayout.LayoutParams window_param = (LinearLayout.LayoutParams) window.getLayoutParams();
+        LinearLayout.LayoutParams historyWindow_param = (LinearLayout.LayoutParams) historyWindow.getLayoutParams();
+        window_param.height = height/ 3;
+        historyWindow_param.height= height/ 3;
+        window.setLayoutParams(window_param);
+        historyWindow.setLayoutParams(historyWindow_param);
+    }
     public void onClickReturn(View view){
         startActivity(new Intent(this,MapActivity.class));
     }
