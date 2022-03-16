@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,11 +35,14 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+import javax.xml.transform.Result;
+
 
 public class Reservation implements ReservationInterface{
 
     String unique_userid;
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    DocumentReference reference;
     public Reservation(String uid) {
         this.unique_userid = uid;
     }
@@ -100,6 +105,14 @@ public class Reservation implements ReservationInterface{
                 Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
                 Statement s = connection.createStatement();
                 System.out.println("after connection");
+                //get the timeid
+                String getTimeQuery = String.format("SELECT timeslot_id FROM reservation\n" +
+                        "\tWHERE reservation.reservation_id=%s;",reservation_id);
+                ResultSet timeResult = s.executeQuery(getTimeQuery);
+                int time_id=-1;
+                while(timeResult.next()){
+                    time_id = timeResult.getInt("timeslot_id");
+                }
                 //update the database by delete the reservation
                 String query = String.format(
                         "DELETE from reservation\n" +
@@ -107,7 +120,47 @@ public class Reservation implements ReservationInterface{
 
                 s.executeUpdate(query);
                 System.out.println(String.format("after execution of query delete %s from database",reservation_id));
-                //also notify the user
+                String lastcheck = String.format(
+                        "SELECT COUNT(reservation.timeslot_id) AS count FROM reservation WHERE reservation.timeslot_id = %s;",  time_id);
+                ResultSet result2 = s.executeQuery(lastcheck);
+                int count = 0;
+                while(result2.next()){
+                    count = result2.getInt("count");
+                }
+                //compare the count from recreational_center copacity
+                int capacity = 0;
+                String capacityQuery = String.format("SELECT max_capacity FROM timeslot\n" +
+                        "\tWHERE timeslot_id=%s;",time_id);
+                ResultSet capacityResult = s.executeQuery(capacityQuery);
+                while(capacityResult.next()){
+                    capacity = capacityResult.getInt("max_capacity");
+                }
+                if(count<capacity){
+                    //notify all other users in the waitlist
+                    String waitingUserQuery = String.format("SELECT user_id FROM waitlist\n" +
+                            "\tWHERE timeslot_id=%s;",time_id);
+                    ResultSet waitingUserResult = s.executeQuery(waitingUserQuery);
+                    while(waitingUserResult.next()){
+                        String user_id = waitingUserResult.getString("user_id");
+                        //add the user_id to the firedb document
+                        Map<String, Object> user_map= new HashMap<>();
+                        user_map.put(user_id, user_id);
+                        db.collection("User").document("User")
+                                .set(user_map)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        System.out.println("success");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        System.out.println("fail");
+                                    }
+                                });
+                    }
+                }
                 connection.close();
             } catch (Exception e){
                 System.out.println("Exception");
