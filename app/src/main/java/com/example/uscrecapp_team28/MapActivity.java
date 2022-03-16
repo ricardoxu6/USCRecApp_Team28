@@ -1,18 +1,32 @@
 package com.example.uscrecapp_team28;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MapActivity extends AppCompatActivity {
 
     private Agent agent_curr;
+    private RecyclerView mRecyclerView;
+    private RecyclerView mHistoryRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.Adapter mHistoryAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView.LayoutManager mHistoryLayoutManager;
+    private SharedPreferences sp1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +40,25 @@ public class MapActivity extends AppCompatActivity {
             return;
         }
         agent_curr.init_info();
+        setContentView(R.layout.activity_map);
+        mRecyclerView = findViewById(R.id.recyclerMAP);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setHasFixedSize(true);
+        //call agent to display reservation
+        HashMap<String, ArrayList<BookingItem>> m = agent_curr.view_all_reservations();
+        ArrayList<BookingItem> futureList = (ArrayList<BookingItem>) m.get("future");
+        int size_futureList = futureList.size();
+        ArrayList<BookingItem> nearFutureList = new ArrayList<BookingItem>();
+        for (int i=0; i<3; i++) {
+            if (size_futureList > 0) {
+                nearFutureList.add(futureList.get(i));
+                size_futureList -= 1;
+            }
+        }
+        //set up adapter
+        mAdapter = new RecyclerMapAdapter(futureList,agent_curr);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -47,6 +80,11 @@ public class MapActivity extends AppCompatActivity {
         layoutParams2.leftMargin = imgv.getWidth() * 553 / 756 - layoutParams2.height;
         layoutParams2.topMargin = imgv.getHeight() * 287 / 1012 - layoutParams2.height;
         bt2.setLayoutParams(layoutParams2);
+        // small window
+        View window = findViewById(R.id.recyclerMAP);
+        LinearLayout.LayoutParams window_param = (LinearLayout.LayoutParams) window.getLayoutParams();
+        window_param.height = imgv.getWidth() / 2;
+        window.setLayoutParams(window_param);
     }
 
     public void onClickProfile(View view) {
