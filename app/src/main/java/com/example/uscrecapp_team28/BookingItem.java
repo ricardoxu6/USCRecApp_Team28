@@ -1,9 +1,12 @@
 package com.example.uscrecapp_team28;
 
+import android.graphics.drawable.Drawable;
+
 public class BookingItem {
     private String mReservation_id;
     private String mText1;
     private String mText2;
+    private String imgURL;
 
     public BookingItem(String reservation_id,String text1, String text2) {
         mReservation_id = reservation_id;
@@ -20,5 +23,37 @@ public class BookingItem {
 
     public String getText2() {
         return mText2;
+    }
+
+    public String getmReservation_id() {
+        return mReservation_id;
+    }
+
+    public void setmReservation_id(String mReservation_id) {
+        this.mReservation_id = mReservation_id;
+    }
+
+    public String getmText1() {
+        return mText1;
+    }
+
+    public void setmText1(String mText1) {
+        this.mText1 = mText1;
+    }
+
+    public String getmText2() {
+        return mText2;
+    }
+
+    public void setmText2(String mText2) {
+        this.mText2 = mText2;
+    }
+
+    public String getImgURL() {
+        return imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 }

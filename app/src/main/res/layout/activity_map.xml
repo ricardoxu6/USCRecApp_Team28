@@ -19,8 +19,8 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/profileButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/viewpro"
@@ -35,7 +35,7 @@
             android:layout_toRightOf="@+id/profileButton"
             android:text="View Profile"
             android:textColor="@color/uscRed"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:onClick="onClickProfile"/>
 
@@ -47,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="1000dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="0dp">
 
         <ImageView
@@ -96,15 +96,19 @@
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:onClick="onClickSummary"
-            android:text="View All Booking Information" />
+            android:text="View All Booking Information"
+            android:backgroundTint="@color/uscYellow"
+            android:alpha="0.7"/>
 
         <LinearLayout
+            android:onClick="onClickSummary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="top">
 
             <TextView
+                android:onClick="onClickSummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -115,6 +119,7 @@
                 android:text="UPCOMING BOOKINGS"/>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:onClick="onClickSummary"
                 android:id="@+id/recyclerMAP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

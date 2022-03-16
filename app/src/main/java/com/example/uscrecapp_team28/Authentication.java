@@ -30,6 +30,10 @@ public class Authentication implements AuthenticationInterface{
         this.unique_userid = unique_userid;
     }
 
+    public String getUnique_userid() {
+        return unique_userid;
+    }
+
     @Override
     public boolean if_already_login() {
         // check database for if unique_userid's login column is TRUE
@@ -72,4 +76,6 @@ public class Authentication implements AuthenticationInterface{
             return null;
         }
     }
+
+
 }

@@ -22,6 +22,7 @@
             android:layout_gravity="top|left"
             android:onClick="onClickBack"
             android:text="Back"
+            android:textStyle="bold"
             android:textColor="#fff"
             android:alpha="0.7"/>
 
@@ -71,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="275dp"
-            android:backgroundTint="#B8B9CA"
+            android:backgroundTint="#CDAEAE"
             android:alpha="1">
             <TextView
                 android:layout_marginTop="5dp"

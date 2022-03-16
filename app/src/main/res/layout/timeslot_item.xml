@@ -4,17 +4,14 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:id="@+id/imageBackGround"
         android:layout_width="match_parent"
-        android:layout_height="87dp"
-        android:layout_margin="4dp"
-        android:background="@color/white">
+        android:layout_height="80dp"
+        android:layout_margin="4dp">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="0dp"
+            android:layout_width="47dp"
             android:layout_height="match_parent"
-            android:alpha="0.5"
             android:padding="2dp" />
 
         <TextView
@@ -25,9 +22,8 @@
             android:layout_marginStart="70dp"
             android:layout_marginTop="1dp"
             android:layout_toEndOf="@+id/imageView"
-            android:text="Location: "
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
+            android:text="Time: "
+            android:textColor="@android:color/black"
             android:textSize="15dp" />
 
         <TextView
@@ -38,9 +34,8 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="1dp"
             android:layout_toEndOf="@+id/imageView"
-            android:text="Location: "
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
+            android:text="Time: "
+            android:textColor="@android:color/black"
             android:textSize="15dp" />
 
         <TextView
@@ -48,12 +43,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView"
-            android:layout_marginStart="71dp"
+            android:layout_marginStart="150dp"
             android:layout_marginTop="1dp"
             android:layout_toEndOf="@+id/imageView"
-            android:text="Time: "
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
+            android:text="Remaining Spots "
+            android:textColor="@android:color/black"
             android:textSize="15sp" />
 
         <TextView
@@ -64,24 +58,34 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="2dp"
             android:layout_toEndOf="@+id/imageView"
-            android:text="Time: "
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:textSize="15sp" />
+            android:text="Remaining Spots: "
+            android:textColor="@android:color/black"
+            android:textSize="15dp" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/CancelButton"
-            android:layout_toRightOf="@id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/WaitButton"
+            android:layout_width="57dp"
+            android:layout_height="26dp"
             android:layout_marginTop="50dp"
             android:layout_weight="1"
-            android:background="@color/uscRed"
-            android:onClick="onClickCancel"
-            android:text="cancel"
+            android:background="@color/black"
+            android:onClick="onClickWait"
+            android:text="Join Waitlist"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:translationX="90dp" />
+            android:textSize="10dp"
+            android:translationX="45dp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/BookButton"
+            android:layout_width="60dp"
+            android:layout_height="26dp"
+            android:layout_marginTop="50dp"
+            android:layout_weight="1"
+            android:background="@color/black"
+            android:onClick="onClickBook"
+            android:text="Book"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:translationX="45dp" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -3,15 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_booking_information.xml" value="0.11119554204660588" />
+        <entry key="app/src/main/res/layout/activity_booking.xml" value="0.1328643798828125" />
+        <entry key="app/src/main/res/layout/activity_booking_information.xml" value="0.21354166666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2563405797101449" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24956817626953126" />
-        <entry key="app/src/main/res/layout/activity_map.xml" value="0.25859832763671875" />
-        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.2803009033203126" />
+        <entry key="app/src/main/res/layout/activity_map.xml" value="0.317481884057971" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.317481884057971" />
         <entry key="app/src/main/res/layout/activity_view_timeslot.xml" value="0.317481884057971" />
-        <entry key="app/src/main/res/layout/booking_item.xml" value="0.1539855072463768" />
-        <entry key="app/src/main/res/layout/past_booking_item.xml" value="0.1539855072463768" />
-        <entry key="app/src/main/res/layout/upcoming_item.xml" value="0.1453125" />
+        <entry key="app/src/main/res/layout/booking_item.xml" value="0.40662790934244797" />
+        <entry key="app/src/main/res/layout/past_booking_item.xml" value="0.12291666666666666" />
+        <entry key="app/src/main/res/layout/timeslot_item.xml" value="0.13513513513513514" />
       </map>
     </option>
   </component>
