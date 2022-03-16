@@ -47,14 +47,14 @@ public class MapActivity extends AppCompatActivity {
         //call agent to display reservation
         HashMap<String, ArrayList<BookingItem>> m = agent_curr.view_all_reservations();
         ArrayList<BookingItem> futureList = (ArrayList<BookingItem>) m.get("future");
-        int size_futureList = futureList.size();
-        ArrayList<BookingItem> nearFutureList = new ArrayList<BookingItem>();
-        for (int i=0; i<3; i++) {
-            if (size_futureList > 0) {
-                nearFutureList.add(futureList.get(i));
-                size_futureList -= 1;
-            }
-        }
+//        int size_futureList = futureList.size();
+//        ArrayList<BookingItem> nearFutureList = new ArrayList<BookingItem>();
+//        for (int i=0; i<3; i++) {
+//            if (size_futureList > 0) {
+//                nearFutureList.add(futureList.get(i));
+//                size_futureList -= 1;
+//            }
+//        }
         //set up adapter
         mAdapter = new RecyclerMapAdapter(futureList,agent_curr);
         mRecyclerView.setLayoutManager(mLayoutManager);
