@@ -62,6 +62,8 @@ public class LoginActivity extends AppCompatActivity {
         }
         else {
             findViewById(R.id.wrong).setVisibility(View.VISIBLE);
+            usernameView.getText().clear();
+            passwordView.getText().clear();
             System.out.println("WRONG USERNAME / PASSWORD");
         }
     }

@@ -4,9 +4,18 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
+        android:onClick="onClickSummary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp">
+        android:layout_margin="4dp"
+        android:background="#B1B0AE">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:alpha="0.5"
+            android:padding="2dp" />
 
         <TextView
             android:id="@+id/textView"

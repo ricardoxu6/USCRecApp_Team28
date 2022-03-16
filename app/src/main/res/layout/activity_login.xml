@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_background"
+    android:background="@drawable/tommy"
     tools:context=".LoginActivity">
 
     <TextView
@@ -70,11 +70,13 @@
         android:id="@+id/signinbtn"
         android:layout_below="@id/password"
         android:text="LOGIN"
-        android:backgroundTint="@color/design_default_color_primary"
+        android:backgroundTint="@color/uscRed"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
-        android:onClick="onLoginClick"/>
-
-
+        android:layout_margin="20dp"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:onClick="onLoginClick"
+        android:alpha="0.7"
+        />
 
 </RelativeLayout>
