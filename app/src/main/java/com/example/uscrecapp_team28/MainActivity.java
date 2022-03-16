@@ -1,5 +1,6 @@
 package com.example.uscrecapp_team28;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
@@ -15,13 +16,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.sql.*;
+import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
@@ -58,6 +63,15 @@ public class MainActivity extends AppCompatActivity {
                             NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(),"channel_1").setSmallIcon(R.drawable.phoneicon).setContentTitle("USCRecAPP").setContentText("ther is a spot available!").setPriority(NotificationCompat.PRIORITY_DEFAULT);
                             NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
                             notificationManagerCompat.notify(1,mBuilder.build());
+                            //delete the id from db
+                            Map<String,Object> delete_map = new HashMap<>();
+                            delete_map.put(agent_curr.getUnique_userid(), FieldValue.delete());
+                            reference.update(delete_map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    System.out.println("finish deleting");
+                                }
+                            });
                         }
                     }
                 }
