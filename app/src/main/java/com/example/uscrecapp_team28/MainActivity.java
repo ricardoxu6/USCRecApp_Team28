@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (value != null && value.exists()) {
                     System.out.println("current user id" + agent_curr.getUnique_userid());
-                    System.out.println( "Current data: " + value.getData());
+                    System.out.println("Current data: " + value.getData());
                     for (Map.Entry<String, Object> entry : value.getData().entrySet()){
                         //compare with current input
                         if(entry.getValue().equals(agent_curr.getUnique_userid())){
