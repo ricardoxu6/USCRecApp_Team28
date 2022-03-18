@@ -88,39 +88,83 @@ public class BookingAdapter extends RecyclerView.Adapter{
                     String time_id = Integer.toString(currentItem.getTimeslot_id());
                     System.out.println(user_id);
                     System.out.println(time_id);
-                    Integer re_result = tAgent.make_reservation(user_id, time_id, currentItem.getDate_id(), currentItem.getMax_cap());
-                    if(re_result == 0){
-                        //Successfully added a reservation
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setCancelable(true);
+                    builder.setTitle("Confirmation");
+                    String msg = "You are going to make a reservation on " + times + " at " + currentItem.getCenter_name();
+                    builder.setMessage(msg);
+                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent i1 = new Intent(context, BookingActivity.class);
+                                i1.putExtra("gym", currentItem.getCenter_id());
+                                i1.putExtra("datechoice", currentItem.getDate());
+                                context.startActivity(i1);
+                            }
+                        });
+                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Integer re_result = tAgent.make_reservation(user_id, time_id, currentItem.getDate_id(), currentItem.getMax_cap());
+                                if(re_result == 0){
+                                    //Successfully added a reservation
 
-//                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//                        builder.setCancelable(true);
-//                        builder.setTitle("Message");
-//                        builder.setMessage("You already made a reservation today!");
-//                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//                                dialogInterface.cancel();
-//                            }
-//                        });
-//                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialogInterface, int i) {
-//
-//                            }
-//                        });
-                        }
-                    else if(re_result == 1){
-                        //TimeSlot is full just now
+                                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                                    alertDialog.setTitle("Confirmation");
+                                    String msg1 = "You have successfully made a reservation on " + times + " at " + currentItem.getCenter_name();
+                                    alertDialog.setMessage(msg1);
+                                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    Intent i = new Intent(context, BookingActivity.class);
+                                                    i.putExtra("gym", currentItem.getCenter_id());
+                                                    i.putExtra("datechoice", currentItem.getDate());
+                                                    context.startActivity(i);
+                                                }
+                                            });
+                                    alertDialog.show();
 
-                    }
-                    else if (re_result == 2){
-                        //The user is not available
-                    }
+                                }
+                                else if(re_result == 1){
+                                    //TimeSlot is full just now
+                                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                                    alertDialog.setTitle("");
+                                    String msg2 = "The timeslot is unavailable now. Please Check again.";
+                                    alertDialog.setMessage(msg2);
+                                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    Intent i = new Intent(context, BookingActivity.class);
+                                                    i.putExtra("gym", currentItem.getCenter_id());
+                                                    i.putExtra("datechoice", currentItem.getDate());
+                                                    context.startActivity(i);
+                                                }
+                                            });
+                                    alertDialog.show();
 
-                    Intent i = new Intent(context, BookingActivity.class);
-                    i.putExtra("gym", currentItem.getCenter_id());
-                    i.putExtra("datechoice", currentItem.getDate());
-                    context.startActivity(i);
+                                }
+                                else if (re_result == 2){
+                                    //The user is not available
+                                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                                    alertDialog.setTitle("");
+                                    String msg3 = "You already have a reservation today!";
+                                    alertDialog.setMessage(msg3);
+                                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    Intent i = new Intent(context, BookingActivity.class);
+                                                    i.putExtra("gym", currentItem.getCenter_id());
+                                                    i.putExtra("datechoice", currentItem.getDate());
+                                                    context.startActivity(i);
+                                                }
+                                            });
+                                    alertDialog.show();
+                                }
+                            }
+                        });
+
+
+                    builder.show();
                 }
             });
         }
@@ -132,21 +176,82 @@ public class BookingAdapter extends RecyclerView.Adapter{
                 public void onClick(View view) {
                     String user_id = currentItem.getUser_id();
                     String time_id = Integer.toString(currentItem.getTimeslot_id());
-                    Integer wa_result = tAgent.join_waitlist(user_id, time_id);
-                    if(wa_result == 0){
-                        //Successfully Waitlist
-                    }
-                    else if(wa_result == 1){
-                        //Already have a reservation
 
-                    }
-                    else if (wa_result == 2){
-                        //Already in waitlist
-                    }
-                    Intent i = new Intent(context, BookingActivity.class);
-                    i.putExtra("gym", currentItem.getCenter_id());
-                    i.putExtra("datechoice", currentItem.getDate());
-                    context.startActivity(i);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setCancelable(true);
+                    builder.setTitle("Confirmation");
+                    String msg = "You are going to join the waitlist on " + times + " at " + currentItem.getCenter_name();
+                    builder.setMessage(msg);
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent i1 = new Intent(context, BookingActivity.class);
+                            i1.putExtra("gym", currentItem.getCenter_id());
+                            i1.putExtra("datechoice", currentItem.getDate());
+                            context.startActivity(i1);
+                        }
+                    });
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Integer wa_result = tAgent.join_waitlist(user_id, time_id);
+                            if(wa_result == 0){
+                                //Successfully Waitlist
+                                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                                alertDialog.setTitle("");
+                                String msg3 = "You successfully join the waitlist on " + times + " at " + currentItem.getCenter_name();
+                                alertDialog.setMessage(msg3);
+                                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Intent i = new Intent(context, BookingActivity.class);
+                                                i.putExtra("gym", currentItem.getCenter_id());
+                                                i.putExtra("datechoice", currentItem.getDate());
+                                                context.startActivity(i);
+                                            }
+                                        });
+                                alertDialog.show();
+                            }
+                            else if(wa_result == 1){
+                                //Already have a reservation
+                                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                                alertDialog.setTitle("");
+                                String msg3 = "You already have a reservation on this timeslot!";
+                                alertDialog.setMessage(msg3);
+                                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Intent i = new Intent(context, BookingActivity.class);
+                                                i.putExtra("gym", currentItem.getCenter_id());
+                                                i.putExtra("datechoice", currentItem.getDate());
+                                                context.startActivity(i);
+                                            }
+                                        });
+                                alertDialog.show();
+
+                            }
+                            else if (wa_result == 2){
+                                //Already in waitlist
+                                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                                alertDialog.setTitle("");
+                                String msg3 = "You are already in the waitlist";
+                                alertDialog.setMessage(msg3);
+                                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                Intent i = new Intent(context, BookingActivity.class);
+                                                i.putExtra("gym", currentItem.getCenter_id());
+                                                i.putExtra("datechoice", currentItem.getDate());
+                                                context.startActivity(i);
+                                            }
+                                        });
+                                alertDialog.show();
+                            }
+                        }
+                    });
+
+                    builder.show();
+
                 }
             });
         }
