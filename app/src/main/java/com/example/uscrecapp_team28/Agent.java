@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -187,8 +188,14 @@ public class Agent extends CommonServiceInterface{
     }
 
     @Override
-    public boolean make_reservation() {
-        return false;
+    public Integer make_reservation(String user_id, String timeslot_id, String date_id, int maxcap) {
+        TimeSlot ts = new TimeSlot();
+        ts.setUnique_user_id(user_id);
+        ts.setUnique_timeslot_id(timeslot_id);
+        ts.setDate_id(date_id);
+        ts.setMax_capacity(maxcap);
+        ts.add_user(user_id);
+        return ts.getReserve_result();
     }
 
     @Override
@@ -200,8 +207,13 @@ public class Agent extends CommonServiceInterface{
     }
 
     @Override
-    public boolean join_waitlist() {
-        return false;
+    public Integer join_waitlist(String user_id, String timeslot_id) {
+        TimeSlot ts1 = new TimeSlot();
+        ts1.setUnique_user_id(user_id);
+        ts1.setUnique_timeslot_id(timeslot_id);
+        ts1.join_waitlist(timeslot_id, user_id);
+        return ts1.getWait_result();
+
     }
 
     @Override

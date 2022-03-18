@@ -21,6 +21,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -95,7 +96,11 @@ public class BookingActivity extends AppCompatActivity {
         }
         System.out.println(mylist.get(0).getCurrent_users());
         System.out.println(mylist.get(0).getStart());
-        tAdapter = new BookingAdapter(mylist, agent_curr);
+        try {
+            tAdapter = new BookingAdapter(mylist, agent_curr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         tRecyclerView.setLayoutManager(tLayoutManager);
         tRecyclerView.setAdapter(tAdapter);
     }

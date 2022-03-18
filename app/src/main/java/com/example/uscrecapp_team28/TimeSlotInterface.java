@@ -3,6 +3,6 @@ import java.util.ArrayList;
 
 public interface TimeSlotInterface {
     public ArrayList<TimeslotItem> display_all_timeslot_info(String center_id, String thisdate);
-    public boolean check_availability();
+    public boolean check_availability(String user_id, String date_id);
     public void notify_waitlist();
 }
