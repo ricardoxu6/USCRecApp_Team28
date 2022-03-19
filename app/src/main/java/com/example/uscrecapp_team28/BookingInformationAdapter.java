@@ -2,6 +2,7 @@ package com.example.uscrecapp_team28;
 
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
@@ -13,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -76,8 +78,31 @@ public class BookingInformationAdapter<MyActivity> extends RecyclerView.Adapter 
             @Override
             public void onClick(View view) {
                 String reservation_id = (String)view.getTag();
-                mAgent.cancel_reservation(reservation_id);
-                context.startActivity(new Intent(context,BookingInformationActivity.class));
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setCancelable(true);
+                builder.setTitle("Confirmation");
+                String msg = "You are going to cancel the reservation.";
+                builder.setMessage(msg);
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        context.startActivity(new Intent(context,BookingInformationActivity.class));
+                    }
+                });
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        mAgent.cancel_reservation(reservation_id);
+                        context.startActivity(new Intent(context,BookingInformationActivity.class));
+                    }
+                });
+
+
+                builder.show();
+
+
+
             }
         });
     }
