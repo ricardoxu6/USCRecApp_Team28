@@ -77,6 +77,7 @@ public class BookingAdapter extends RecyclerView.Adapter{
         String times = currentItem.getDate() + "  " + currentItem.getStart() + " - " + currentItem.getFinish();
         ((BookingViewHolder) holder).mTextView1.setText(times);
         int remain_spot = currentItem.getMax_cap() - currentItem.getCurrent_users();
+        // int remain_spot = Math.min(0, currentItem.getMax_cap() - currentItem.getCurrent_users());
         ((BookingViewHolder) holder).mTextView2.setText(Integer.toString(remain_spot));
         if(remain_spot > 0){
             ((BookingViewHolder) holder).waitButton.setVisibility(View.INVISIBLE);
@@ -93,7 +94,7 @@ public class BookingAdapter extends RecyclerView.Adapter{
                     builder.setTitle("Confirmation");
                     String msg = "You are going to make a reservation on " + times + " at " + currentItem.getCenter_name();
                     builder.setMessage(msg);
-                        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        builder.setNegativeButton("BACK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent i1 = new Intent(context, BookingActivity.class);
@@ -102,7 +103,7 @@ public class BookingAdapter extends RecyclerView.Adapter{
                                 context.startActivity(i1);
                             }
                         });
-                        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        builder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Integer re_result = tAgent.make_reservation(user_id, time_id, currentItem.getDate_id(), currentItem.getMax_cap());
@@ -182,7 +183,7 @@ public class BookingAdapter extends RecyclerView.Adapter{
                     builder.setTitle("Confirmation");
                     String msg = "You are going to join the waitlist on " + times + " at " + currentItem.getCenter_name();
                     builder.setMessage(msg);
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    builder.setNegativeButton("BACK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             Intent i1 = new Intent(context, BookingActivity.class);
@@ -191,7 +192,7 @@ public class BookingAdapter extends RecyclerView.Adapter{
                             context.startActivity(i1);
                         }
                     });
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton("CONFIRM", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             Integer wa_result = tAgent.join_waitlist(user_id, time_id);
@@ -249,15 +250,10 @@ public class BookingAdapter extends RecyclerView.Adapter{
                             }
                         }
                     });
-
                     builder.show();
-
                 }
             });
         }
-
-
-
     }
 
     @Override

@@ -68,11 +68,11 @@ public class TimeSlot implements TimeSlotInterface{
         }
         else{
             if(check_full(unique_timeslot_id, max_capacity)){
-                //The time slot is full just now
+                //The time slot is full just now (page not refresh yet)
                 reserve_result = 1;
             }
             else if(!check_availability(unique_user_id, date_id)){
-                //The user is not available
+                //The user is not available (already reserved)
                 reserve_result = 2;
             }
         }
