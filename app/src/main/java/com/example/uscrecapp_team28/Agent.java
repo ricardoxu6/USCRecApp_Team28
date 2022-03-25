@@ -23,10 +23,8 @@ public class Agent extends CommonServiceInterface{
     private String photourl;
     private String name;
     private String email;
-
     private String unique_center_id;  // change when click button
     private String unique_timeslot_id;  // change when click button
-
     private Profile profile = null;
 
     public Agent() {}
@@ -54,6 +52,14 @@ public class Agent extends CommonServiceInterface{
             return;
         }
         logout();
+        setUnique_userid("");
+        setUscid("");
+        setReal_username("");
+        setReal_password("");
+        setPhotourl("");
+        setName("");
+        setEmail("");
+        System.out.println("DELETED EVERYTHING ALREADY");
     }
 
     public String getUnique_userid() {

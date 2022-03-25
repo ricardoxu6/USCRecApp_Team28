@@ -78,31 +78,25 @@ public class BookingInformationAdapter<MyActivity> extends RecyclerView.Adapter 
             @Override
             public void onClick(View view) {
                 String reservation_id = (String)view.getTag();
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setCancelable(true);
                 builder.setTitle("Confirmation");
                 String msg = "You are going to cancel the reservation.";
                 builder.setMessage(msg);
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Back", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         context.startActivity(new Intent(context,BookingInformationActivity.class));
                     }
                 });
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         mAgent.cancel_reservation(reservation_id);
                         context.startActivity(new Intent(context,BookingInformationActivity.class));
                     }
                 });
-
-
                 builder.show();
-
-
-
             }
         });
     }

@@ -1,5 +1,7 @@
 package com.example.uscrecapp_team28;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.provider.Settings;
 
@@ -11,6 +13,7 @@ import android.provider.Settings;
 
 public class LoginChecker implements LoginCheckerInterface{
 
+    Context context;
     String username;
     String password;
     String device_id;
@@ -88,7 +91,9 @@ public class LoginChecker implements LoginCheckerInterface{
                 connection.close();
             } catch (Exception e){
                 e.printStackTrace();
-                System.out.println("Exception");
+                System.out.println("LOGIN Exception");
+//                Intent i = new Intent(context, MainActivity.class);
+//                context.startActivity(i);
             }
             return null;
         }
@@ -108,7 +113,7 @@ public class LoginChecker implements LoginCheckerInterface{
                 connection.close();
             } catch (Exception e){
                 e.printStackTrace();
-                System.out.println("Exception");
+                System.out.println("LOGIN Exception");
             }
             return null;
         }

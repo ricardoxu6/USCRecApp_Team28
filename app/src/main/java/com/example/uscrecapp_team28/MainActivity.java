@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         if (!mWifi.isConnected()) {
             System.out.println("WIFI IS NOT CONNECTED!!!!!!!");
+            Intent i = new Intent(MainActivity.this, WifiActivity.class);
+            startActivity(i);
             return;
         }
         System.out.println("WIFI CONNECTED SUCCESS");

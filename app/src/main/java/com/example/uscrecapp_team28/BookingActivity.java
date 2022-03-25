@@ -105,6 +105,20 @@ public class BookingActivity extends AppCompatActivity {
         tRecyclerView.setAdapter(tAdapter);
     }
 
+    public void onClickRefresh(View view) {
+        System.out.println("REFRESH");
+        if (!this.agent_curr.check_loggedin()) {
+            Intent i = new Intent(BookingActivity.this, MainActivity.class);
+            startActivity(i);
+            finish();
+            return;
+        }
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
+    }
+
     public void onClickMap(View view) {
         System.out.println("BACK TO MAP PAGE");
         if (!this.agent_curr.check_loggedin()) {

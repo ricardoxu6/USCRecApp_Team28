@@ -209,7 +209,7 @@ public class Reservation implements ReservationInterface{
                         "\tAND reservation.user_id=user.user_id \n" +
                         "    AND reservation.timeslot_id=timeslot.timeslot_id\n" +
                         "\tAND center.center_id=timeslot.center_id\n" +
-                        "    AND datelist.date_id=timeslot.date_id;", userId);
+                        "    AND datelist.date_id=timeslot.date_id ORDER BY datelist.date_id;", userId);
                 ResultSet result = s.executeQuery(query);
                 Date cur_time = new Date();
                 while (result.next()){
