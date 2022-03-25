@@ -5,7 +5,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 
+import android.app.ActivityManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
@@ -35,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference reference;
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        createNotificationChannels();
         setContentView(R.layout.activity_main);
         android_id = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         // Agent agent_curr = new Agent(android_id);
@@ -47,36 +49,6 @@ public class MainActivity extends AppCompatActivity {
         // check if wifi is connected
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-        //listen for databse change
-        reference = db.collection("User").document("User");
-        reference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (value != null && value.exists()) {
-                    System.out.println("current user id" + agent_curr.getUnique_userid());
-                    System.out.println("Current data: " + value.getData());
-                    for (Map.Entry<String, Object> entry : value.getData().entrySet()){
-                        //compare with current input
-                        if(entry.getValue().equals(agent_curr.getUnique_userid())){
-                            //send notification
-                            System.out.println("send notification");
-                            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(),"channel_1").setSmallIcon(R.drawable.phoneicon).setContentTitle("USCRecAPP").setContentText("ther is a spot available!").setPriority(NotificationCompat.PRIORITY_DEFAULT);
-                            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
-                            notificationManagerCompat.notify(1,mBuilder.build());
-                            //delete the id from db
-                            Map<String,Object> delete_map = new HashMap<>();
-                            delete_map.put(agent_curr.getUnique_userid(), FieldValue.delete());
-                            reference.update(delete_map).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    System.out.println("finish deleting");
-                                }
-                            });
-                        }
-                    }
-                }
-            }
-        });
         if (!mWifi.isConnected()) {
             System.out.println("WIFI IS NOT CONNECTED!!!!!!!");
             return;
@@ -97,19 +69,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         finish();
-    }
-    //create notification channel
-    private void createNotificationChannels() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel1 = new NotificationChannel(
-                    "channel_1",
-                    "Channel 1",
-                    NotificationManager.IMPORTANCE_HIGH
-            );
-            channel1.setDescription("This is Channel 1");
-
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel1);
-        }
     }
 }

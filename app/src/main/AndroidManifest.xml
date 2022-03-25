@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -14,6 +14,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.USCRecApp_Team28">
+
+        <receiver
+            android:name=".CustomBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:label="RestartServiceWhenStopped">
+        </receiver>
+
         <activity
             android:name=".BookingActivity"
             android:exported="true">
@@ -23,7 +31,6 @@
                             <category android:name="android.intent.category.LAUNCHER" />
                         </intent-filter>
         </activity>
-
         <activity android:name=".MapActivity"
             android:exported="false" />
         <activity
@@ -52,6 +59,13 @@
 <!--             <category android:name="android.intent.category.LAUNCHER" />-->
 <!--             </intent-filter>-->
         </activity>
+        <service
+            android:name=".NotificationService"
+            android:enabled="true"
+            android:label="@string/app_name"
+            android:stopWithTask="true"
+            android:exported="false">
+        </service>
     </application>
 
 </manifest>

@@ -21,7 +21,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MapActivity extends AppCompatActivity {
-
     private Agent agent_curr;
     private RecyclerView mRecyclerView;
     private RecyclerView mHistoryRecyclerView;
