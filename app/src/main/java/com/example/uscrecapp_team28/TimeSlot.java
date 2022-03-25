@@ -326,13 +326,27 @@ public class TimeSlot implements TimeSlotInterface{
                 //query the database for all user's reservation
                 String query = String.format(
                         "INSERT INTO reservation(user_id, timeslot_id) VALUES (%d, %s);", Integer.parseInt(user_id), time_id);
+
                 String query2 = String.format(
                         "INSERT INTO availability(user_id, date_id) VALUES (%d, %s);", Integer.parseInt(user_id), date_id);
+                String query3 = String.format(
+                        "SELECT * FROM waitlist WHERE user_id = %s AND timeslot_id = %s", Integer.parseInt(user_id), time_id);
                 System.out.println(query);
                 int result = s.executeUpdate(query);
                 int result3 = s.executeUpdate(query2);
+                ResultSet result4 = s.executeQuery(query3);
                 if(result == 1 && result3 ==1){
-                    System.out.println("Reservation Insertion Succeeds");
+                    while(result4.next()){
+                        String query4 = String.format(
+                                "DELETE FROM waitlist WHERE user_id = %s AND timeslot_id = %s", Integer.parseInt(user_id), time_id);
+                        int result5 = s.executeUpdate(query4);
+                        if(result5==1){
+                            System.out.println("Reservation Insertion Succeeds");
+                            break;
+                        }
+
+                    }
+
                 }
 
             } catch (Exception e){
