@@ -41,7 +41,6 @@ public class ProfileActivity extends AppCompatActivity {
         final TextView profile_username = (TextView) findViewById(R.id.profile_username);
         profile_username.setText("Username: " + username);
 
-        // photourl = profile_result.get(4);
         // photourl = "https://media-exp1.licdn.com/dms/image/C5603AQFxpC5CYYULNA/profile-displayphoto-shrink_800_800/0/1624353277071?e=1652918400&v=beta&t=84ukoO8jlXa6Di4JE2VbtMd-klLCCcQK6aoQT1G5GwY";
         photourl = profile_result.get(4);
         try {
@@ -121,5 +120,4 @@ public class ProfileActivity extends AppCompatActivity {
             return null;
         }
     }
-
 }

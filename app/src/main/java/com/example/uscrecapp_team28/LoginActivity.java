@@ -1,6 +1,9 @@
 package com.example.uscrecapp_team28;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -45,6 +48,15 @@ public class LoginActivity extends AppCompatActivity {
 //    }
 
     public void onLoginHelper() {
+        ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if (!mWifi.isConnected()) {
+            System.out.println("LOGIN ACTIVITY: WIFI IS NOT CONNECTED!!!!!!!");
+            Intent i = new Intent(LoginActivity.this, WifiActivity.class);
+            startActivity(i);
+            return;
+        }
+        System.out.println("LOGIN ACTIVITY: WIFI CONNECTED!!!!!!!");
         EditText usernameView = (EditText)findViewById(R.id.username);
         EditText passwordView = (EditText)findViewById(R.id.password);
         String usernameStr = usernameView.getText().toString();

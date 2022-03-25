@@ -33,7 +33,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="25dp"
             android:layout_toRightOf="@+id/profileButton"
-            android:text="View Profile"
+            android:text="VIEW PROFILE"
             android:textColor="@color/uscRed"
             android:textSize="20sp"
             android:textStyle="bold"
