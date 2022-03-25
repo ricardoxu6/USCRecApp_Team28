@@ -32,7 +32,7 @@ Booking Page (Activity):
 Summary Page (Activity):
   Click the upper left Back to go back the the Map Page
   The first part shows the upcoming bookings, while the second part shows the history bookings, each window allows sliding to view more
-  Click Cancel (for upcoming bookings only) to cancel an upcomimg meeting
+  Click Cancel (for upcoming bookings only) to cancel an upcoming meeting
 
 Profile Page (Activity):
   Click the upper left Back to go back the the Map Page
