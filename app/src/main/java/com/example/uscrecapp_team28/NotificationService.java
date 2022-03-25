@@ -76,7 +76,7 @@ public class NotificationService extends Service {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (value != null && value.exists()) {
-                            System.out.println("current user id" + unique_userid);
+                            System.out.println("current user id " + unique_userid);
                             System.out.println("Current data: " + value.getData());
                             for (Map.Entry<String, Object> entry : value.getData().entrySet()){
                                 //compare with current input

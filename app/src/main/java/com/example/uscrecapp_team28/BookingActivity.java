@@ -2,9 +2,11 @@ package com.example.uscrecapp_team28;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -46,6 +48,7 @@ public class BookingActivity extends AppCompatActivity {
     Agent agent_curr;
     Intent intent;
     private String date_choice;
+    Intent mServiceIntent;
 
     public String getDate_choice() {
         return date_choice;
@@ -59,6 +62,14 @@ public class BookingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
+        //TODO add this code to all pages oncreate
+        this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
+        mServiceIntent = new Intent(this, NotificationService.class);
+        mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
+        if (!isMyServiceRunning(NotificationService.class)) {
+            ContextCompat.startForegroundService(this,mServiceIntent);
+        }
+        //TODO end
         System.out.println("Booking Page Here");
         Button button1 = (Button) findViewById(R.id.todaybutton);
         Button button2 = (Button) findViewById(R.id.tomorrowbutton);
@@ -86,7 +97,7 @@ public class BookingActivity extends AppCompatActivity {
         }
         String curr_date = intent.getStringExtra("datechoice");
         System.out.println("Center Id:" + center_id);
-        agent_curr = ((MyApplication) this.getApplication()).getAgent();
+//        agent_curr = ((MyApplication) this.getApplication()).getAgent();
         usid = agent_curr.getUnique_userid();
         System.out.println("User Id: "+ usid);
         ArrayList<TimeslotItem> mylist = agent_curr.view_all_timeslots(center_id, curr_date);
@@ -191,9 +202,24 @@ public class BookingActivity extends AppCompatActivity {
         startActivity(i);
         finish();
     }
-
-
-
-
-
+    //TODO add the following code the all pages
+    @Override
+    protected void onDestroy() {
+        System.out.println("ondestroy in service");
+        CustomBroadcastReceiver.setBroadcastReceiverId(agent_curr.getUnique_userid());
+        Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
+        sendBroadcast(broadcastIntent);
+        System.out.println("destroy the mainactivity service");
+        super.onDestroy();
+    }
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    //TODO end
 }

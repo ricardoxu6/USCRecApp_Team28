@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         //TODO add this code to all pages oncreate
+        this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
         mServiceIntent = new Intent(this, NotificationService.class);
         mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
         if (!isMyServiceRunning(NotificationService.class)) {
@@ -93,12 +94,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         System.out.println("ondestroy in service");
-        CustomBroadcastReceiver.setBroadcastReceiverId(agent_curr.getUnique_center_id());
+        CustomBroadcastReceiver.setBroadcastReceiverId(agent_curr.getUnique_userid());
         Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
         sendBroadcast(broadcastIntent);
         System.out.println("destroy the mainactivity service");
         super.onDestroy();
-
     }
     private boolean isMyServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
@@ -109,5 +109,5 @@ public class LoginActivity extends AppCompatActivity {
         }
         return false;
     }
-    //TODO endg
+    //TODO end
 }

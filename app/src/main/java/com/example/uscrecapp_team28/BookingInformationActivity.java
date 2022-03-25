@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -53,16 +55,27 @@ import java.util.Locale;
 import java.util.Map;
 
 public class BookingInformationActivity extends AppCompatActivity {
+    private Agent agent_curr;
     private RecyclerView mRecyclerView;
     private RecyclerView mHistoryRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.Adapter mHistoryAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.LayoutManager mHistoryLayoutManager;
+    Intent mServiceIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_information);
+        //TODO add this code to all pages oncreate
+        this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
+        mServiceIntent = new Intent(this, NotificationService.class);
+        mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
+        if (!isMyServiceRunning(NotificationService.class)) {
+            ContextCompat.startForegroundService(this,mServiceIntent);
+        }
+        //TODO end
         mRecyclerView = findViewById(R.id.recyclerView);
         mHistoryRecyclerView = findViewById(R.id.HistoryrecyclerView);
         mRecyclerView.setHasFixedSize(true);
@@ -108,4 +121,24 @@ public class BookingInformationActivity extends AppCompatActivity {
         startActivity(new Intent(this,MapActivity.class));
     }
 
+    //TODO add the following code the all pages
+    @Override
+    protected void onDestroy() {
+        System.out.println("ondestroy in service");
+        CustomBroadcastReceiver.setBroadcastReceiverId(agent_curr.getUnique_userid());
+        Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
+        sendBroadcast(broadcastIntent);
+        System.out.println("destroy the mainactivity service");
+        super.onDestroy();
+    }
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    //TODO end
 }

@@ -344,11 +344,8 @@ public class TimeSlot implements TimeSlotInterface{
                             System.out.println("Reservation Insertion Succeeds");
                             break;
                         }
-
                     }
-
                 }
-
             } catch (Exception e){
                 System.out.println("Exception");
                 e.printStackTrace();

@@ -1,9 +1,12 @@
 package com.example.uscrecapp_team28;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,11 +32,20 @@ public class MapActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.LayoutManager mHistoryLayoutManager;
     private SharedPreferences sp1;
+    Intent mServiceIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        //TODO add this code to all pages oncreate
+        this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
+        mServiceIntent = new Intent(this, NotificationService.class);
+        mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
+        if (!isMyServiceRunning(NotificationService.class)) {
+            ContextCompat.startForegroundService(this,mServiceIntent);
+        }
+        //TODO end
         this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
         if (!this.agent_curr.check_loggedin()) {
             Intent i = new Intent(MapActivity.this, MainActivity.class);
@@ -150,4 +162,25 @@ public class MapActivity extends AppCompatActivity {
         startActivity(i);
         finish();
     }
+
+    //TODO add the following code the all pages
+    @Override
+    protected void onDestroy() {
+        System.out.println("ondestroy in service");
+        CustomBroadcastReceiver.setBroadcastReceiverId(agent_curr.getUnique_userid());
+        Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
+        sendBroadcast(broadcastIntent);
+        System.out.println("destroy the mainactivity service");
+        super.onDestroy();
+    }
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    //TODO end
 }
