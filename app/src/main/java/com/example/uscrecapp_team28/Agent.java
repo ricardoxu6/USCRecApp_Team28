@@ -52,6 +52,14 @@ public class Agent extends CommonServiceInterface{
             return;
         }
         logout();
+        setUnique_userid("");
+        setUscid("");
+        setReal_username("");
+        setReal_password("");
+        setPhotourl("");
+        setName("");
+        setEmail("");
+        System.out.println("DELETED EVERYTHING ALREADY");
     }
 
     public String getUnique_userid() {

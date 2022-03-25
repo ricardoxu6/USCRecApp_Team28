@@ -107,7 +107,7 @@ public class Reservation implements ReservationInterface{
                 System.out.println("after connection");
                 //get the timeid
                 String getTimeQuery = String.format("SELECT timeslot_id FROM reservation\n" +
-                        "\tWHERE reservation.reservation_id=%s ORDER BY date_id;",reservation_id);
+                        "\tWHERE reservation.reservation_id=%s;",reservation_id);
                 ResultSet timeResult = s.executeQuery(getTimeQuery);
                 int time_id=-1;
                 while(timeResult.next()){
@@ -115,7 +115,7 @@ public class Reservation implements ReservationInterface{
                 }
                 //get the date
                 String getDateQuery = String.format("SELECT date_id FROM timeslot \n" +
-                        "\tWHERE timeslot_id=%s ORDER BY date_id;",time_id);
+                        "\tWHERE timeslot_id=%s;",time_id);
                 ResultSet dateResult = s.executeQuery(getDateQuery);
                 int date_id=-1;
                 while(dateResult.next()){
