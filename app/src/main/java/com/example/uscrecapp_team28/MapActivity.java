@@ -43,6 +43,7 @@ public class MapActivity extends AppCompatActivity {
         mServiceIntent = new Intent(this, NotificationService.class);
         mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
         if (!isMyServiceRunning(NotificationService.class)) {
+            System.out.println("start the notification service");
             ContextCompat.startForegroundService(this,mServiceIntent);
         }
         //TODO end
@@ -80,8 +81,8 @@ public class MapActivity extends AppCompatActivity {
         // this method relocate the two buttons (two gyms) relative to different screens
         super.onWindowFocusChanged(hasFocus);
         ImageView imgv = (ImageView) findViewById(R.id.uscmap);
-        System.out.println(imgv.getWidth());
-        System.out.println(imgv.getHeight());
+//        System.out.println(imgv.getWidth());
+//        System.out.println(imgv.getHeight());
         // lyon
         Button bt1 = (Button) findViewById(R.id.button1);
         RelativeLayout.LayoutParams layoutParams1 = (RelativeLayout.LayoutParams) bt1.getLayoutParams();
@@ -166,17 +167,22 @@ public class MapActivity extends AppCompatActivity {
     //TODO add the following code the all pages
     @Override
     protected void onDestroy() {
-        System.out.println("ondestroy in service");
-        CustomBroadcastReceiver.setBroadcastReceiverId(agent_curr.getUnique_userid());
-        Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
-        sendBroadcast(broadcastIntent);
-        System.out.println("destroy the mainactivity service");
+//        System.out.println("ondestroy in service");
+        if (!isMyServiceRunning(NotificationService.class)) {
+            CustomBroadcastReceiver.setBroadcastReceiverId(agent_curr.getUnique_userid());
+            Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
+            sendBroadcast(broadcastIntent);
+        }
+//        System.out.println("destroy the mainactivity service");
         super.onDestroy();
     }
     private boolean isMyServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        System.out.println("in myservice running " + serviceClass.getName());
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            System.out.println("activity manager: "+service.service.getClassName());
             if (serviceClass.getName().equals(service.service.getClassName())) {
+                System.out.println("true");
                 return true;
             }
         }

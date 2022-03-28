@@ -1,5 +1,6 @@
 package com.example.uscrecapp_team28;
 
+import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -17,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -76,6 +78,7 @@ public class NotificationService extends Service {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (value != null && value.exists()) {
+                            System.out.println("*****************");
                             System.out.println("current user id " + unique_userid);
                             System.out.println("Current data: " + value.getData());
                             for (Map.Entry<String, Object> entry : value.getData().entrySet()){
@@ -138,13 +141,26 @@ public class NotificationService extends Service {
         super.onDestroy();
         stoptimertask();
         System.out.println("ondestroy in service");
-        CustomBroadcastReceiver.setBroadcastReceiverId(unique_userid);
-        Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
-        sendBroadcast(broadcastIntent);
+        if (!isMyServiceRunning(NotificationService.class)) {
+            CustomBroadcastReceiver.setBroadcastReceiverId(unique_userid);
+            Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
+            sendBroadcast(broadcastIntent);
 
+        }
     }
 
     //we are going to use a handler to be able to run in our TimerTask
     final Handler handler = new Handler();
-
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        System.out.println("in myservice running " + serviceClass.getName());
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            System.out.println("activity manager: "+service.service.getClassName());
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                System.out.println("true");
+                return true;
+            }
+        }
+        return false;
+    }
 }
