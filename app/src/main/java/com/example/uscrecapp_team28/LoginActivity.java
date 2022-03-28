@@ -30,14 +30,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        //TODO add this code to all pages oncreate
-        this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
-        mServiceIntent = new Intent(this, NotificationService.class);
-        mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
-        if (!isMyServiceRunning(NotificationService.class)) {
-            ContextCompat.startForegroundService(this,mServiceIntent);
-        }
-        //TODO end
         this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
         EditText editText = (EditText) findViewById(R.id.password);
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -89,25 +81,4 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginClick(View view) {
         onLoginHelper();
     }
-
-    //TODO add the following code the all pages
-    @Override
-    protected void onDestroy() {
-        System.out.println("ondestroy in service");
-        CustomBroadcastReceiver.setBroadcastReceiverId(agent_curr.getUnique_userid());
-        Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
-        sendBroadcast(broadcastIntent);
-        System.out.println("destroy the mainactivity service");
-        super.onDestroy();
-    }
-    private boolean isMyServiceRunning(Class<?> serviceClass) {
-        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
-            if (serviceClass.getName().equals(service.service.getClassName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-    //TODO end
 }
