@@ -62,15 +62,13 @@ public class BookingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
-        //TODO add this code to all pages oncreate
         this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
         mServiceIntent = new Intent(this, NotificationService.class);
         mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
         if (!isMyServiceRunning(NotificationService.class)) {
             ContextCompat.startForegroundService(this,mServiceIntent);
         }
-        //TODO end
-        System.out.println("Booking Page Here");
+        // System.out.println("Booking Page Here");
         Button button1 = (Button) findViewById(R.id.todaybutton);
         Button button2 = (Button) findViewById(R.id.tomorrowbutton);
         Button button3 = (Button) findViewById(R.id.thirdbutton);
@@ -96,17 +94,15 @@ public class BookingActivity extends AppCompatActivity {
             center_name.setText("@ USC Village Fitness Center");
         }
         String curr_date = intent.getStringExtra("datechoice");
-        System.out.println("Center Id:" + center_id);
-//        agent_curr = ((MyApplication) this.getApplication()).getAgent();
         usid = agent_curr.getUnique_userid();
-        System.out.println("User Id: "+ usid);
+        // System.out.println("User Id: "+ usid);
         ArrayList<TimeslotItem> mylist = agent_curr.view_all_timeslots(center_id, curr_date);
-        System.out.println(mylist.size());
+        // System.out.println(mylist.size());
         for(int i = 0; i < mylist.size();i++){
             mylist.get(i).setUser_id(usid);
         }
-        System.out.println(mylist.get(0).getCurrent_users());
-        System.out.println(mylist.get(0).getStart());
+        // System.out.println(mylist.get(0).getCurrent_users());
+        // System.out.println(mylist.get(0).getStart());
         try {
             tAdapter = new BookingAdapter(mylist, agent_curr);
         } catch (ParseException e) {
@@ -117,7 +113,7 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     public void onClickRefresh(View view) {
-        System.out.println("REFRESH");
+        // System.out.println("REFRESH");
         if (!this.agent_curr.check_loggedin()) {
             Intent i = new Intent(BookingActivity.this, MainActivity.class);
             startActivity(i);
@@ -131,7 +127,7 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     public void onClickMap(View view) {
-        System.out.println("BACK TO MAP PAGE");
+        // System.out.println("BACK TO MAP PAGE");
         if (!this.agent_curr.check_loggedin()) {
             Intent i = new Intent(BookingActivity.this, MainActivity.class);
             startActivity(i);
@@ -144,7 +140,7 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     public void onClickToday(View view) {
-        System.out.println("Today's Timeslot");
+        // System.out.println("Today's Timeslot");
         if (!this.agent_curr.check_loggedin()) {
             Intent i = new Intent(BookingActivity.this, MainActivity.class);
             startActivity(i);
@@ -163,7 +159,7 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     public void onClickSecond(View view) {
-        System.out.println("Today's Timeslot");
+        // System.out.println("Today's Timeslot");
         if (!this.agent_curr.check_loggedin()) {
             Intent i = new Intent(BookingActivity.this, MainActivity.class);
             startActivity(i);
@@ -184,7 +180,7 @@ public class BookingActivity extends AppCompatActivity {
     }
 
     public void onClickThird(View view) {
-        System.out.println("Today's Timeslot");
+        // System.out.println("Today's Timeslot");
         if (!this.agent_curr.check_loggedin()) {
             Intent i = new Intent(BookingActivity.this, MainActivity.class);
             startActivity(i);

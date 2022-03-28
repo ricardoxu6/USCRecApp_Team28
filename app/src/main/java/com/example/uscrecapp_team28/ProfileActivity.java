@@ -89,7 +89,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void onClickBack(View view) {
-        System.out.println("BACK TO MAP PAGE");
+        // System.out.println("BACK TO MAP PAGE");
         if (!this.agent_curr.check_loggedin()) {
             Intent i = new Intent(ProfileActivity.this, MainActivity.class);
             startActivity(i);
@@ -102,7 +102,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void onClickLogout(View view) {
-        System.out.println("LOGOUT");
+        // System.out.println("LOGOUT");
         if (!this.agent_curr.check_loggedin()) {
             Intent i = new Intent(ProfileActivity.this, MainActivity.class);
             startActivity(i);

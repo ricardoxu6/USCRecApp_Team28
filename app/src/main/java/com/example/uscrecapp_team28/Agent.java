@@ -34,7 +34,7 @@ public class Agent extends CommonServiceInterface{
     public void init_info() {
         profile = new Profile(this.device_id);
         ArrayList<String> result = profile.display_profile();
-        System.out.println("RESULT: " + result);
+        // System.out.println("RESULT: " + result);
         setUnique_userid(result.get(0));
         setUscid(result.get(1));
         setReal_username(result.get(2));
@@ -42,7 +42,7 @@ public class Agent extends CommonServiceInterface{
         setPhotourl(result.get(4));
         setName(result.get(5));
         setEmail(result.get(6));
-        System.out.println("AGENT: SET UNIQUE USERID: " + unique_userid);
+        // System.out.println("AGENT: SET UNIQUE USERID: " + unique_userid);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class Agent extends CommonServiceInterface{
         setPhotourl("");
         setName("");
         setEmail("");
-        System.out.println("DELETED EVERYTHING ALREADY");
+        // System.out.println("DELETED EVERYTHING ALREADY");
     }
 
     public String getUnique_userid() {
@@ -168,7 +168,7 @@ public class Agent extends CommonServiceInterface{
 
     @Override
     public boolean check_loggedin() {
-        System.out.println("LOGGED IN");
+        // System.out.println("LOGGED IN");
         AuthenticationInterface a = new Authentication(this.device_id);
         boolean already_login = a.if_already_login();
         while (already_login && this.profile == null) {
@@ -206,7 +206,7 @@ public class Agent extends CommonServiceInterface{
 
     @Override
     public boolean cancel_reservation(String reservation_id) {
-        System.out.println("AGENT: User Unique ID: " + unique_userid);
+        // System.out.println("AGENT: User Unique ID: " + unique_userid);
         ReservationInterface r = new Reservation(unique_userid);
         r.cancel_reservation(reservation_id);
         return true;
@@ -224,7 +224,7 @@ public class Agent extends CommonServiceInterface{
 
     @Override
     public HashMap<String, ArrayList<BookingItem>> view_all_reservations() {
-        System.out.println("AGENT: User Unique ID: " + unique_userid);
+        // .out.println("AGENT: User Unique ID: " + unique_userid);
         ReservationInterface r = new Reservation(unique_userid);
         return r.display_all_reservation_info();
     }

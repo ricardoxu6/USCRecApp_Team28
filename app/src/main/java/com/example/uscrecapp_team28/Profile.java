@@ -126,10 +126,10 @@ public class Profile implements ProfileInterface{
                 Statement s = connection.createStatement();
                 String query = String.format("SELECT * FROM user WHERE device_id='%s';", device_id);
                 ResultSet result = s.executeQuery(query);
-                System.out.println("Query Complete");
+                // System.out.println("Query Complete");
                 while (result.next()){
                     setUnique_userid(result.getString("user_id"));
-                    System.out.println("PROFILE: SET UNIQUE USERID: " + unique_userid);
+                    // System.out.println("PROFILE: SET UNIQUE USERID: " + unique_userid);
                     setUscid(result.getString("usc_id"));
                     setUsername(result.getString("username"));
                     setPassword(result.getString("password"));
@@ -141,7 +141,7 @@ public class Profile implements ProfileInterface{
                 connection.close();
             } catch (Exception e){
                 e.printStackTrace();
-                System.out.println("Exception");
+                // System.out.println("Exception");
             }
             return null;
         }

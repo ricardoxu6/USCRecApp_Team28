@@ -62,7 +62,7 @@ public class NotificationService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
         unique_userid = (String)intent.getExtras().get("userId");
-        System.out.println("user id in foreground is "+ unique_userid);
+        // System.out.println("user id in foreground is "+ unique_userid);
         createNotificationChannels();
         startTimer();
         return START_STICKY;
@@ -78,14 +78,13 @@ public class NotificationService extends Service {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (value != null && value.exists()) {
-                            System.out.println("*****************");
-                            System.out.println("current user id " + unique_userid);
-                            System.out.println("Current data: " + value.getData());
+                            // System.out.println("current user id " + unique_userid);
+                            // System.out.println("Current data: " + value.getData());
                             for (Map.Entry<String, Object> entry : value.getData().entrySet()){
                                 //compare with current input
                                 if(entry.getValue().equals(unique_userid)){
                                     //send notification
-                                    System.out.println("send notification");
+                                    // System.out.println("send notification");
                                     NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(),"channel_2").setSmallIcon(R.drawable.phoneicon).setContentTitle("USCRecAPP").setContentText("ther is a spot available!").setPriority(NotificationCompat.PRIORITY_MAX);
                                     NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
                                     notificationManagerCompat.notify(1,mBuilder.build());
@@ -95,7 +94,7 @@ public class NotificationService extends Service {
                                     reference.update(delete_map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            System.out.println("finish deleting");
+                                            // System.out.println("finish deleting");
                                         }
                                     });
                                 }

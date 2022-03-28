@@ -103,7 +103,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
     public void onClickProfile(View view) {
-        System.out.println("TO PROFILE PAGE");
+        // System.out.println("TO PROFILE PAGE");
         if (!this.agent_curr.check_loggedin()) {
             Intent i = new Intent(MapActivity.this, MainActivity.class);
             startActivity(i);
@@ -116,7 +116,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
     public void onClickLyon(View view) {
-        System.out.println("TO LYON");
+        // System.out.println("TO LYON");
         if (!this.agent_curr.check_loggedin()) {
             Intent i = new Intent(MapActivity.this, MainActivity.class);
             startActivity(i);
@@ -134,7 +134,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
     public void onClickVill(View view) {
-        System.out.println("TO VILLAGE");
+        // System.out.println("TO VILLAGE");
         if (!this.agent_curr.check_loggedin()) {
             Intent i = new Intent(MapActivity.this, MainActivity.class);
             startActivity(i);
@@ -152,7 +152,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
     public void onClickSummary(View view) {
-        System.out.println("TO SUMMARY");
+        // System.out.println("TO SUMMARY");
         if (!this.agent_curr.check_loggedin()) {
             Intent i = new Intent(MapActivity.this, MainActivity.class);
             startActivity(i);

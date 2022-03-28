@@ -7,5 +7,5 @@ public interface TimeSlotInterface {
     public boolean check_availability(String user_id, String date_id);
     public boolean check_full(String timeslot_id, int max_capacity);
     public Integer join_waitlist(String time_id, String user_id);
-    public void notify_waitlist();
+
 }

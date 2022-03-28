@@ -13,7 +13,6 @@ import android.provider.Settings;
 
 public class LoginChecker implements LoginCheckerInterface{
 
-    Context context;
     String username;
     String password;
     String device_id;
