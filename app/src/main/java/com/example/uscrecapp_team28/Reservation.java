@@ -98,13 +98,13 @@ public class Reservation implements ReservationInterface{
         @Override
         protected Void doInBackground(Void... voids){
             try{
-                System.out.println("enter background");
+                // System.out.println("enter background");
                 //connect to sql database
                 Class.forName("com.mysql.jdbc.Driver");
                 String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
                 Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
                 Statement s = connection.createStatement();
-                System.out.println("after connection");
+                // System.out.println("after connection");
                 //get the timeid
                 String getTimeQuery = String.format("SELECT timeslot_id FROM reservation\n" +
                         "\tWHERE reservation.reservation_id=%s;",reservation_id);
@@ -127,7 +127,7 @@ public class Reservation implements ReservationInterface{
                                 "\tWHERE reservation.reservation_id=%s;", reservation_id);
 
                 s.executeUpdate(query);
-                System.out.println(String.format("after execution of query delete %s from database",reservation_id));
+                // System.out.println(String.format("after execution of query delete %s from database",reservation_id));
                 String deleteAvaiQuery = String.format("DELETE FROM availability\n" +
                         "\tWHERE user_id=%s AND date_id=%s;",getUnique_userid(),date_id);
                 s.executeUpdate(deleteAvaiQuery);
@@ -161,20 +161,20 @@ public class Reservation implements ReservationInterface{
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        System.out.println("success");
+                                        // System.out.println("success");
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        System.out.println("fail");
+                                        // System.out.println("fail");
                                     }
                                 });
                     }
                 }
                 connection.close();
             } catch (Exception e){
-                System.out.println("Exception");
+                // System.out.println("Exception");
                 e.printStackTrace();
             }
             return null;
@@ -196,7 +196,7 @@ public class Reservation implements ReservationInterface{
 //              String userId = sp1.getString("user_id",null);
                 // String userId = "0";
                 String userId = getUnique_userid();
-                System.out.println("User Unique ID: " + userId);
+                // System.out.println("User Unique ID: " + userId);
                 //query the database for all user's reservation
                 String query = String.format("SELECT \n" +
                         "\treservation.reservation_id,datelist.date,center.name AS center_name,timeslot.start_time,timeslot.finish_time \n" +
@@ -225,7 +225,7 @@ public class Reservation implements ReservationInterface{
                 }
                 connection.close();
             } catch (Exception e){
-                System.out.println("Exception");
+                // System.out.println("Exception");
             }
             return null;
         }

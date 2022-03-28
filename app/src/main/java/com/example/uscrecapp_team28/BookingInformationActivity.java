@@ -124,11 +124,11 @@ public class BookingInformationActivity extends AppCompatActivity {
     //TODO add the following code the all pages
     @Override
     protected void onDestroy() {
-        System.out.println("ondestroy in service");
+        // System.out.println("ondestroy in service");
         CustomBroadcastReceiver.setBroadcastReceiverId(agent_curr.getUnique_userid());
         Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
         sendBroadcast(broadcastIntent);
-        System.out.println("destroy the mainactivity service");
+        // System.out.println("destroy the mainactivity service");
         super.onDestroy();
     }
     private boolean isMyServiceRunning(Class<?> serviceClass) {

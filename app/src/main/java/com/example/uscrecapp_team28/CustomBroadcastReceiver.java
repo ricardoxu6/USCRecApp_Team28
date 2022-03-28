@@ -14,7 +14,7 @@ public class CustomBroadcastReceiver extends BroadcastReceiver {
     }
     @Override
     public void onReceive(Context context, Intent intent) {
-        System.out.println("create new service");
+        // System.out.println("create new service");
         Intent mServiceIntent = new Intent(context, NotificationService.class);
         mServiceIntent.putExtra("userId",mUniqueUserId);
         ContextCompat.startForegroundService(context,mServiceIntent);

@@ -154,13 +154,13 @@ public class TimeSlot implements TimeSlotInterface{
         @Override
         protected Void doInBackground(Void... voids){
             try{
-                System.out.println("enter background");
+                // System.out.println("enter background");
                 //connect to sql database
                 Class.forName("com.mysql.jdbc.Driver");
                 String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
                 Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
                 Statement s = connection.createStatement();
-                System.out.println("after connection");
+                // System.out.println("after connection");
                 String checkquery = String.format(
                         "SELECT * FROM reservation WHERE user_id = %s AND timeslot_id = %s;", user_id, time_id);
                 ResultSet result1 = s.executeQuery(checkquery);
@@ -188,12 +188,12 @@ public class TimeSlot implements TimeSlotInterface{
                     if(result == 1){
                         //Join successfully
                         wait_result = 0;
-                        System.out.println("Waitlist Insertion Succeeds");
+                        // System.out.println("Waitlist Insertion Succeeds");
                     }
                 }
 
             } catch (Exception e){
-                System.out.println("Exception");
+                // System.out.println("Exception");
                 e.printStackTrace();
             }
             return null;
@@ -215,13 +215,13 @@ public class TimeSlot implements TimeSlotInterface{
         @Override
         protected Void doInBackground(Void... voids){
             try{
-                System.out.println("enter background");
+                // System.out.println("enter background");
                 //connect to sql database
                 Class.forName("com.mysql.jdbc.Driver");
                 String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
                 Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
                 Statement s = connection.createStatement();
-                System.out.println("after connection");
+                // System.out.println("after connection");
                 //query the database for all user's reservation
                 String judge = String.format(
                         "SELECT COUNT(reservation.timeslot_id) AS count FROM reservation WHERE reservation.timeslot_id = %s;",  timeslot_id);
@@ -234,14 +234,14 @@ public class TimeSlot implements TimeSlotInterface{
                 //replace with a message box later
                 if(remaining <= 0){
                     isfull = true;
-                    System.out.println("No spots left!!");
+                    // System.out.println("No spots left!!");
                 }
                 else{
                     isfull = false;
                 }
 
             } catch (Exception e){
-                System.out.println("Exception");
+                // System.out.println("Exception");
                 e.printStackTrace();
             }
             return null;
@@ -264,13 +264,13 @@ public class TimeSlot implements TimeSlotInterface{
         @Override
         protected Void doInBackground(Void... voids){
             try{
-                System.out.println("enter background");
+                // System.out.println("enter background");
                 //connect to sql database
                 Class.forName("com.mysql.jdbc.Driver");
                 String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
                 Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
                 Statement s = connection.createStatement();
-                System.out.println("after connection");
+                // System.out.println("after connection");
                 //query the database for all user's reservation
                 String judge = String.format(
                         "SELECT * FROM availability WHERE user_id = %s AND date_id = %s ;", user_id, date_id);
@@ -289,7 +289,7 @@ public class TimeSlot implements TimeSlotInterface{
                 }
 
             } catch (Exception e){
-                System.out.println("Exception");
+                // System.out.println("Exception");
                 e.printStackTrace();
             }
             return null;
@@ -316,13 +316,13 @@ public class TimeSlot implements TimeSlotInterface{
         @Override
         protected Void doInBackground(Void... voids){
             try{
-                System.out.println("enter background");
+                // System.out.println("enter background");
                 //connect to sql database
                 Class.forName("com.mysql.jdbc.Driver");
                 String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
                 Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
                 Statement s = connection.createStatement();
-                System.out.println("after connection");
+                // System.out.println("after connection");
                 //query the database for all user's reservation
                 String query = String.format(
                         "INSERT INTO reservation(user_id, timeslot_id) VALUES (%d, %s);", Integer.parseInt(user_id), time_id);
@@ -331,7 +331,7 @@ public class TimeSlot implements TimeSlotInterface{
                         "INSERT INTO availability(user_id, date_id) VALUES (%d, %s);", Integer.parseInt(user_id), date_id);
                 String query3 = String.format(
                         "SELECT * FROM waitlist WHERE user_id = %s AND timeslot_id = %s", Integer.parseInt(user_id), time_id);
-                System.out.println(query);
+                // System.out.println(query);
                 int result = s.executeUpdate(query);
                 int result3 = s.executeUpdate(query2);
                 ResultSet result4 = s.executeQuery(query3);
@@ -341,13 +341,13 @@ public class TimeSlot implements TimeSlotInterface{
                                 "DELETE FROM waitlist WHERE user_id = %s AND timeslot_id = %s", Integer.parseInt(user_id), time_id);
                         int result5 = s.executeUpdate(query4);
                         if(result5==1){
-                            System.out.println("Reservation Insertion Succeeds");
+                            // System.out.println("Reservation Insertion Succeeds");
                             break;
                         }
                     }
                 }
             } catch (Exception e){
-                System.out.println("Exception");
+                // System.out.println("Exception");
                 e.printStackTrace();
             }
             return null;
@@ -376,8 +376,8 @@ public class TimeSlot implements TimeSlotInterface{
                 Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
                 Statement s = connection.createStatement();
                 String centerId = center_id;
-                System.out.println(centerId);
-                System.out.println(datenow);
+                // System.out.println(centerId);
+                // System.out.println(datenow);
                 //query the database for all user's reservation
                 String query = String.format("SELECT \n" +
                         "\ttimeslot.timeslot_id AS timeslot_id,timeslot.max_capacity AS maxcap,timeslot.date_id, center.name AS center_name,timeslot.start_time,timeslot.finish_time, " +
@@ -390,15 +390,15 @@ public class TimeSlot implements TimeSlotInterface{
                         "JOIN datelist\n" +
                         " ON datelist.date_id=timeslot.date_id WHERE datelist.date = '%s' AND center.center_id=%s " +
                         "GROUP BY(timeslot.timeslot_id) ;", datenow, centerId);
-                System.out.println(query);
+                // System.out.println(query);
                 ResultSet result = s.executeQuery(query);
                 while (result.next()){
                     slotList.add(new TimeslotItem(Integer.parseInt(result.getString("timeslot_id")),datenow,Integer.parseInt(result.getString("currentusers")), Integer.parseInt(result.getString("maxcap")),
                             result.getString("start_time"), result.getString("finish_time"), result.getString("center_name"), usid, centerId, result.getString("date_id")));
                 }
-                System.out.println("Get all timeslots");
+                // System.out.println("Get all timeslots");
             } catch (Exception e){
-                System.out.println("Exception");
+                // System.out.println("Exception");
             }
             return null;
         }

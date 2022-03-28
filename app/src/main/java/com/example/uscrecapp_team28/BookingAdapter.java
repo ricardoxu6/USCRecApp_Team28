@@ -47,7 +47,7 @@ public class BookingAdapter extends RecyclerView.Adapter{
     }
 
     public BookingAdapter(ArrayList<TimeslotItem> slotList, Agent agent) throws ParseException {
-        System.out.println("Constructor for Booking Adapter");
+        // System.out.println("Constructor for Booking Adapter");
         tSlotList = new ArrayList<TimeslotItem>();
         Date cur_time = new Date();
         for(int i = 0; i < slotList.size();i++){
@@ -72,7 +72,7 @@ public class BookingAdapter extends RecyclerView.Adapter{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        System.out.println("On Bind View Holder");
+        // System.out.println("On Bind View Holder");
         TimeslotItem currentItem = tSlotList.get(position);
         String times = currentItem.getDate() + "  " + currentItem.getStart() + " - " + currentItem.getFinish();
         ((BookingViewHolder) holder).mTextView1.setText(times);
@@ -87,8 +87,8 @@ public class BookingAdapter extends RecyclerView.Adapter{
                 public void onClick(View view) {
                     String user_id = currentItem.getUser_id();
                     String time_id = Integer.toString(currentItem.getTimeslot_id());
-                    System.out.println(user_id);
-                    System.out.println(time_id);
+                    // System.out.println(user_id);
+                    // System.out.println(time_id);
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setCancelable(true);
                     builder.setTitle("Confirmation");

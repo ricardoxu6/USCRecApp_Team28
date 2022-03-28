@@ -43,11 +43,11 @@ public class Authentication implements AuthenticationInterface{
             e.printStackTrace();
         }
         if (this.unique_userid.isEmpty()) {
-            System.out.println("NOT YET LOGIN");
+            // System.out.println("NOT YET LOGIN");
             return false;
         }
         else {
-            System.out.println("ALREADY LOGIN");
+            // System.out.println("ALREADY LOGIN");
             return true;
         }
     }
@@ -56,14 +56,14 @@ public class Authentication implements AuthenticationInterface{
         @Override
         protected Void doInBackground(Void... voids){
             try{
-                System.out.println("enter");
+                // System.out.println("enter");
                 Class.forName("com.mysql.jdbc.Driver");
                 String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
                 Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
                 Statement s = connection.createStatement();
                 String query = String.format("SELECT * FROM user WHERE device_id='%s';", device_id);
                 ResultSet result = s.executeQuery(query);
-                System.out.println("Query Complete");
+                // System.out.println("Query Complete");
                 while (result.next()){
                     String temp = result.getString("user_id") + "\n";
                     setUnique_userid(temp);
@@ -71,7 +71,7 @@ public class Authentication implements AuthenticationInterface{
                 connection.close();
             } catch (Exception e){
                 e.printStackTrace();
-                System.out.println("Exception");
+                // System.out.println("Exception");
             }
             return null;
         }

@@ -80,8 +80,8 @@ public class MapActivity extends AppCompatActivity {
         // this method relocate the two buttons (two gyms) relative to different screens
         super.onWindowFocusChanged(hasFocus);
         ImageView imgv = (ImageView) findViewById(R.id.uscmap);
-        System.out.println(imgv.getWidth());
-        System.out.println(imgv.getHeight());
+        // System.out.println(imgv.getWidth());
+        // System.out.println(imgv.getHeight());
         // lyon
         Button bt1 = (Button) findViewById(R.id.button1);
         RelativeLayout.LayoutParams layoutParams1 = (RelativeLayout.LayoutParams) bt1.getLayoutParams();
@@ -102,7 +102,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
     public void onClickProfile(View view) {
-        System.out.println("TO PROFILE PAGE");
+        // System.out.println("TO PROFILE PAGE");
         if (!this.agent_curr.check_loggedin()) {
             Intent i = new Intent(MapActivity.this, MainActivity.class);
             startActivity(i);
@@ -115,7 +115,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
     public void onClickLyon(View view) {
-        System.out.println("TO LYON");
+        // System.out.println("TO LYON");
         if (!this.agent_curr.check_loggedin()) {
             Intent i = new Intent(MapActivity.this, MainActivity.class);
             startActivity(i);
@@ -133,7 +133,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
     public void onClickVill(View view) {
-        System.out.println("TO VILLAGE");
+        // System.out.println("TO VILLAGE");
         if (!this.agent_curr.check_loggedin()) {
             Intent i = new Intent(MapActivity.this, MainActivity.class);
             startActivity(i);
@@ -151,7 +151,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
     public void onClickSummary(View view) {
-        System.out.println("TO SUMMARY");
+        // System.out.println("TO SUMMARY");
         if (!this.agent_curr.check_loggedin()) {
             Intent i = new Intent(MapActivity.this, MainActivity.class);
             startActivity(i);
@@ -166,11 +166,11 @@ public class MapActivity extends AppCompatActivity {
     //TODO add the following code the all pages
     @Override
     protected void onDestroy() {
-        System.out.println("ondestroy in service");
+        // System.out.println("ondestroy in service");
         CustomBroadcastReceiver.setBroadcastReceiverId(agent_curr.getUnique_userid());
         Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
         sendBroadcast(broadcastIntent);
-        System.out.println("destroy the mainactivity service");
+        // System.out.println("destroy the mainactivity service");
         super.onDestroy();
     }
     private boolean isMyServiceRunning(Class<?> serviceClass) {

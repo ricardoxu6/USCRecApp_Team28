@@ -43,11 +43,11 @@ public class Logout implements LogoutInterface{
                 Statement s = connection.createStatement();
                 String update = String.format("UPDATE user SET device_id='' WHERE device_id='%s';", getDevice_id());
                 int i = s.executeUpdate(update);
-                System.out.println("Update Complete");
+                // System.out.println("Update Complete");
                 connection.close();
             } catch (Exception e){
                 e.printStackTrace();
-                System.out.println("Exception");
+                // System.out.println("Exception");
             }
             return null;
         }
