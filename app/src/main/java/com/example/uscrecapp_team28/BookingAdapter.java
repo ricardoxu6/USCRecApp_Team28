@@ -76,8 +76,7 @@ public class BookingAdapter extends RecyclerView.Adapter{
         TimeslotItem currentItem = tSlotList.get(position);
         String times = currentItem.getDate() + "  " + currentItem.getStart() + " - " + currentItem.getFinish();
         ((BookingViewHolder) holder).mTextView1.setText(times);
-        int remain_spot = currentItem.getMax_cap() - currentItem.getCurrent_users();
-        // int remain_spot = Math.min(0, currentItem.getMax_cap() - currentItem.getCurrent_users());
+        int remain_spot = Math.min(0, currentItem.getMax_cap() - currentItem.getCurrent_users());
         ((BookingViewHolder) holder).mTextView2.setText(Integer.toString(remain_spot));
         if(remain_spot > 0){
             ((BookingViewHolder) holder).waitButton.setVisibility(View.INVISIBLE);
