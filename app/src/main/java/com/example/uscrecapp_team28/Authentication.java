@@ -34,34 +34,33 @@ public class Authentication implements AuthenticationInterface{
         return unique_userid;
     }
 
-    Thread thread1 = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            try  {
-                //Your code goes here
-                Class.forName("com.mysql.jdbc.Driver");
-                String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
-                Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
-                Statement s = connection.createStatement();
-                String query = String.format("SELECT * FROM user WHERE device_id='%s';", device_id);
-                ResultSet result = s.executeQuery(query);
-                // System.out.println("Query Complete");
-                while (result.next()){
-                    String temp = result.getString("user_id") + "\n";
-                    setUnique_userid(temp);
-                }
-                connection.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    });
-
     @Override
     public boolean if_already_login() {
         // check database for if unique_userid's login column is TRUE
         try {
             //new AuthenticationTask().execute().get();
+            Thread thread1 = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try  {
+                        //Your code goes here
+                        Class.forName("com.mysql.jdbc.Driver");
+                        String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
+                        Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
+                        Statement s = connection.createStatement();
+                        String query = String.format("SELECT * FROM user WHERE device_id='%s';", device_id);
+                        ResultSet result = s.executeQuery(query);
+                        // System.out.println("Query Complete");
+                        while (result.next()){
+                            String temp = result.getString("user_id") + "\n";
+                            setUnique_userid(temp);
+                        }
+                        connection.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
             thread1.start();
             thread1.join();
         } catch (Exception e) {
@@ -76,33 +75,4 @@ public class Authentication implements AuthenticationInterface{
             return true;
         }
     }
-
-
-
-    class AuthenticationTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... voids){
-            try{
-                // System.out.println("enter");
-                Class.forName("com.mysql.jdbc.Driver");
-                String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
-                Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
-                Statement s = connection.createStatement();
-                String query = String.format("SELECT * FROM user WHERE device_id='%s';", device_id);
-                ResultSet result = s.executeQuery(query);
-                // System.out.println("Query Complete");
-                while (result.next()){
-                    String temp = result.getString("user_id") + "\n";
-                    setUnique_userid(temp);
-                }
-                connection.close();
-            } catch (Exception e){
-                e.printStackTrace();
-                // System.out.println("Exception");
-            }
-            return null;
-        }
-    }
-
-
 }

@@ -50,7 +50,7 @@ public class AuthenticationTest extends TestCase {
         assertEquals(false, a.if_already_login());
         a.setUnique_userid("abc");
         assertEquals(true, a.if_already_login());
-        AuthenticationInterface i = new Authentication("interface");
+        Authentication i = new Authentication("interface");
         assertEquals(false, i.if_already_login());
         a.setDevice_id("deviceid");
         assertEquals(true, a.if_already_login());

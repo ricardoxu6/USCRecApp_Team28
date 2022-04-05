@@ -15,8 +15,6 @@ public class LoginCheckerTest {
 
     @Before
     public void setup() {
-
-
     }
 
     @After
@@ -28,5 +26,26 @@ public class LoginCheckerTest {
         LoginChecker loginChecker = new LoginChecker("test","test","deviceid2");
         loginChecker.check_login();
         assertTrue(loginChecker.getLoginFlag());
+    }
+
+    public void testGetUsername() {
+    }
+
+    public void testSetUsername() {
+    }
+
+    public void testGetPassword() {
+    }
+
+    public void testSetPassword() {
+    }
+
+    public void testGetLoginFlag() {
+    }
+
+    public void testSetLoginFlag() {
+    }
+
+    public void testCheck_login() {
     }
 }
