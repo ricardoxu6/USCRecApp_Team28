@@ -64,8 +64,8 @@ public class LoginChecker implements LoginCheckerInterface{
                         Statement s = connection.createStatement();
                         String query = String.format("SELECT * FROM user WHERE username='%s' AND password='%s';", getUsername(), getPassword());
                         ResultSet result = s.executeQuery(query);
-                        System.out.println("Query Complete");
-                        System.out.println(result);
+//                        System.out.println("Query Complete");
+//                        System.out.println(result);
                         while (result.next()) {
                             setLoginFlag(true);
                         }
@@ -80,7 +80,7 @@ public class LoginChecker implements LoginCheckerInterface{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(this.loginFlag);
+        // System.out.println(this.loginFlag);
         if (this.loginFlag) {
             try {
                 Thread thread_device = new Thread(new Runnable() {
@@ -93,7 +93,7 @@ public class LoginChecker implements LoginCheckerInterface{
                             Statement s = connection.createStatement();
                             String update = String.format("UPDATE user SET device_id='%s' WHERE username='%s' AND password='%s';", device_id, username, password);
                             int i = s.executeUpdate(update);
-                            System.out.println("Update Complete");
+                            // System.out.println("Update Complete");
                             connection.close();
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -111,53 +111,4 @@ public class LoginChecker implements LoginCheckerInterface{
             return false;
         }
     }
-
-    class LoginTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... voids){
-            try{
-                Class.forName("com.mysql.jdbc.Driver");
-                String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
-                Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
-                Statement s = connection.createStatement();
-                String query = String.format("SELECT * FROM user WHERE username='%s' AND password='%s';", getUsername(), getPassword());
-                ResultSet result = s.executeQuery(query);
-                System.out.println("Query Complete");
-                System.out.println(result);
-                while (result.next()) {
-                    setLoginFlag(true);
-                    return null;
-                }
-                connection.close();
-            } catch (Exception e){
-                e.printStackTrace();
-                System.out.println("LOGIN Exception");
-//                Intent i = new Intent(context, MainActivity.class);
-//                context.startActivity(i);
-            }
-            return null;
-        }
-    }
-
-    class AddDeviceTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... voids){
-            try{
-                Class.forName("com.mysql.jdbc.Driver");
-                String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
-                Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
-                Statement s = connection.createStatement();
-                String update = String.format("UPDATE user SET device_id='%s' WHERE username='%s' AND password='%s';", device_id, username, password);
-                int i = s.executeUpdate(update);
-                // System.out.println("Update Complete");
-                connection.close();
-            } catch (Exception e){
-                e.printStackTrace();
-                // System.out.println("LOGIN Exception");
-            }
-            return null;
-        }
-    }
-
-
 }
