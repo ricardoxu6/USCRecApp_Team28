@@ -64,7 +64,6 @@ public class Authentication implements AuthenticationInterface{
             //new AuthenticationTask().execute().get();
             thread1.start();
             thread1.join();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
