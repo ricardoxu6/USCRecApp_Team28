@@ -74,14 +74,14 @@ public class LoginCheckerTest extends TestCase {
 
     // DS
     public void testCheck_login() {
-        LoginChecker loginChecker1 = new LoginChecker("test","test","deviceid2");
+        LoginChecker loginChecker1 = new LoginChecker("test","test","deviceid");
         loginChecker1.check_login();
         assertEquals(true, loginChecker1.getLoginFlag());
-        LoginChecker loginChecker2 = new LoginChecker("alvinshe","12345678","deviceid2");
+        LoginChecker loginChecker2 = new LoginChecker("alvinshe","x","deviceid");
         loginChecker2.check_login();
-        assertEquals(true, loginChecker2.getLoginFlag());
-        LoginChecker loginChecker3 = new LoginChecker("tigojian","12345678","deviceid2");
+        assertEquals(false, loginChecker2.getLoginFlag());
+        LoginChecker loginChecker3 = new LoginChecker("tigojian","x","deviceid");
         loginChecker3.check_login();
-        assertEquals(true, loginChecker3.getLoginFlag());
+        assertEquals(false, loginChecker3.getLoginFlag());
     }
 }

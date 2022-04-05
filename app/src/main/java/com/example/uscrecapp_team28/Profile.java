@@ -24,7 +24,37 @@ public class Profile implements ProfileInterface{
         this.device_id = did;
         // set all other attributes from the database
         try {
-            new InitAgentTask().execute().get();
+            // new InitAgentTask().execute().get();
+            Thread thread1 = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try  {
+                        Class.forName("com.mysql.jdbc.Driver");
+                        String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
+                        Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
+                        Statement s = connection.createStatement();
+                        String query = String.format("SELECT * FROM user WHERE device_id='%s';", device_id);
+                        ResultSet result = s.executeQuery(query);
+                        // System.out.println("Query Complete");
+                        while (result.next()){
+                            setUnique_userid(result.getString("user_id"));
+                            // System.out.println("PROFILE: SET UNIQUE USERID: " + unique_userid);
+                            setUscid(result.getString("usc_id"));
+                            setUsername(result.getString("username"));
+                            setPassword(result.getString("password"));
+                            setPhotourl(result.getString("photourl"));
+                            setName(result.getString("name"));
+                            setEmail(result.getString("email"));
+                        }
+                        setResult(result);
+                        connection.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            thread1.start();
+            thread1.join();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -116,34 +146,34 @@ public class Profile implements ProfileInterface{
         this.device_id = device_id;
     }
 
-    class InitAgentTask extends AsyncTask<Void, Void, Void> {
-        @Override
-        protected Void doInBackground(Void... voids){
-            try{
-                Class.forName("com.mysql.jdbc.Driver");
-                String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
-                Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
-                Statement s = connection.createStatement();
-                String query = String.format("SELECT * FROM user WHERE device_id='%s';", device_id);
-                ResultSet result = s.executeQuery(query);
-                // System.out.println("Query Complete");
-                while (result.next()){
-                    setUnique_userid(result.getString("user_id"));
-                    // System.out.println("PROFILE: SET UNIQUE USERID: " + unique_userid);
-                    setUscid(result.getString("usc_id"));
-                    setUsername(result.getString("username"));
-                    setPassword(result.getString("password"));
-                    setPhotourl(result.getString("photourl"));
-                    setName(result.getString("name"));
-                    setEmail(result.getString("email"));
-                }
-                setResult(result);
-                connection.close();
-            } catch (Exception e){
-                e.printStackTrace();
-                // System.out.println("Exception");
-            }
-            return null;
-        }
-    }
+//    class InitAgentTask extends AsyncTask<Void, Void, Void> {
+//        @Override
+//        protected Void doInBackground(Void... voids){
+//            try{
+//                Class.forName("com.mysql.jdbc.Driver");
+//                String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
+//                Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
+//                Statement s = connection.createStatement();
+//                String query = String.format("SELECT * FROM user WHERE device_id='%s';", device_id);
+//                ResultSet result = s.executeQuery(query);
+//                // System.out.println("Query Complete");
+//                while (result.next()){
+//                    setUnique_userid(result.getString("user_id"));
+//                    // System.out.println("PROFILE: SET UNIQUE USERID: " + unique_userid);
+//                    setUscid(result.getString("usc_id"));
+//                    setUsername(result.getString("username"));
+//                    setPassword(result.getString("password"));
+//                    setPhotourl(result.getString("photourl"));
+//                    setName(result.getString("name"));
+//                    setEmail(result.getString("email"));
+//                }
+//                setResult(result);
+//                connection.close();
+//            } catch (Exception e){
+//                e.printStackTrace();
+//                // System.out.println("Exception");
+//            }
+//            return null;
+//        }
+//    }
 }
