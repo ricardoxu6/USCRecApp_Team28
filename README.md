@@ -31,18 +31,18 @@ Map Page (Activity):
     Click on the window at the bottom of the page to view the booking summary (Note: can slide the window to view different upcoming timeslots)
 
 Booking Page (Activity):
-    Click the upper left Back to go back the Map Page
+    Click the upper left Back to go back to the Map Page
     Click the upper right Refresh to refresh the current page (when you stay on the page for a long time and did nothing)
     Click the three buttons to select the date to make a reservation (can only select the next three days)
     Click Book or Join Waitlist to book a timeslot or join the waitlist as required (NOTE: a user can book at most one timeslot at a center a day)
 
 Summary Page (Activity):
-    Click the upper left Back to go back the Map Page
+    Click the upper left Back to go back to the Map Page
     The first part shows the upcoming bookings, while the second part shows the history bookings, each window allows sliding to view more
     Click Cancel (for upcoming bookings only) to cancel an upcoming meeting
 
 Profile Page (Activity):
-    Click the upper left Back to go back the Map Page
+    Click the upper left Back to go back to the Map Page
     Click the upper right Logout to logout this account (will then be redirected to Login Page)
 
 To Test Notifications & Waitlist (need at least two devices):

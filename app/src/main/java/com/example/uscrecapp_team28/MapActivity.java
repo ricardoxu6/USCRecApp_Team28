@@ -38,6 +38,14 @@ public class MapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
+        if (!this.agent_curr.check_loggedin()) {
+            Intent i = new Intent(MapActivity.this, MainActivity.class);
+            startActivity(i);
+            finish();
+            return;
+        }
+        agent_curr.init_info();
         //TODO add this code to all pages oncreate
         this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
         mServiceIntent = new Intent(this, NotificationService.class);
@@ -47,14 +55,6 @@ public class MapActivity extends AppCompatActivity {
             ContextCompat.startForegroundService(this,mServiceIntent);
         }
         //TODO end
-        this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
-        if (!this.agent_curr.check_loggedin()) {
-            Intent i = new Intent(MapActivity.this, MainActivity.class);
-            startActivity(i);
-            finish();
-            return;
-        }
-        agent_curr.init_info();
         setContentView(R.layout.activity_map);
         mRecyclerView = findViewById(R.id.recyclerMAP);
         mLayoutManager = new LinearLayoutManager(this);
