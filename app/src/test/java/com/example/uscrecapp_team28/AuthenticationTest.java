@@ -16,6 +16,7 @@ public class AuthenticationTest extends TestCase {
     public void tearDown() throws Exception {
     }
 
+    // DS
     public void testGetDevice_id() {
         Authentication a = new Authentication("dida");
         assertEquals("dida", a.getDevice_id());
@@ -23,6 +24,7 @@ public class AuthenticationTest extends TestCase {
         assertEquals("didb", b.getDevice_id());
     }
 
+    // DS
     public void testSetDevice_id() {
         Authentication a = new Authentication("did");
         a.setDevice_id("did'");
@@ -33,24 +35,27 @@ public class AuthenticationTest extends TestCase {
         assertEquals("", a.getDevice_id());
     }
 
+    // DS
     public void testSetUnique_userid() {
         Authentication a = new Authentication("did");
         a.setUnique_userid("abc");
         assertEquals("abc", a.getUnique_userid());
     }
 
+    // DS
     public void testGetUnique_userid() {
         Authentication a = new Authentication("did");
         a.setUnique_userid("abc2");
         assertEquals("abc2", a.getUnique_userid());
     }
 
+    // DS
     public void testIf_already_login() {
         Authentication a = new Authentication("did");
         assertEquals(false, a.if_already_login());
         a.setUnique_userid("abc");
         assertEquals(true, a.if_already_login());
-        AuthenticationInterface i = new Authentication("interface");
+        Authentication i = new Authentication("interface");
         assertEquals(false, i.if_already_login());
         a.setDevice_id("deviceid");
         assertEquals(true, a.if_already_login());
