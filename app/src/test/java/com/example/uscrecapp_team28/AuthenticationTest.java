@@ -2,10 +2,17 @@ package com.example.uscrecapp_team28;
 
 import junit.framework.TestCase;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+
+import junit.framework.TestCase;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-import org.powermock.modules.junit4.PowerMockRunner;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 public class AuthenticationTest extends TestCase {
 
