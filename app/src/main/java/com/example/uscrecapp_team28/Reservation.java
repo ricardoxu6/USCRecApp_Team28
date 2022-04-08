@@ -47,6 +47,7 @@ public class Reservation implements ReservationInterface{
 
     public Reservation(){
     };
+
     public Reservation(String uid) {
         this.unique_userid = uid;
         db = FirebaseFirestore.getInstance();
@@ -72,9 +73,7 @@ public class Reservation implements ReservationInterface{
                         res.add(result.getString("reservation_id"));
                     }
 
-                } catch (Exception e) {
-
-                }
+                } catch (Exception e) { }
             }
         });
         t.start();
@@ -135,7 +134,7 @@ public class Reservation implements ReservationInterface{
                         }
                     }
                     connection.close();
-                } catch (Exception e){
+                } catch (Exception e) {
                     // System.out.println("Exception");
                 }
             }

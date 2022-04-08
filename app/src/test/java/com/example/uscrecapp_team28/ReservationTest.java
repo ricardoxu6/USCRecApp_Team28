@@ -21,10 +21,16 @@ public class ReservationTest {
 
     @Test
     public void getUnique_userid() {
+        Reservation r = new Reservation();
+        r.setUnique_userid("uid1");
+        assertEquals("uid1", r.getUnique_userid());
     }
 
     @Test
     public void setUnique_userid() {
+        Reservation r = new Reservation();
+        r.setUnique_userid("uid2");
+        assertEquals("uid2", r.getUnique_userid());
     }
 
     //display all reservation information of a user. make sure the past and future information are correct
@@ -51,7 +57,6 @@ public class ReservationTest {
         }
         assertTrue(contain129);
         assertTrue(contain130);
-
     }
 
     @Test
