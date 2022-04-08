@@ -41,11 +41,14 @@ import javax.xml.transform.Result;
 public class Reservation implements ReservationInterface{
 
     String unique_userid;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    DocumentReference reference;
+    FirebaseFirestore db;
     String reservation_id;
+
+    public Reservation(){
+    };
     public Reservation(String uid) {
         this.unique_userid = uid;
+        db = FirebaseFirestore.getInstance();
     }
 
     public String getUnique_userid() {
@@ -55,7 +58,6 @@ public class Reservation implements ReservationInterface{
     public void setUnique_userid(String unique_userid) {
         this.unique_userid = unique_userid;
     }
-
     private final HashMap<String, ArrayList<BookingItem>> listMap = new HashMap<String,ArrayList<BookingItem>>(){{
         put("future",new ArrayList<>());
         put("history", new ArrayList<>());
