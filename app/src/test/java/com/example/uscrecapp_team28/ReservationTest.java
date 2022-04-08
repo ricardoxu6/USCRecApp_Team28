@@ -71,7 +71,7 @@ public class ReservationTest {
 
     //add a reservation and test to cancel the reservation
     @Test
-    public void cancel_reservation() {
+    public void cancel_reservation_reservation_table() {
         Agent agent = new Agent();
         String user_id = "6";
         String timeslot_id = "104";
@@ -85,5 +85,23 @@ public class ReservationTest {
         reservation.cancel_reservation(reservation_id);
         //test if it contains the reservation id
         assertEquals(0,reservation.get_reservationId_by_timeslot_and_user(timeslot_id).size());
+    }
+
+    @Test
+    public void cancel_reservation_availability_table(){
+        Agent agent = new Agent();
+        String user_id = "6";
+        String timeslot_id = "104";
+        String date_id = "104";
+        agent.make_reservation(user_id,timeslot_id,date_id,2);
+        //cancel the reservation and find if the reservation exists
+        Reservation reservation = new Reservation();
+        reservation.setUnique_userid(user_id);
+        assertEquals(1,reservation.get_reservationId_by_timeslot_and_user(timeslot_id).size());
+        assertEquals(1,reservation.check_availability_table_for_reservation().size());
+        String reservation_id = reservation.get_reservationId_by_timeslot_and_user(timeslot_id).get(0);
+        reservation.cancel_reservation(reservation_id);
+        //test if it contains the reservation id in the availability table
+        assertEquals(0,reservation.check_availability_table_for_reservation().size());
     }
 }
