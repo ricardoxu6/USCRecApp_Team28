@@ -68,7 +68,7 @@ public class BookingInformationAdapter<MyActivity> extends RecyclerView.Adapter 
         ((BookingInformationViewHolder) holder).mTextView2.setText(currentItem.getText2());
 //        System.out.println(currentItem.getmText1());
 //        String PACKAGE_NAME = context.getApplicationContext().getPackageName();
-        if (currentItem.getmText1().equals("Lyon Center")) {
+        if (currentItem.getText1().equals("Lyon Center")) {
             ((BookingInformationViewHolder) holder).backImage.setBackground(ContextCompat.getDrawable(context, R.drawable.lyon));
         } else {
             ((BookingInformationViewHolder) holder).backImage.setBackground(ContextCompat.getDrawable(context, R.drawable.village));

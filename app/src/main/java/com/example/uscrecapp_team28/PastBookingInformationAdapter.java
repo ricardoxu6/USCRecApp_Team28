@@ -44,7 +44,7 @@ public class PastBookingInformationAdapter extends RecyclerView.Adapter{
         BookingItem currentItem = mBookingList.get(position);
         ((PastBookingInformationViewHolder) holder).mTextView1.setText(currentItem.getText1());
         ((PastBookingInformationViewHolder) holder).mTextView2.setText(currentItem.getText2());
-        if (currentItem.getmText1().equals("Lyon Center")) {
+        if (currentItem.getText1().equals("Lyon Center")) {
             ((PastBookingInformationViewHolder) holder).backImage.setBackground(ContextCompat.getDrawable(context, R.drawable.lyon));
         } else {
             ((PastBookingInformationViewHolder) holder).backImage.setBackground(ContextCompat.getDrawable(context, R.drawable.village));
