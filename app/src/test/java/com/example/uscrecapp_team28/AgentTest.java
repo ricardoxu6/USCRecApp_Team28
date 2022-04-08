@@ -10,6 +10,8 @@ import java.sql.Statement;
 import java.sql.Time;
 import java.util.ArrayList;
 
+import java.util.ArrayList;
+
 public class AgentTest extends TestCase {
 
     public void setUp() throws Exception {
@@ -20,90 +22,244 @@ public class AgentTest extends TestCase {
     }
 
     public void testInit_info() {
+        // a trivial version
+        Agent e = new Agent();
+        e.init_info();
+        assertEquals(null, e.getUnique_userid());
+        assertEquals(null, e.getUscid());
+        assertEquals(null, e.getReal_username());
+        assertEquals(null, e.getReal_password());
+        assertEquals(null, e.getPhotourl());
+        assertEquals(null, e.getName());
+        assertEquals(null, e.getEmail());
+        // a real version
+        Agent a = new Agent();
+        a.setDevice_id("deviceid");
+        // before init_info()
+        assertEquals(null, a.getUnique_userid());
+        assertEquals(null, a.getUscid());
+        assertEquals(null, a.getReal_username());
+        assertEquals(null, a.getReal_password());
+        assertEquals(null, a.getPhotourl());
+        assertEquals(null, a.getName());
+        assertEquals(null, a.getEmail());
+        // after init_info()
+        a.init_info();
+        assertEquals("5", a.getUnique_userid());
+        assertEquals("uscid", a.getUscid());
+        assertEquals("test", a.getReal_username());
+        assertEquals("test", a.getReal_password());
+        assertEquals("https://media-exp1.licdn.com/dms/image/C5603AQFxpC5CYYULNA/profile-displayphoto-shrink_800_800/0/1624353277071?e=1652918400&v=beta&t=84ukoO8jlXa6Di4JE2VbtMd-klLCCcQK6aoQT1G5GwY", a.getPhotourl());
+        assertEquals("test_name", a.getName());
+        assertEquals("test_email", a.getEmail());
     }
 
     public void testLogout() {
+        Agent a = new Agent();
+        a.setUsername("test");
+        a.setPassword("test");
+        a.setDevice_id("deviceid");
+        a.user_login();
+        a.logout();
+        assertEquals("deviceid", a.getDevice_id());
+        // assign diviceid back to the user to not modify the database
+        a.setUsername("test");
+        a.setPassword("test");
+        a.setDevice_id("deviceid");
+        a.user_login();
     }
 
     public void testGetUnique_userid() {
+        Agent a = new Agent();
+        a.setUnique_userid("id");
+        assertEquals("id", a.getUnique_userid());
     }
 
     public void testGetUsername() {
+        Agent a = new Agent();
+        a.setUsername("un");
+        assertEquals("un", a.getUsername());
     }
 
     public void testGetPassword() {
+        Agent a = new Agent();
+        a.setPassword("pw");
+        assertEquals("pw", a.getPassword());
     }
 
     public void testGetUnique_center_id() {
+        Agent a = new Agent();
+        a.setUnique_center_id("cid");
+        assertEquals("cid", a.getUnique_center_id());
     }
 
     public void testGetUnique_timeslot_id() {
+        Agent a = new Agent();
+        a.setUnique_timeslot_id("tid");
+        assertEquals("tid", a.getUnique_timeslot_id());
     }
 
     public void testGetDevice_id() {
+        Agent a = new Agent();
+        a.setDevice_id("did");
+        assertEquals("did", a.getDevice_id());
     }
 
     public void testSetUnique_userid() {
+        Agent a = new Agent();
+        a.setUnique_userid("id");
+        assertEquals("id", a.getUnique_userid());
     }
 
     public void testSetUsername() {
+        Agent a = new Agent();
+        a.setUsername("un");
+        assertEquals("un", a.getUsername());
     }
 
     public void testSetPassword() {
+        Agent a = new Agent();
+        a.setPassword("pw");
+        assertEquals("pw", a.getPassword());
     }
 
     public void testSetUnique_center_id() {
+        Agent a = new Agent();
+        a.setUnique_center_id("cid");
+        assertEquals("cid", a.getUnique_center_id());
     }
 
     public void testSetUnique_timeslot_id() {
+        Agent a = new Agent();
+        a.setUnique_timeslot_id("tid");
+        assertEquals("tid", a.getUnique_timeslot_id());
     }
 
     public void testSetDevice_id() {
+        Agent a = new Agent();
+        a.setDevice_id("did");
+        assertEquals("did", a.getDevice_id());
     }
 
     public void testGetReal_username() {
+        Agent a = new Agent();
+        a.setReal_username("run");
+        assertEquals("run", a.getReal_username());
     }
 
     public void testSetReal_username() {
+        Agent a = new Agent();
+        a.setReal_username("run");
+        assertEquals("run", a.getReal_username());
     }
 
     public void testGetReal_password() {
+        Agent a = new Agent();
+        a.setReal_password("rpw");
+        assertEquals("rpw", a.getReal_password());
     }
 
     public void testSetReal_password() {
+        Agent a = new Agent();
+        a.setReal_password("rpw");
+        assertEquals("rpw", a.getReal_password());
     }
 
     public void testGetUscid() {
+        Agent a = new Agent();
+        a.setUscid("uscid");
+        assertEquals("uscid", a.getUscid());
     }
 
     public void testSetUscid() {
+        Agent a = new Agent();
+        a.setUscid("uscid");
+        assertEquals("uscid", a.getUscid());
     }
 
     public void testGetPhotourl() {
+        Agent a = new Agent();
+        a.setPhotourl("url");
+        assertEquals("url", a.getPhotourl());
     }
 
     public void testSetPhotourl() {
+        Agent a = new Agent();
+        a.setPhotourl("url");
+        assertEquals("url", a.getPhotourl());
     }
 
-    public void testTestGetName() {
+    public void testGetName() {
+        Agent a = new Agent();
+        a.setName("name");
+        assertEquals("name", a.getName());
     }
 
-    public void testTestSetName() {
+    public void testSetName() {
+        Agent a = new Agent();
+        a.setName("name");
+        assertEquals("name", a.getName());
     }
 
     public void testGetEmail() {
+        Agent a = new Agent();
+        a.setEmail("email");
+        assertEquals("email", a.getEmail());
     }
 
     public void testSetEmail() {
+        Agent a = new Agent();
+        a.setEmail("email");
+        assertEquals("email", a.getEmail());
     }
 
     public void testUser_login() {
+        Agent a = new Agent();
+        a.setUsername("test");
+        a.setPassword("test");
+        a.setDevice_id("deviceid");
+        assertEquals(true, a.user_login());
+        Agent b = new Agent();
+        assertEquals(false, b.user_login());
     }
 
     public void testCheck_loggedin() {
+        Agent a = new Agent();
+        assertEquals(false, a.check_loggedin());
+        Agent b = new Agent();
+        b.setDevice_id("deviceid");
+        assertEquals(true, b.check_loggedin());
+        b.setDevice_id("another_not_exist");
+        assertEquals(false, b.check_loggedin());
     }
 
     public void testView_profile() {
+        // a trivial version
+        Agent e = new Agent();
+        ArrayList<String> e_arr = new ArrayList<String>();
+        e_arr.add(null);
+        e_arr.add(null);
+        e_arr.add(null);
+        e_arr.add(null);
+        e_arr.add(null);
+        e_arr.add(null);
+        e_arr.add(null);
+        e_arr.add(null);
+        assertEquals(e_arr, e.view_profile());
+        // a real version
+        Agent a = new Agent();
+        a.setDevice_id("deviceid");
+        ArrayList<String> display = new ArrayList<String>();
+        display.add("5");
+        display.add("uscid");
+        display.add("test");
+        display.add("test");
+        display.add("https://media-exp1.licdn.com/dms/image/C5603AQFxpC5CYYULNA/profile-displayphoto-shrink_800_800/0/1624353277071?e=1652918400&v=beta&t=84ukoO8jlXa6Di4JE2VbtMd-klLCCcQK6aoQT1G5GwY");
+        display.add("test_name");
+        display.add("test_email");
+        display.add("deviceid");
+        ArrayList<String> real = a.view_profile();
+        assertEquals(display, real);
     }
 
     public void testView_all_timeslots() {
@@ -129,8 +285,6 @@ public class AgentTest extends TestCase {
         assertEquals(2, r2);
         try {
             //new MakeBooking(unique_timeslot_id, unique_user_id,date_id, max_capacity).execute().get();
-
-
             Thread thread_del = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -167,9 +321,6 @@ public class AgentTest extends TestCase {
             e.printStackTrace();
         }
 
-    }
-
-    public void testCancel_reservation() {
     }
 
     public void testJoin_waitlist() {
@@ -215,6 +366,10 @@ public class AgentTest extends TestCase {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+    public void testCancel_reservation() {
     }
 
     public void testView_all_reservations() {

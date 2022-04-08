@@ -49,6 +49,13 @@ public class Agent extends CommonServiceInterface{
     public void logout() {
         LogoutInterface a = new Logout(this.device_id);
         if (a.user_logout()) {
+            setUnique_userid("");
+            setUscid("");
+            setReal_username("");
+            setReal_password("");
+            setPhotourl("");
+            setName("");
+            setEmail("");
             return;
         }
         logout();
