@@ -236,8 +236,8 @@ public class Agent extends CommonServiceInterface{
         return r.display_all_reservation_info();
     }
 
-    @Override
-    public String toString() {
-        return unique_userid + uscid + real_username + real_password + photourl + name + email + device_id;
-    }
+//    @Override
+//    public String toString() {
+//        return unique_userid + uscid + real_username + real_password + photourl + name + email + device_id;
+//    }
 }
