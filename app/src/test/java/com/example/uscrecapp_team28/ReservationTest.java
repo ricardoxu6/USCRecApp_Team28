@@ -93,6 +93,7 @@ public class ReservationTest {
         Reservation reservation = new Reservation();
         reservation.setUnique_userid(user_id);
         assertEquals(1,reservation.get_reservationId_by_timeslot_and_user(timeslot_id).size());
+        assertEquals(1,reservation.check_availability_table_for_reservation().size());
         String reservation_id = reservation.get_reservationId_by_timeslot_and_user(timeslot_id).get(0);
         reservation.cancel_reservation(reservation_id);
         //test if it contains the reservation id in the availability table
