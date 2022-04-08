@@ -49,6 +49,13 @@ public class Agent extends CommonServiceInterface{
     public void logout() {
         LogoutInterface a = new Logout(this.device_id);
         if (a.user_logout()) {
+            setUnique_userid("");
+            setUscid("");
+            setReal_username("");
+            setReal_password("");
+            setPhotourl("");
+            setName("");
+            setEmail("");
             return;
         }
         logout();
@@ -229,8 +236,8 @@ public class Agent extends CommonServiceInterface{
         return r.display_all_reservation_info();
     }
 
-    @Override
-    public String toString() {
-        return unique_userid + uscid + real_username + real_password + photourl + name + email + device_id;
-    }
+//    @Override
+//    public String toString() {
+//        return unique_userid + uscid + real_username + real_password + photourl + name + email + device_id;
+//    }
 }

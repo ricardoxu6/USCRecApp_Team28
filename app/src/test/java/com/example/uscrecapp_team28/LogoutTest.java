@@ -4,6 +4,7 @@ import junit.framework.TestCase;
 
 import org.junit.Assert;
 
+// DS
 public class LogoutTest extends TestCase {
 
     public void setUp() throws Exception {

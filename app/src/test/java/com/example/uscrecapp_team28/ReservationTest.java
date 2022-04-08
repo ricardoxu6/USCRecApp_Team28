@@ -38,14 +38,14 @@ public class ReservationTest {
         System.out.println(m);
         assertEquals(2,m.get("future").size());
         assertEquals(1,m.get("history").size());
-        assertEquals("128",m.get("history").get(0).getmReservation_id());
+        assertEquals("128",m.get("history").get(0).getmReservationId());
         //contain reservation id 104 and 105
         boolean contain129 = false;
         boolean contain130 = false;
         for(BookingItem i:m.get("future")){
-            if(i.getmReservation_id().equals("129")){
+            if(i.getmReservationId().equals("129")){
                 contain129 = true;
-            }else if(i.getmReservation_id().equals("130")){
+            }else if(i.getmReservationId().equals("130")){
                 contain130 = true;
             }
         }
