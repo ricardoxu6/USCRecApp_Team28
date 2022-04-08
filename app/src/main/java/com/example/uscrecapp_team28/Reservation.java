@@ -26,6 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -54,7 +55,36 @@ public class Reservation implements ReservationInterface{
     public String getUnique_userid() {
         return unique_userid;
     }
+    public ArrayList<String> get_reservationId_by_timeslot_and_user(String timeslot_id){
+        final ArrayList<String> res = new ArrayList<>();
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //connect to sql database
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
+                    Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
+                    Statement s = connection.createStatement();
+                    String query = String.format("SELECT reservation.reservation_id from reservation where user_id=%s and timeslot_id=%s;",getUnique_userid(),timeslot_id);
+                    ResultSet result = s.executeQuery(query);
+                    while(result.next()){
+                        res.add(result.getString("reservation_id"));
+                    }
 
+                } catch (Exception e) {
+
+                }
+            }
+        });
+        t.start();
+        try {
+            t.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
     public void setUnique_userid(String unique_userid) {
         this.unique_userid = unique_userid;
     }

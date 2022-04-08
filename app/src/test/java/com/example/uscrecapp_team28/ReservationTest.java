@@ -32,24 +32,25 @@ public class ReservationTest {
     public void display_all_reservation_info() {
         //test all reservation information for a user
         Reservation reservation = new Reservation();
-        reservation.setUnique_userid("5");
+        String user_id = "6";
+        reservation.setUnique_userid(user_id);
         HashMap<String, ArrayList<BookingItem>>  m = reservation.display_all_reservation_info();
         System.out.println(m);
-        assertEquals(1,m.get("future").size());
-        assertEquals(2,m.get("history").size());
-        assertEquals("106",m.get("future").get(0).getmReservation_id());
+        assertEquals(2,m.get("future").size());
+        assertEquals(1,m.get("history").size());
+        assertEquals("128",m.get("history").get(0).getmReservation_id());
         //contain reservation id 104 and 105
-        boolean contain104 = false;
-        boolean contain105 = false;
-        for(BookingItem i:m.get("history")){
-            if(i.getmReservation_id().equals("104")){
-                contain104 = true;
-            }else if(i.getmReservation_id().equals("105")){
-                contain105 = true;
+        boolean contain129 = false;
+        boolean contain130 = false;
+        for(BookingItem i:m.get("future")){
+            if(i.getmReservation_id().equals("129")){
+                contain129 = true;
+            }else if(i.getmReservation_id().equals("130")){
+                contain130 = true;
             }
         }
-        assertTrue(contain104);
-        assertTrue(contain105);
+        assertTrue(contain129);
+        assertTrue(contain130);
 
     }
 
@@ -66,6 +67,17 @@ public class ReservationTest {
     //add a reservation and test to cancel the reservation
     @Test
     public void cancel_reservation() {
-        
+        Agent agent = new Agent();
+        String user_id = "6";
+        String timeslot_id = "104";
+        String date_id = "104";
+        agent.make_reservation(user_id,timeslot_id,date_id,2);
+        //cancel the reservation and find if the reservation exists
+        Reservation reservation = new Reservation();
+        reservation.setUnique_userid(user_id);
+        String reservation_id = reservation.get_reservationId_by_timeslot_and_user(timeslot_id).get(0);
+        reservation.cancel_reservation(reservation_id);
+        //test if it contains the reservation id
+        assertEquals(0,reservation.get_reservationId_by_timeslot_and_user(timeslot_id).size());
     }
 }
