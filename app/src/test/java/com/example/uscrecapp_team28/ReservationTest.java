@@ -33,6 +33,20 @@ public class ReservationTest {
         assertEquals("uid2", r.getUnique_userid());
     }
 
+    @Test
+    public void setReservation_id() {
+        Reservation r = new Reservation();
+        r.setReservation_id("rid1");
+        assertEquals("rid1", r.getReservation_id());
+    }
+
+    @Test
+    public void getReservation_id() {
+        Reservation r = new Reservation();
+        r.setReservation_id("rid2");
+        assertEquals("rid2", r.getReservation_id());
+    }
+
     //display all reservation information of a user. make sure the past and future information are correct
     @Test
     public void display_all_reservation_info() {

@@ -53,6 +53,14 @@ public class Reservation implements ReservationInterface{
         db = FirebaseFirestore.getInstance();
     }
 
+    public String getReservation_id() {
+        return reservation_id;
+    }
+
+    public void setReservation_id(String reservation_id) {
+        this.reservation_id = reservation_id;
+    }
+
     public String getUnique_userid() {
         return unique_userid;
     }
@@ -276,5 +284,4 @@ public class Reservation implements ReservationInterface{
         //else do not need to notify
 
     }
-
 }
