@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,6 +28,22 @@ import java.util.concurrent.ExecutionException;
 
 
 public class BookingAdapter extends RecyclerView.Adapter{
+    public ArrayList<TimeslotItem> gettSlotList() {
+        return tSlotList;
+    }
+
+    public ArrayList<Button> getBookButtonList() {
+        return bookButtonList;
+    }
+
+    public ArrayList<Button> getWaitButtonList() {
+        return waitButtonList;
+    }
+
+    public static ArrayList<Button> bookButtonList = new ArrayList<Button>();
+
+    private  ArrayList<Button> waitButtonList = new ArrayList<Button>();
+
     private ArrayList<TimeslotItem> tSlotList;
     private Agent tAgent;
 
@@ -43,6 +60,8 @@ public class BookingAdapter extends RecyclerView.Adapter{
             mTextView2 = itemView.findViewById(R.id.textView2);
             bookButton = itemView.findViewById(R.id.BookButton);
             waitButton = itemView.findViewById(R.id.WaitButton);
+            BookingAdapter.bookButtonList.add(bookButton);
+
         }
     }
 

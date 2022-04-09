@@ -41,6 +41,11 @@ import android.widget.TextView;
 
 public class BookingActivity extends AppCompatActivity {
     private RecyclerView tRecyclerView;
+
+    public RecyclerView.Adapter gettAdapter() {
+        return tAdapter;
+    }
+
     private RecyclerView.Adapter tAdapter;
     private RecyclerView.LayoutManager tLayoutManager;
     String usid;
