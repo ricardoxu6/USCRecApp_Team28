@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/profile_back"
+            android:id="@+id/booking_back"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -36,6 +36,7 @@
             android:textColor="@color/black"
             android:text="Timeslots"/>
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/refreshbtn"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
