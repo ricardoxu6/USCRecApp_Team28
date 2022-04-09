@@ -1,6 +1,8 @@
 package com.example.uscrecapp_team28;
 
-// 2 test cases
+// 1 test case
+
+import junit.framework.TestCase;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -33,34 +35,40 @@ import static androidx.test.ext.truth.content.IntentSubject.assertThat;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 import java.util.List;
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING) // run A (setup) then B (test)
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class LoginActivityTest {
-
+public class AlreadyLoginTest {
     @Rule
     public ActivityTestRule<MainActivity> activityRule =
             new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void testLoginSuccessAndLogout() {
-        onView(withId(R.id.username)).perform(typeText("test_login"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.password)).perform(typeText("test_login"), ViewActions.closeSoftKeyboard());
+    public void AtestAlreadyLoginSetup() {
+        // first, login but not logout -> just to setup... => will run first because of A
+        onView(withId(R.id.username)).perform(typeText("already"), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.password)).perform(typeText("already"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.signinbtn)).perform(click());
-        // already jump to map page, so the wrong field will not exist
-        onView(withId(R.id.wrong)).check(doesNotExist());
+    }
+
+    @Test
+    public void BtestAlreadyLoginTest() {
+        // the user should be already logged in (because using the same device) => will run then because of B
         // check if in map page already
+        onView(withId(R.id.wrong)).check(doesNotExist());
         onView(withId(R.id.profileText)).check(matches(withText("VIEW PROFILE")));
         onView(withId(R.id.summarybtn)).check(matches(withText("UPCOMING BOOKINGS")));
-        // click into profile to further check if the identity is a match (text)
-        onView(withId(R.id.profileText)).perform(click());
+        // click into profile to further check if the identity is a match (icon)
+        onView(withId(R.id.profileButton)).perform(click());
         onView(withId(R.id.profile_name)).check(matches(withText("TESTNAME")));
-        onView(withId(R.id.profile_username)).check(matches(withText("Username: test_login")));
+        onView(withId(R.id.profile_username)).check(matches(withText("Username: already")));
         onView(withId(R.id.profile_email)).check(matches(withText("Email: testEMAIL")));
         onView(withId(R.id.profile_uscid)).check(matches(withText("USCid: testUSCID")));
         // logout
@@ -68,19 +76,4 @@ public class LoginActivityTest {
         onView(withId(R.id.signin)).check(matches(withText("Sign in")));
     }
 
-    @Test
-    public void testLoginFail() {
-        onView(withId(R.id.username)).perform(typeText("test_login"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.password)).perform(typeText("test_login_wrong"), ViewActions.closeSoftKeyboard());
-        onView(withId(R.id.signinbtn)).perform(click());
-        // a wrong message prompt & still in login page
-        onView(withId(R.id.wrong)).check(matches(withText("Wrong username/password. Try again.")));
-        onView(withId(R.id.signin)).check(matches(withText("Sign in")));
-        // views in map should not exist
-        onView(withId(R.id.profileText)).check(doesNotExist());
-        onView(withId(R.id.profileButton)).check(doesNotExist());
-        onView(withId(R.id.summarybtn)).check(doesNotExist());
-        onView(withId(R.id.button1)).check(doesNotExist());
-        onView(withId(R.id.button2)).check(doesNotExist());
-    }
 }
