@@ -40,8 +40,8 @@ public class BookingInformationActivityTest {
         intended(hasComponent(MapActivity.class.getName()));
         Intents.release();
         Intents.init();
-        onView(withId(R.id.text)).perform(click());
+        onView(withId(R.id.summarybtn)).perform(click());
         intended(hasComponent(BookingInformationActivity.class.getName()));
-        Intents.release();
+//        Intents.release();
     }
 }
