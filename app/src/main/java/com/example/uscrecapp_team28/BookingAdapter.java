@@ -65,6 +65,20 @@ public class BookingAdapter extends RecyclerView.Adapter{
         }
     }
 
+
+
+    public void settSlotList(ArrayList<TimeslotItem> tSlotList) {
+        this.tSlotList = tSlotList;
+    }
+
+    public Agent gettAgent() {
+        return tAgent;
+    }
+
+    public void settAgent(Agent tAgent) {
+        this.tAgent = tAgent;
+    }
+
     public BookingAdapter(ArrayList<TimeslotItem> slotList, Agent agent) throws ParseException {
         // System.out.println("Constructor for Booking Adapter");
         tSlotList = new ArrayList<TimeslotItem>();
@@ -116,6 +130,7 @@ public class BookingAdapter extends RecyclerView.Adapter{
                     // System.out.println(time_id);
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
                     builder.setCancelable(true);
+
                     builder.setTitle("Confirmation");
                     String msg = "You are going to make a reservation on " + times + " at " + currentItem.getCenter_name();
                     builder.setMessage(msg);
