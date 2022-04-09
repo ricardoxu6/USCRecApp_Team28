@@ -59,6 +59,23 @@ public class BookingInformationActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView mHistoryRecyclerView;
     private RecyclerView.Adapter mAdapter;
+
+    public RecyclerView getmRecyclerView() {
+        return mRecyclerView;
+    }
+
+    public RecyclerView getmHistoryRecyclerView() {
+        return mHistoryRecyclerView;
+    }
+
+    public RecyclerView.Adapter getmAdapter() {
+        return mAdapter;
+    }
+
+    public RecyclerView.Adapter getmHistoryAdapter() {
+        return mHistoryAdapter;
+    }
+
     private RecyclerView.Adapter mHistoryAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.LayoutManager mHistoryLayoutManager;

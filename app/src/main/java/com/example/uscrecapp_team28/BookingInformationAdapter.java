@@ -32,6 +32,10 @@ import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 public class BookingInformationAdapter<MyActivity> extends RecyclerView.Adapter {
+    public ArrayList<BookingItem> getmBookingList() {
+        return mBookingList;
+    }
+
     private ArrayList<BookingItem> mBookingList;
     Context context;
     private Agent mAgent;

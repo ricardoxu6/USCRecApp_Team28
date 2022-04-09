@@ -3,6 +3,10 @@ package com.example.uscrecapp_team28;
 import android.graphics.drawable.Drawable;
 
 public class BookingItem {
+    public String getmReservation_id() {
+        return mReservation_id;
+    }
+
     private String mReservation_id;
     private String mText1;
     private String mText2;

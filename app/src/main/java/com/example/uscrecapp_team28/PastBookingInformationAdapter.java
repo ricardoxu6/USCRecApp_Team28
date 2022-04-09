@@ -14,6 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class PastBookingInformationAdapter extends RecyclerView.Adapter{
+    public ArrayList<BookingItem> getmBookingList() {
+        return mBookingList;
+    }
+
     private ArrayList<BookingItem> mBookingList;
     Context context;
     public static class PastBookingInformationViewHolder extends RecyclerView.ViewHolder {
