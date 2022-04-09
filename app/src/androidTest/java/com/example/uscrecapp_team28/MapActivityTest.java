@@ -92,14 +92,14 @@ public class MapActivityTest {
         // click into profile (icon)
         onView(withId(R.id.profileButton)).perform(click());
         onView(withId(R.id.profile_name)).check(matches(withText("TESTNAME")));
-        onView(withId(R.id.profile_username)).check(matches(withText("Username: test_login")));
+        onView(withId(R.id.profile_username)).check(matches(withText("Username: mainmap")));
         onView(withId(R.id.profile_email)).check(matches(withText("Email: testEMAIL")));
         onView(withId(R.id.profile_uscid)).check(matches(withText("USCid: testUSCID")));
         onView(withId(R.id.profile_back)).perform(click());
         // click into profile (text)
         onView(withId(R.id.profileText)).perform(click());
         onView(withId(R.id.profile_name)).check(matches(withText("TESTNAME")));
-        onView(withId(R.id.profile_username)).check(matches(withText("Username: test_login")));
+        onView(withId(R.id.profile_username)).check(matches(withText("Username: mainmap")));
         onView(withId(R.id.profile_email)).check(matches(withText("Email: testEMAIL")));
         onView(withId(R.id.profile_uscid)).check(matches(withText("USCid: testUSCID")));
         onView(withId(R.id.profile_back)).perform(click());
