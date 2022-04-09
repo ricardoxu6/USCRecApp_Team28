@@ -86,8 +86,12 @@ public class BookingInformationActivity extends AppCompatActivity {
         Agent agent_curr = ((MyApplication) this.getApplication()).getAgent();
 
         HashMap<String,ArrayList<BookingItem>> m = agent_curr.view_all_reservations();
+
         ArrayList<BookingItem> futureList = (ArrayList<BookingItem>) m.get("future");
         ArrayList<BookingItem> historyList = (ArrayList<BookingItem>) m.get("history");
+        System.out.println("get list");
+        System.out.println(futureList);
+        System.out.println(historyList);
         //set up adapter
         mAdapter = new BookingInformationAdapter(futureList,agent_curr);
         mRecyclerView.setLayoutManager(mLayoutManager);
