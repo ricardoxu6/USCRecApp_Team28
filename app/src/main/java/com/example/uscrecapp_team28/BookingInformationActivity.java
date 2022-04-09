@@ -121,7 +121,6 @@ public class BookingInformationActivity extends AppCompatActivity {
         startActivity(new Intent(this,MapActivity.class));
     }
 
-    //TODO add the following code the all pages
     @Override
     protected void onDestroy() {
 //        System.out.println("ondestroy in service");
@@ -142,5 +141,4 @@ public class BookingInformationActivity extends AppCompatActivity {
         }
         return false;
     }
-    //TODO end
 }

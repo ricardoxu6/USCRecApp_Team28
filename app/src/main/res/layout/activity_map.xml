@@ -108,6 +108,7 @@
             android:gravity="top">
 
             <TextView
+                android:id="@+id/text"
                 android:onClick="onClickSummary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
