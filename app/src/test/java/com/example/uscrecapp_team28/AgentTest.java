@@ -374,6 +374,4 @@ public class AgentTest extends TestCase {
     public void testView_all_reservations() {
     }
 
-//    public void testToString() {
-//    }
 }
