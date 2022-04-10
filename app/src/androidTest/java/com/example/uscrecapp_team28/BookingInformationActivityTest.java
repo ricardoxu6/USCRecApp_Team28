@@ -11,6 +11,7 @@ import static androidx.test.espresso.matcher.RootMatchers.isDialog;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.allOf;
 import static org.junit.Assert.*;
 
 import android.app.Activity;
@@ -28,6 +29,9 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
 import androidx.test.runner.lifecycle.Stage;
 
+import org.hamcrest.BaseMatcher;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -40,7 +44,26 @@ import java.util.Collection;
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class BookingInformationActivityTest {
-
+    private static Matcher<View> getElementFromMatchAtPosition(final Matcher<View> matcher, final int position) {
+        return new BaseMatcher<View>() {
+            int counter = 0;
+            @Override
+            public boolean matches(final Object item) {
+                if (matcher.matches(item)) {
+                    if(counter == position) {
+                        counter++;
+                        return true;
+                    }
+                    counter++;
+                }
+                return false;
+            }
+            @Override
+            public void describeTo(final Description description) {
+                description.appendText("Element at hierarchy position "+position);
+            }
+        };
+    }
     @Rule
     public ActivityTestRule<MainActivity> activityRule =
             new ActivityTestRule<>(MainActivity.class);
@@ -113,11 +136,36 @@ public class BookingInformationActivityTest {
         //make reservation
         onView(withId(R.id.tomorrowbutton)).perform(click());
         BookingAdapter bookingActivity = (BookingAdapter) ((BookingActivity) getCurrentActivity()).gettAdapter();
-        bookingActivity.getBookButtonList().get(0).performClick();
+        onView(allOf(getElementFromMatchAtPosition(allOf(withId(R.id.BookButton)), 0), isDisplayed())).perform(click());
         onView(withText("CONFIRM")).inRoot(isDialog())
                 .check(matches(isDisplayed()))
                 .perform(click());
-        onView(withId(R.id.profile_back)).perform(click());
+        onView(withText("OK")).inRoot(isDialog())
+                .check(matches(isDisplayed()))
+                .perform(click());
+        onView(withId(R.id.booking_back)).perform(click());
+        // go to summary page
+        onView(withId(R.id.summarybtn)).perform(click());
+        // cancel reservation
+        onView(allOf(getElementFromMatchAtPosition(allOf(withId(R.id.CancelButton)), 0), isDisplayed())).perform(click());
+        onView(withText("CONFIRM")).inRoot(isDialog())
+                .check(matches(isDisplayed()))
+                .perform(click());
+        //check the display that the element is the same as before
+        ArrayList<BookingItem> cancelHistoryList = ((PastBookingInformationAdapter)((BookingInformationActivity)getCurrentActivity()).getmHistoryAdapter()).getmBookingList();
+        assertEquals(1,cancelHistoryList.size());
+        assertEquals("128",cancelHistoryList.get(0).getmReservation_id());
+        ArrayList<BookingItem> cancelFutureList = ((BookingInformationAdapter)((BookingInformationActivity)getCurrentActivity()).getmAdapter()).getmBookingList();
+        assertEquals(2,cancelFutureList.size());
+        int future_correct_count = 0;
+        for(BookingItem b:cancelFutureList){
+            if(b.getmReservation_id().equals("129")||b.getmReservation_id().equals("130")){
+                future_correct_count++;
+            }
+        }
+        assertEquals(2,future_correct_count);
+        // back to map page
+        onView(withId(R.id.returnButton)).perform(click());
         onView(withId(R.id.profileButton)).perform(click());
         onView(withId(R.id.profile_logout)).perform(click());
     }
