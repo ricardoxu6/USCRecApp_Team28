@@ -1,6 +1,7 @@
 package com.example.uscrecapp_team28;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import junit.framework.TestCase;
 
@@ -11,6 +12,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AgentTest extends TestCase {
 
@@ -369,9 +371,48 @@ public class AgentTest extends TestCase {
     }
 
     public void testCancel_reservation() {
+        Agent agent = new Agent();
+        String user_id = "6";
+        String timeslot_id = "104";
+        String date_id = "104";
+        agent.make_reservation(user_id,timeslot_id,date_id,2);
+        //cancel the reservation and find if the reservation exists
+        Reservation reservation = new Reservation();
+        reservation.setUnique_userid(user_id);
+        assertEquals(1,reservation.get_reservationId_by_timeslot_and_user(timeslot_id).size());
+        String reservation_id = reservation.get_reservationId_by_timeslot_and_user(timeslot_id).get(0);
+        agent.cancel_reservation_test(reservation_id,"6");
+        //test if it contains the reservation id
+        assertEquals(0,reservation.get_reservationId_by_timeslot_and_user(timeslot_id).size());
+        //test if it contains the reservation id in the availability table
+        assertEquals(0,reservation.check_availability_table_for_reservation().size());
+
     }
 
     public void testView_all_reservations() {
+        Agent a = new Agent();
+        HashMap<String, ArrayList<BookingItem>> m = a.view_all_reservations_test("6");
+        System.out.println(m);
+        assertEquals(2,m.get("future").size());
+        assertEquals(1,m.get("history").size());
+        assertEquals("128",m.get("history").get(0).getmReservationId());
+        //contain reservation id 104 and 105
+        boolean contain129 = false;
+        boolean contain130 = false;
+        for(BookingItem i:m.get("future")){
+            if(i.getmReservationId().equals("129")){
+                contain129 = true;
+            }else if(i.getmReservationId().equals("130")){
+                contain130 = true;
+            }
+        }
+        assertTrue(contain129);
+        assertTrue(contain130);
+        //test for nonexist user
+        HashMap<String, ArrayList<BookingItem>>  nonexistM = a.view_all_reservations_test("-1");
+        System.out.println( nonexistM);
+        assertEquals(0, nonexistM.get("future").size());
+        assertEquals(0, nonexistM.get("history").size());
     }
 
 }

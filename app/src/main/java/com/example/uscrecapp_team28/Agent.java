@@ -219,6 +219,13 @@ public class Agent extends CommonServiceInterface{
         return true;
     }
 
+    public boolean cancel_reservation_test(String reservation_id,String user_id) {
+        // System.out.println("AGENT: User Unique ID: " + unique_userid);
+        Reservation r = new Reservation();
+        r.setUnique_userid(user_id);
+        r.cancel_reservation(reservation_id);
+        return true;
+    }
     @Override
     public Integer join_waitlist(String user_id, String timeslot_id) {
         TimeSlot ts1 = new TimeSlot();
@@ -236,4 +243,10 @@ public class Agent extends CommonServiceInterface{
         return r.display_all_reservation_info();
     }
 
+    public HashMap<String, ArrayList<BookingItem>> view_all_reservations_test(String user_id) {
+        // .out.println("AGENT: User Unique ID: " + unique_userid);
+        Reservation r = new Reservation();
+        r.setUnique_userid(user_id);
+        return r.display_all_reservation_info();
+    }
 }
