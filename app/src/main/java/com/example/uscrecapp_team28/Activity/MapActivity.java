@@ -1,4 +1,4 @@
-package com.example.uscrecapp_team28;
+package com.example.uscrecapp_team28.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -10,12 +10,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import com.example.uscrecapp_team28.Class.Agent;
+import com.example.uscrecapp_team28.Class.BookingItem;
+import com.example.uscrecapp_team28.Helper.CustomBroadcastReceiver;
+import com.example.uscrecapp_team28.MyApplication;
+import com.example.uscrecapp_team28.Helper.NotificationService;
+import com.example.uscrecapp_team28.R;
+import com.example.uscrecapp_team28.Helper.RecyclerMapAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.example.uscrecapp_team28;
+package com.example.uscrecapp_team28.Class;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;

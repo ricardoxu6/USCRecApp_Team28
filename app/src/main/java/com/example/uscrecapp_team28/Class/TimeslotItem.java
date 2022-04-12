@@ -1,4 +1,4 @@
-package com.example.uscrecapp_team28;
+package com.example.uscrecapp_team28.Class;
 
 public class TimeslotItem {
     private int timeslot_id;

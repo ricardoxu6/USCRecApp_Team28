@@ -1,5 +1,7 @@
 package com.example.uscrecapp_team28;
 
+import com.example.uscrecapp_team28.Class.BookingItem;
+
 import junit.framework.TestCase;
 
 // DS

@@ -1,7 +1,6 @@
-package com.example.uscrecapp_team28;
+package com.example.uscrecapp_team28.Helper;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.uscrecapp_team28.Class.Agent;
+import com.example.uscrecapp_team28.Class.BookingItem;
+import com.example.uscrecapp_team28.R;
 
 import java.util.ArrayList;
 

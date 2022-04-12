@@ -1,15 +1,9 @@
-package com.example.uscrecapp_team28;
-
-import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.provider.Settings;
+package com.example.uscrecapp_team28.Class;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import android.provider.Settings;
 
 public class LoginChecker implements LoginCheckerInterface{
 

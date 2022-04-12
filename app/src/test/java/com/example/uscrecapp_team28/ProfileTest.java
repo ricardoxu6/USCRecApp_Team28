@@ -1,5 +1,7 @@
 package com.example.uscrecapp_team28;
 
+import com.example.uscrecapp_team28.Class.Profile;
+
 import junit.framework.TestCase;
 
 import org.junit.Assert;

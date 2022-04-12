@@ -3,15 +3,18 @@ package com.example.uscrecapp_team28;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import com.example.uscrecapp_team28.Class.Agent;
+import com.example.uscrecapp_team28.Class.Reservation;
+import com.example.uscrecapp_team28.Class.BookingItem;
+import com.example.uscrecapp_team28.Class.TimeslotItem;
+
 import junit.framework.TestCase;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
-import java.sql.Time;
 import java.util.ArrayList;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AgentTest extends TestCase {

@@ -1,10 +1,7 @@
-package com.example.uscrecapp_team28;
-
-import android.os.AsyncTask;
+package com.example.uscrecapp_team28.Class;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Logout implements LogoutInterface{

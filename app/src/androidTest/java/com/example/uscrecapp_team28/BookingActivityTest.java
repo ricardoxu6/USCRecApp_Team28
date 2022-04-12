@@ -10,26 +10,18 @@ import static androidx.test.espresso.action.ViewActions.*;
 import static org.hamcrest.CoreMatchers.allOf;
 import static org.junit.Assert.*;
 
-import android.app.Activity;
 import android.view.View;
 
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
-import androidx.test.espresso.intent.rule.IntentsTestRule;
-import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.LargeTest;
-import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
-import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
-import androidx.test.runner.lifecycle.Stage;
+
+import com.example.uscrecapp_team28.Activity.MainActivity;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,12 +29,8 @@ import org.junit.runner.RunWith;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -230,7 +218,7 @@ public class BookingActivityTest {
         onView(withId(R.id.password)).perform(typeText("test"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.signinbtn)).perform(click());
         onView(withId(R.id.wrong)).check(doesNotExist());
-//        intended(hasComponent("com.example.uscrecapp_team28.MapActivity"));
+//        intended(hasComponent("com.example.uscrecapp_team28.Activity.MapActivity"));
         onView(withId(R.id.button1)).perform(click());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
@@ -257,7 +245,7 @@ public class BookingActivityTest {
 //        onView(withId(R.id.password)).perform(typeText("test"), ViewActions.closeSoftKeyboard());
 //        onView(withId(R.id.signinbtn)).perform(click());
 //        onView(withId(R.id.wrong)).check(doesNotExist());
-////        intended(hasComponent("com.example.uscrecapp_team28.MapActivity"));
+////        intended(hasComponent("com.example.uscrecapp_team28.Activity.MapActivity"));
 //        onView(withId(R.id.button1)).perform(click());
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //        Calendar cal = Calendar.getInstance();
@@ -284,7 +272,7 @@ public class BookingActivityTest {
 //        onView(withId(R.id.password)).perform(typeText("test"), ViewActions.closeSoftKeyboard());
 //        onView(withId(R.id.signinbtn)).perform(click());
 //        onView(withId(R.id.wrong)).check(doesNotExist());
-////        intended(hasComponent("com.example.uscrecapp_team28.MapActivity"));
+////        intended(hasComponent("com.example.uscrecapp_team28.Activity.MapActivity"));
 //        onView(withId(R.id.button1)).perform(click());
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //        Calendar cal = Calendar.getInstance();
@@ -315,7 +303,7 @@ public class BookingActivityTest {
 //        onView(withId(R.id.password)).perform(typeText("test"), ViewActions.closeSoftKeyboard());
 //        onView(withId(R.id.signinbtn)).perform(click());
 //        onView(withId(R.id.wrong)).check(doesNotExist());
-////        intended(hasComponent("com.example.uscrecapp_team28.MapActivity"));
+////        intended(hasComponent("com.example.uscrecapp_team28.Activity.MapActivity"));
 //        onView(withId(R.id.button1)).perform(click());
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //        Calendar cal = Calendar.getInstance();
@@ -350,7 +338,7 @@ public class BookingActivityTest {
 //        onView(withId(R.id.password)).perform(typeText("test"), ViewActions.closeSoftKeyboard());
 //        onView(withId(R.id.signinbtn)).perform(click());
 //        onView(withId(R.id.wrong)).check(doesNotExist());
-////        intended(hasComponent("com.example.uscrecapp_team28.MapActivity"));
+////        intended(hasComponent("com.example.uscrecapp_team28.Activity.MapActivity"));
 //        onView(withId(R.id.button1)).perform(click());
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 //        Calendar cal = Calendar.getInstance();

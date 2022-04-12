@@ -1,9 +1,8 @@
-package com.example.uscrecapp_team28;
+package com.example.uscrecapp_team28.Helper;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 
 import androidx.core.content.ContextCompat;
 

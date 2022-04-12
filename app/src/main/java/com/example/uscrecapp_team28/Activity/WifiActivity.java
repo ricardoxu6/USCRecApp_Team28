@@ -1,8 +1,10 @@
-package com.example.uscrecapp_team28;
+package com.example.uscrecapp_team28.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.uscrecapp_team28.R;
 
 public class WifiActivity extends AppCompatActivity {
 

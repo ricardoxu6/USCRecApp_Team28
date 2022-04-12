@@ -1,7 +1,6 @@
-package com.example.uscrecapp_team28;
+package com.example.uscrecapp_team28.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,35 +8,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.view.LayoutInflater;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatButton;
-
-import android.os.AsyncTask;
 import android.os.Bundle;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.Locale;
-import java.util.concurrent.ExecutionException;
 
-import android.content.Intent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.uscrecapp_team28.Class.Agent;
+import com.example.uscrecapp_team28.Helper.BookingAdapter;
+import com.example.uscrecapp_team28.Helper.CustomBroadcastReceiver;
+import com.example.uscrecapp_team28.MyApplication;
+import com.example.uscrecapp_team28.Helper.NotificationService;
+import com.example.uscrecapp_team28.R;
+import com.example.uscrecapp_team28.Class.TimeslotItem;
 
 public class BookingActivity extends AppCompatActivity {
     private RecyclerView tRecyclerView;

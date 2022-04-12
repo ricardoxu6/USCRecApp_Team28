@@ -1,6 +1,4 @@
-package com.example.uscrecapp_team28;
-
-import android.content.Context;
+package com.example.uscrecapp_team28.Class;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -2,6 +2,10 @@ package com.example.uscrecapp_team28;
 
 import static org.junit.Assert.*;
 
+import com.example.uscrecapp_team28.Class.Agent;
+import com.example.uscrecapp_team28.Class.Reservation;
+import com.example.uscrecapp_team28.Class.BookingItem;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

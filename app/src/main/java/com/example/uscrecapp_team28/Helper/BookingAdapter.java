@@ -1,9 +1,8 @@
-package com.example.uscrecapp_team28;
+package com.example.uscrecapp_team28.Helper;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +14,16 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import com.example.uscrecapp_team28.Activity.BookingActivity;
+import com.example.uscrecapp_team28.Class.Agent;
+import com.example.uscrecapp_team28.Class.TimeslotItem;
+import com.example.uscrecapp_team28.R;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-import java.util.concurrent.ExecutionException;
 
 
 public class BookingAdapter extends RecyclerView.Adapter{

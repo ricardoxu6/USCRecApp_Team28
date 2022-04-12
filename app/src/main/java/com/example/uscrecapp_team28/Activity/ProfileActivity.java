@@ -1,4 +1,4 @@
-package com.example.uscrecapp_team28;
+package com.example.uscrecapp_team28.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -14,12 +14,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.uscrecapp_team28.Class.Agent;
+import com.example.uscrecapp_team28.Class.BookingItem;
+import com.example.uscrecapp_team28.Helper.CustomBroadcastReceiver;
+import com.example.uscrecapp_team28.MyApplication;
+import com.example.uscrecapp_team28.Helper.NotificationService;
+import com.example.uscrecapp_team28.R;
+
 import java.io.InputStream;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 

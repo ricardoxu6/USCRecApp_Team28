@@ -1,4 +1,5 @@
-package com.example.uscrecapp_team28;
+package com.example.uscrecapp_team28.Class;
+
 import java.util.ArrayList;
 
 public interface TimeSlotInterface {

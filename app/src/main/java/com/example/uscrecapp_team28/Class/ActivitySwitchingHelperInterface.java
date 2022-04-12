@@ -1,4 +1,4 @@
-package com.example.uscrecapp_team28;
+package com.example.uscrecapp_team28.Class;
 
 public interface ActivitySwitchingHelperInterface {
     public boolean to_login_page();

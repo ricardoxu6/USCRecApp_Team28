@@ -8,7 +8,7 @@
     android:layout_height="fill_parent"
     android:layout_marginRight="0dp"
     android:layout_marginLeft="0dp"
-    tools:context=".MapActivity"
+    tools:context=".Activity.MapActivity"
     android:background="@color/white"
     android:orientation="vertical">
 

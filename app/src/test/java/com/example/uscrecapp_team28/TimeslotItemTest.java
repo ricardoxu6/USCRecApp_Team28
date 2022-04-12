@@ -2,6 +2,8 @@ package com.example.uscrecapp_team28;
 
 import static org.junit.Assert.*;
 
+import com.example.uscrecapp_team28.Class.TimeslotItem;
+
 import org.junit.Test;
 
 public class TimeslotItemTest {

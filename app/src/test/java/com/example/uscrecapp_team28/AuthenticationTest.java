@@ -8,11 +8,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 
-import junit.framework.TestCase;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import com.example.uscrecapp_team28.Class.Authentication;
 
 public class AuthenticationTest extends TestCase {
 

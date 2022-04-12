@@ -6,11 +6,9 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 
-import junit.framework.TestCase;
+import com.example.uscrecapp_team28.Class.LoginChecker;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import junit.framework.TestCase;
 
 public class LoginCheckerTest extends TestCase {
 

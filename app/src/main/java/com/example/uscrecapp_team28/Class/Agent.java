@@ -1,17 +1,9 @@
-package com.example.uscrecapp_team28;
+package com.example.uscrecapp_team28.Class;
 
-import android.content.Context;
-import android.os.AsyncTask;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Agent extends CommonServiceInterface{
+public class Agent extends CommonServiceInterface {
 
     private String device_id;
     private String unique_userid;

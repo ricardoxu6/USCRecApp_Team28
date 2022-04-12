@@ -1,18 +1,10 @@
-package com.example.uscrecapp_team28;
-
-import android.content.DialogInterface;
-import android.os.AsyncTask;
-
-import androidx.appcompat.app.AlertDialog;
+package com.example.uscrecapp_team28.Class;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.concurrent.ExecutionException;
 
 public class TimeSlot implements TimeSlotInterface{
     String unique_timeslot_id;

@@ -2,12 +2,13 @@ package com.example.uscrecapp_team28;
 
 import static org.junit.Assert.*;
 
+import com.example.uscrecapp_team28.Class.TimeSlot;
+import com.example.uscrecapp_team28.Class.TimeslotItem;
+
 import org.junit.Test;
 
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 

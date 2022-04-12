@@ -1,27 +1,20 @@
-package com.example.uscrecapp_team28;
+package com.example.uscrecapp_team28.Activity;
 
-import android.app.ActivityManager;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.StrictMode;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings.Secure;
-import java.sql.*;
-import android.view.inputmethod.EditorInfo;
-import android.widget.TextView;
 import android.view.KeyEvent;
+
+import com.example.uscrecapp_team28.Class.Agent;
+import com.example.uscrecapp_team28.MyApplication;
+import com.example.uscrecapp_team28.R;
 
 public class LoginActivity extends AppCompatActivity {
 

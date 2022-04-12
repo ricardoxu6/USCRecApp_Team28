@@ -1,35 +1,26 @@
-package com.example.uscrecapp_team28;
+package com.example.uscrecapp_team28.Helper;
 
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.text.SimpleDateFormat;
+import com.example.uscrecapp_team28.Activity.BookingInformationActivity;
+import com.example.uscrecapp_team28.Class.Agent;
+import com.example.uscrecapp_team28.Class.BookingItem;
+import com.example.uscrecapp_team28.R;
+
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
-import java.util.concurrent.ExecutionException;
 
 public class BookingInformationAdapter<MyActivity> extends RecyclerView.Adapter {
     public ArrayList<BookingItem> getmBookingList() {
@@ -90,7 +81,7 @@ public class BookingInformationAdapter<MyActivity> extends RecyclerView.Adapter 
                 builder.setNegativeButton("Back", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        context.startActivity(new Intent(context,BookingInformationActivity.class));
+                        context.startActivity(new Intent(context, BookingInformationActivity.class));
                     }
                 });
                 builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
