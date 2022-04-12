@@ -27,10 +27,12 @@ import androidx.test.runner.lifecycle.Stage;
 import com.example.uscrecapp_team28.Activity.BookingActivity;
 import com.example.uscrecapp_team28.Activity.BookingInformationActivity;
 import com.example.uscrecapp_team28.Activity.MainActivity;
+import com.example.uscrecapp_team28.Activity.MapActivity;
 import com.example.uscrecapp_team28.Helper.BookingAdapter;
 import com.example.uscrecapp_team28.Helper.BookingInformationAdapter;
 import com.example.uscrecapp_team28.Class.BookingItem;
 import com.example.uscrecapp_team28.Helper.PastBookingInformationAdapter;
+import com.example.uscrecapp_team28.Helper.RecyclerMapAdapter;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
@@ -86,16 +88,19 @@ public class BookingInformationActivityTest {
     public void DisplayReservation(){
         onView(withId(R.id.username)).perform(typeText("reservation_test"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.password)).perform(typeText("test"), ViewActions.closeSoftKeyboard());
-//        Intents.init();
         onView(withId(R.id.signinbtn)).perform(click());
-//        intended(hasComponent(MapActivity.class.getName()));
-//        Intents.release();
-//        Intents.init();
+        ArrayList<BookingItem> mapFutureList = ((RecyclerMapAdapter)((MapActivity)getCurrentActivity()).getmAdapter()).getmBookingList();
+        int future_correct_count = 0;
+        for(BookingItem b:mapFutureList){
+            if(b.getmReservation_id().equals("129")||b.getmReservation_id().equals("130")){
+                future_correct_count++;
+            }
+        }
+        assertEquals(future_correct_count,2);
         onView(withId(R.id.summarybtn)).perform(click());
         ArrayList<BookingItem> historyList = ((PastBookingInformationAdapter)((BookingInformationActivity)getCurrentActivity()).getmHistoryAdapter()).getmBookingList();
         assertEquals(1,historyList.size());
         assertEquals("128",historyList.get(0).getmReservation_id());
-//        intended(hasComponent(BookingInformationActivity.class.getName()));
         ArrayList<BookingItem> futureList = ((BookingInformationAdapter)((BookingInformationActivity)getCurrentActivity()).getmAdapter()).getmBookingList();
         assertEquals(2,futureList.size());
         int correct_count = 0;

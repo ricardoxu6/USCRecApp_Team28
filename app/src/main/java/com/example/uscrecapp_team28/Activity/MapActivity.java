@@ -34,6 +34,11 @@ public class MapActivity extends AppCompatActivity {
     private Agent agent_curr;
     private RecyclerView mRecyclerView;
     private RecyclerView mHistoryRecyclerView;
+
+    public RecyclerView.Adapter getmAdapter() {
+        return mAdapter;
+    }
+
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.Adapter mHistoryAdapter;
     private RecyclerView.LayoutManager mLayoutManager;

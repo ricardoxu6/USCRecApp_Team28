@@ -19,6 +19,9 @@ import java.util.ArrayList;
 public class RecyclerMapAdapter extends RecyclerView.Adapter {
 
     private ArrayList<BookingItem> mBookingList;
+    public ArrayList<BookingItem> getmBookingList() {
+        return mBookingList;
+    }
     Context context;
     private Agent mAgent;
     public static class BookingInformationViewHolder extends RecyclerView.ViewHolder {
