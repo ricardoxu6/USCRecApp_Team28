@@ -1,5 +1,6 @@
 package com.example.uscrecapp_team28;
 
+import com.example.uscrecapp_team28.Class.Agent;
 import com.example.uscrecapp_team28.Class.Profile;
 
 import junit.framework.TestCase;
@@ -180,5 +181,16 @@ public class ProfileTest extends TestCase {
         display.add("deviceid");
         Profile real = new Profile("deviceid");
         assertEquals(display, real.display_profile());
+        ArrayList<String> e_arr = new ArrayList<String>();
+        e_arr.add(null);
+        e_arr.add(null);
+        e_arr.add(null);
+        e_arr.add(null);
+        e_arr.add(null);
+        e_arr.add(null);
+        e_arr.add(null);
+        e_arr.add("fakeid");
+        Profile fake = new Profile("fakeid");
+        assertEquals(e_arr, fake.display_profile());
     }
 }

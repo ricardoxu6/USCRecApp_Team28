@@ -251,6 +251,10 @@ public class AgentTest extends TestCase {
         e_arr.add(null);
         e_arr.add(null);
         assertEquals(e_arr, e.view_profile());
+        // a trivial version
+        Agent t = new Agent();
+        t.setDevice_id("DNE");
+        assertEquals(e_arr, e.view_profile());
         // a real version
         Agent a = new Agent();
         a.setDevice_id("deviceid");
