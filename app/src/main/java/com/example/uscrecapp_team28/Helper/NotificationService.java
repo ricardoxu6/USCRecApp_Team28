@@ -87,7 +87,7 @@ public class NotificationService extends Service {
                             // System.out.println("Current data: " + value.getData());
                             for (Map.Entry<String, Object> entry : value.getData().entrySet()){
                                 //compare with current input
-                                if(entry.getValue().equals(unique_userid)){
+                                if(entry.getKey().equals(unique_userid)){
                                     //send notification
                                     // Create an Intent for the activity you want to start
                                     Intent resultIntent = new Intent(getApplicationContext(), BookingInformationActivity.class);
@@ -97,7 +97,7 @@ public class NotificationService extends Service {
                                     // Get the PendingIntent containing the entire back stack
                                     PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
                                     // System.out.println("send notification");
-                                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(),"channel_2").setSmallIcon(R.drawable.phoneicon).setContentTitle("USCRecAPP").setContentText("ther is a spot available!").setPriority(NotificationCompat.PRIORITY_MAX).setContentIntent(resultPendingIntent);
+                                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(),"channel_2").setSmallIcon(R.drawable.phoneicon).setContentTitle("USCRecAPP").setContentText("A spot available on "+entry.getValue()+"!").setPriority(NotificationCompat.PRIORITY_MAX).setContentIntent(resultPendingIntent);
                                     NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
                                     notificationManagerCompat.notify(1,mBuilder.build());
                                     //delete the id from db

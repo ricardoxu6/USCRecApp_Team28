@@ -169,6 +169,8 @@ public class Reservation implements ReservationInterface{
     public void cancel_reservation(String reservation_id) {
         //cancel the reservation from sql database
         this.reservation_id = reservation_id;
+        final Date[] date = new Date[1];
+        final String[] start_time = new String[1];
         Thread ThreadCancelBooking = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -189,12 +191,18 @@ public class Reservation implements ReservationInterface{
                         time_id = timeResult.getInt("timeslot_id");
                     }
                     //get the date
-                    String getDateQuery = String.format("SELECT date_id FROM timeslot \n" +
+                    String getDateQuery = String.format("SELECT date_id, start_time FROM timeslot \n" +
                             "\tWHERE timeslot_id=%s;",time_id);
                     ResultSet dateResult = s.executeQuery(getDateQuery);
                     int date_id=-1;
                     while(dateResult.next()){
                         date_id = dateResult.getInt("date_id");
+                        start_time[0] = dateResult.getString("start_time");
+                    }
+                    String getDateStringQuery = String.format("SELECT date FROM datelist WHERE date_id=%s",date_id);
+                    dateResult = s.executeQuery(getDateStringQuery);
+                    while(dateResult.next()){
+                        date[0] = dateResult.getDate("date");
                     }
                     //update the database by delete the reservation
                     String query = String.format(
@@ -230,7 +238,7 @@ public class Reservation implements ReservationInterface{
                             String user_id = waitingUserResult.getString("user_id");
                             //add the user_id to the firedb document
                             Map<String, Object> user_map= new HashMap<>();
-                            user_map.put(user_id, user_id);
+                            user_map.put(user_id, date[0].toString()+" " + start_time[0]);
                             db.collection("User").document("User")
                                     .set(user_map)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
