@@ -63,7 +63,9 @@ public class BookingActivity extends AppCompatActivity {
         this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
         mServiceIntent = new Intent(this, NotificationService.class);
         mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
+        mServiceIntent.putExtra("command",false);
         if (!isMyServiceRunning(NotificationService.class)) {
+            System.out.println("booking activity: start the notification service");
             ContextCompat.startForegroundService(this,mServiceIntent);
         }
         this.mHandler = new Handler();
@@ -207,7 +209,6 @@ public class BookingActivity extends AppCompatActivity {
         startActivity(i);
         finish();
     }
-    //TODO add the following code the all pages
     @Override
     protected void onDestroy() {
 //        System.out.println("ondestroy in service");
@@ -223,10 +224,10 @@ public class BookingActivity extends AppCompatActivity {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
+                System.out.println("booking activity: find already running service");
                 return true;
             }
         }
         return false;
     }
-    //TODO end
 }

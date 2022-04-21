@@ -60,7 +60,9 @@ public class BookingInformationActivity extends AppCompatActivity {
         this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
         mServiceIntent = new Intent(this, NotificationService.class);
         mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
+        mServiceIntent.putExtra("command",false);
         if (!isMyServiceRunning(NotificationService.class)) {
+            System.out.println("booking information activity: start the notification service");
             ContextCompat.startForegroundService(this,mServiceIntent);
         }
         //TODO end
@@ -128,6 +130,7 @@ public class BookingInformationActivity extends AppCompatActivity {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
+                System.out.println("booking informationa activity: find already running service");
                 return true;
             }
         }

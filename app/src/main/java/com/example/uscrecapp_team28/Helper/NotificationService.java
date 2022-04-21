@@ -4,7 +4,9 @@ import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -17,6 +19,8 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import com.example.uscrecapp_team28.Activity.BookingInformationActivity;
+import com.example.uscrecapp_team28.Activity.MainActivity;
 import com.example.uscrecapp_team28.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -60,9 +64,12 @@ public class NotificationService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
         unique_userid = (String)intent.getExtras().get("userId");
+        Boolean stop = (Boolean)intent.getExtras().get("command");
         // System.out.println("user id in foreground is "+ unique_userid);
-        createNotificationChannels();
-        startTimer();
+        if(!stop){
+            createNotificationChannels();
+            startTimer();
+        }
         return START_STICKY;
     }
     private Timer timer;
@@ -82,8 +89,15 @@ public class NotificationService extends Service {
                                 //compare with current input
                                 if(entry.getValue().equals(unique_userid)){
                                     //send notification
+                                    // Create an Intent for the activity you want to start
+                                    Intent resultIntent = new Intent(getApplicationContext(), BookingInformationActivity.class);
+                                    // Create the TaskStackBuilder and add the intent, which inflates the back stack
+                                    TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
+                                    stackBuilder.addNextIntentWithParentStack(resultIntent);
+                                    // Get the PendingIntent containing the entire back stack
+                                    PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
                                     // System.out.println("send notification");
-                                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(),"channel_2").setSmallIcon(R.drawable.phoneicon).setContentTitle("USCRecAPP").setContentText("ther is a spot available!").setPriority(NotificationCompat.PRIORITY_MAX);
+                                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(),"channel_2").setSmallIcon(R.drawable.phoneicon).setContentTitle("USCRecAPP").setContentText("ther is a spot available!").setPriority(NotificationCompat.PRIORITY_MAX).setContentIntent(resultPendingIntent);
                                     NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
                                     notificationManagerCompat.notify(1,mBuilder.build());
                                     //delete the id from db
@@ -137,13 +151,15 @@ public class NotificationService extends Service {
     public void onDestroy() {
         super.onDestroy();
         stoptimertask();
+        stopForeground(true);
+//        stopSelfResult(startId);
         System.out.println("ondestroy in service");
-        if (!isMyServiceRunning(NotificationService.class)) {
-            CustomBroadcastReceiver.setBroadcastReceiverId(unique_userid);
-            Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
-            sendBroadcast(broadcastIntent);
-
-        }
+//        if (!isMyServiceRunning(NotificationService.class)) {
+//            CustomBroadcastReceiver.setBroadcastReceiverId(unique_userid);
+//            Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
+//            sendBroadcast(broadcastIntent);
+//
+//        }
     }
 
     //we are going to use a handler to be able to run in our TimerTask

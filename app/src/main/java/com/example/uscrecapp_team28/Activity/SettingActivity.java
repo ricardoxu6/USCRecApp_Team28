@@ -31,6 +31,7 @@ public class SettingActivity extends AppCompatActivity {
         this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
         mServiceIntent = new Intent(this, NotificationService.class);
         mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
+        mServiceIntent.putExtra("command",false);
         if (!isMyServiceRunning(NotificationService.class)) {
             ContextCompat.startForegroundService(this,mServiceIntent);
         }
@@ -53,10 +54,27 @@ public class SettingActivity extends AppCompatActivity {
                 if(isChecked) {
                     list_toggle.setText("Notification ON ");  //To change the text near to switch
                     System.out.println("Notification ON ");
+                    mServiceIntent = new Intent(getApplicationContext(), NotificationService.class);
+                    mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
+                    mServiceIntent.putExtra("command",false);
+                    if (!isMyServiceRunning(NotificationService.class)) {
+                        System.out.println("setting: start the notification service");
+                        ContextCompat.startForegroundService(getApplicationContext(),mServiceIntent);
+                    }
                 }
                 else {
                     list_toggle.setText("Notification OFF");  //To change the text near to switch
                     System.out.println("Notification OFF");
+                    //stop the service
+                    mServiceIntent = new Intent(getApplicationContext(), NotificationService.class);
+                    mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
+                    mServiceIntent.putExtra("command",true);
+                    startService(mServiceIntent);
+                    stopService(mServiceIntent);
+                    System.out.println("setting: stop the foreground service");
+                    Intent i = new Intent(SettingActivity.this, SettingActivity.class);
+                    startActivity(i);
+                    finish();
                 }
             }
         });
@@ -85,15 +103,14 @@ public class SettingActivity extends AppCompatActivity {
         finish();
     }
 
-    //TODO add the following code the all pages
     @Override
     protected void onDestroy() {
 //        System.out.println("ondestroy in service");
-        if (!isMyServiceRunning(NotificationService.class)) {
-            CustomBroadcastReceiver.setBroadcastReceiverId(agent_curr.getUnique_userid());
-            Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
-            sendBroadcast(broadcastIntent);
-        }
+//        if (!isMyServiceRunning(NotificationService.class)) {
+//            CustomBroadcastReceiver.setBroadcastReceiverId(agent_curr.getUnique_userid());
+//            Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
+//            sendBroadcast(broadcastIntent);
+//        }
 //        System.out.println("destroy the mainactivity service");
         super.onDestroy();
     }
@@ -106,5 +123,4 @@ public class SettingActivity extends AppCompatActivity {
         }
         return false;
     }
-    //TODO end
 }

@@ -31,19 +31,19 @@ public class ProfileActivity extends AppCompatActivity {
     private Agent agent_curr;
     String photourl;
     Intent mServiceIntent;
-
+    Boolean stop = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        //TODO add this code to all pages oncreate
         this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
         mServiceIntent = new Intent(this, NotificationService.class);
         mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
+        mServiceIntent.putExtra("command",false);
         if (!isMyServiceRunning(NotificationService.class)) {
+            System.out.println("profile activity: start the notification service");
             ContextCompat.startForegroundService(this,mServiceIntent);
         }
-        //TODO end
         ArrayList<String> profile_result = agent_curr.view_profile();
 //        String unique_userid = profile_result.get(0);
 
@@ -113,6 +113,14 @@ public class ProfileActivity extends AppCompatActivity {
             return;
         }
         this.agent_curr.logout();
+        //stop the service
+        mServiceIntent = new Intent(this, NotificationService.class);
+        mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
+        mServiceIntent.putExtra("command",true);
+        startService(mServiceIntent);
+        stopService(mServiceIntent);
+        stop = true;
+        System.out.println("logout: stop the foreground service");
         if (!this.agent_curr.check_loggedin()) {
             Intent i = new Intent(ProfileActivity.this, MainActivity.class);
             startActivity(i);
@@ -135,11 +143,11 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    //TODO add the following code the all pages
     @Override
     protected void onDestroy() {
 //        System.out.println("ondestroy in service");
-        if (!isMyServiceRunning(NotificationService.class)) {
+        //if not running and not stopped
+        if (!isMyServiceRunning(NotificationService.class) && !stop) {
             CustomBroadcastReceiver.setBroadcastReceiverId(agent_curr.getUnique_userid());
             Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
             sendBroadcast(broadcastIntent);
@@ -151,10 +159,10 @@ public class ProfileActivity extends AppCompatActivity {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
+                System.out.println("profile activity: find already running service");
                 return true;
             }
         }
         return false;
     }
-    //TODO end
 }

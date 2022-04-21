@@ -62,8 +62,9 @@ public class MapActivity extends AppCompatActivity {
         this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
         mServiceIntent = new Intent(this, NotificationService.class);
         mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
+        mServiceIntent.putExtra("command",false);
         if (!isMyServiceRunning(NotificationService.class)) {
-            System.out.println("start the notification service");
+            System.out.println("map activity: start the notification service");
             ContextCompat.startForegroundService(this,mServiceIntent);
         }
         //TODO end
@@ -189,10 +190,9 @@ public class MapActivity extends AppCompatActivity {
         finish();
     }
 
-    //TODO add the following code the all pages
     @Override
     protected void onDestroy() {
-//        System.out.println("ondestroy in service");
+////        System.out.println("ondestroy in service");
         if (!isMyServiceRunning(NotificationService.class)) {
             CustomBroadcastReceiver.setBroadcastReceiverId(agent_curr.getUnique_userid());
             Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
@@ -207,11 +207,10 @@ public class MapActivity extends AppCompatActivity {
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             System.out.println("activity manager: "+service.service.getClassName());
             if (serviceClass.getName().equals(service.service.getClassName())) {
-                System.out.println("true");
+                System.out.println("map activity: find already running service");
                 return true;
             }
         }
         return false;
     }
-    //TODO end
 }
