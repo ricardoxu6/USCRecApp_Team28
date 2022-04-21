@@ -100,7 +100,7 @@ public class BookingActivityTest {
         onView(withId(R.id.profileButton)).perform(click());
         onView(withId(R.id.profile_logout)).perform(click());
         onView(withId(R.id.signin)).check(matches(withText("Sign in")));
-    }
+    };
     //Make the reservation, and then try to join the waitlist of same timeslot
     @Test
     public void joinAfterMakeTest() {
@@ -238,6 +238,34 @@ public class BookingActivityTest {
         onView(withId(R.id.profileButton)).perform(click());
         onView(withId(R.id.profile_logout)).perform(click());
     }
+
+//    @Test
+//    public void onClickRefresh() {
+//        onView(withId(R.id.username)).perform(typeText("bookingtest"), ViewActions.closeSoftKeyboard());
+//        onView(withId(R.id.password)).perform(typeText("test"), ViewActions.closeSoftKeyboard());
+//        onView(withId(R.id.signinbtn)).perform(click());
+//        onView(withId(R.id.wrong)).check(doesNotExist());
+////        intended(hasComponent("com.example.uscrecapp_team28.MapActivity"));
+//        onView(withId(R.id.button1)).perform(click());
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        Calendar cal = Calendar.getInstance();
+//        String today = sdf.format(cal.getTime());
+//        cal.add(Calendar.DATE, 1);
+//        String tomorrow =  sdf.format(cal.getTime());
+//        cal.add(Calendar.DATE, 1);
+//        String third =  sdf.format(cal.getTime());
+//        onView(withId(R.id.todaybutton))
+//                .check(matches(withText(today)));
+//        onView(withId(R.id.tomorrowbutton))
+//                .check(matches(withText(tomorrow)));
+//        onView(withId(R.id.thirdbutton))
+//                .check(matches(withText(third)));
+//        onView(withId(R.id.refreshbtn)).perform(click());
+//        onView(withId(R.id.booking_back)).perform(click());
+//        onView(withId(R.id.profileButton)).perform(click());
+//        onView(withId(R.id.profile_logout)).perform(click());
+//    }
+
 //
 //    @Test
 //    public void onClickMap() {

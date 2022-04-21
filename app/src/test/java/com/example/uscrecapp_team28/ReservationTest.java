@@ -60,8 +60,8 @@ public class ReservationTest {
         reservation.setUnique_userid(user_id);
         HashMap<String, ArrayList<BookingItem>>  m = reservation.display_all_reservation_info();
         System.out.println(m);
-        assertEquals(2,m.get("future").size());
-        assertEquals(1,m.get("history").size());
+        assertEquals(1,m.get("future").size());
+        assertEquals(2,m.get("history").size());
         assertEquals("128",m.get("history").get(0).getmReservationId());
         //contain reservation id 104 and 105
         boolean contain129 = false;
@@ -73,7 +73,7 @@ public class ReservationTest {
                 contain130 = true;
             }
         }
-        assertTrue(contain129);
+        assertFalse(contain129);
         assertTrue(contain130);
     }
 
