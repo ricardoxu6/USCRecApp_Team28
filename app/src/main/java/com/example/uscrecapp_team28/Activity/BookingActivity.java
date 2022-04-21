@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.view.View;
 
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import java.util.Date;
 
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.uscrecapp_team28.Class.Agent;
 import com.example.uscrecapp_team28.Helper.BookingAdapter;
@@ -31,6 +33,7 @@ import com.example.uscrecapp_team28.Class.TimeslotItem;
 
 public class BookingActivity extends AppCompatActivity {
     private RecyclerView tRecyclerView;
+    Handler mHandler;
 
     public RecyclerView.Adapter gettAdapter() {
         return tAdapter;
@@ -63,6 +66,8 @@ public class BookingActivity extends AppCompatActivity {
         if (!isMyServiceRunning(NotificationService.class)) {
             ContextCompat.startForegroundService(this,mServiceIntent);
         }
+        this.mHandler = new Handler();
+//        m_Runnable.run();
         // System.out.println("Booking Page Here");
         Button button1 = (Button) findViewById(R.id.todaybutton);
         Button button2 = (Button) findViewById(R.id.tomorrowbutton);
@@ -106,6 +111,15 @@ public class BookingActivity extends AppCompatActivity {
         tRecyclerView.setLayoutManager(tLayoutManager);
         tRecyclerView.setAdapter(tAdapter);
     }
+
+//    private final Runnable m_Runnable = new Runnable()
+//    {
+//        public void run()
+//        {
+//            Toast.makeText(BookingActivity.this,"refreshing",Toast.LENGTH_SHORT).show();
+//            BookingActivity.this.mHandler.postDelayed(m_Runnable,20000);
+//        }
+//    };
 
     public void onClickRefresh(View view) {
         // System.out.println("REFRESH");

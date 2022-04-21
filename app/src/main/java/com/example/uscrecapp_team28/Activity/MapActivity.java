@@ -83,7 +83,7 @@ public class MapActivity extends AppCompatActivity {
 //            }
 //        }
         //set up adapter
-        mAdapter = new RecyclerMapAdapter(futureList,agent_curr);
+        mAdapter = new RecyclerMapAdapter(futureList, agent_curr);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -123,6 +123,19 @@ public class MapActivity extends AppCompatActivity {
             return;
         }
         Intent i = new Intent(MapActivity.this, ProfileActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+    public void onClickNotification(View view) {
+        // System.out.println("TO Notification PAGE");
+        if (!this.agent_curr.check_loggedin()) {
+            Intent i = new Intent(MapActivity.this, MainActivity.class);
+            startActivity(i);
+            finish();
+            return;
+        }
+        Intent i = new Intent(MapActivity.this, SettingActivity.class);
         startActivity(i);
         finish();
     }
