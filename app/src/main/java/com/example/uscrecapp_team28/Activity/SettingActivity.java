@@ -30,15 +30,14 @@ public class SettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-        //TODO add this code to all pages oncreate
         this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
         mServiceIntent = new Intent(this, NotificationService.class);
         mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
         mServiceIntent.putExtra("command",false);
-        if (!isMyServiceRunning(NotificationService.class)) {
+        if (!isMyServiceRunning(NotificationService.class) && agent_curr.getNotification_on()) {
+            System.out.println("setting activity: start the notification service");
             ContextCompat.startForegroundService(this,mServiceIntent);
         }
-        //TODO end
         TextView message = (TextView) findViewById(R.id.notification_show);
         SwitchCompat switchMain = (SwitchCompat)findViewById(R.id.switchMAIN);
         if (agent_curr.getNotification_on()) {
@@ -75,17 +74,21 @@ public class SettingActivity extends AppCompatActivity {
                     switchMain.setText("Notification OFF");  //To change the text near to switch
                     System.out.println("Notification OFF");
                     //stop the service
+//                    agent_curr.logout();
+//                    agent_curr.setUnique_userid("");
                     mServiceIntent = new Intent(getApplicationContext(), NotificationService.class);
-                    mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
+                    mServiceIntent.putExtra("userId","");
                     mServiceIntent.putExtra("command",true);
                     startService(mServiceIntent);
                     stopService(mServiceIntent);
                     System.out.println("setting: stop the foreground service");
                     Intent i = new Intent(SettingActivity.this, SettingActivity.class);
+                    startActivity(i);
                     finish();
-                    overridePendingTransition(0, 0);
-                    startActivity(getIntent());
-                    overridePendingTransition(0, 0);
+                    return;
+//                    overridePendingTransition(0, 0);
+//
+//                    overridePendingTransition(0, 0);
                 }
             }
         });
@@ -140,29 +143,26 @@ public class SettingActivity extends AppCompatActivity {
             System.out.println("FAIL");
         }
 
-
-
-
-
-
-
     }
 
     @Override
     protected void onDestroy() {
         // System.out.println("ondestroy in service");
-        if (!isMyServiceRunning(NotificationService.class)) {
+        //create if on
+        if (!isMyServiceRunning(NotificationService.class) && agent_curr.getNotification_on()) {
             CustomBroadcastReceiver.setBroadcastReceiverId(agent_curr.getUnique_userid());
             Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
             sendBroadcast(broadcastIntent);
+             System.out.println("send broadcast");
         }
-        // System.out.println("destroy the mainactivity service");
+
         super.onDestroy();
     }
     private boolean isMyServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
+                System.out.println("setting activity: find already running service");
                 return true;
             }
         }

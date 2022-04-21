@@ -61,7 +61,7 @@ public class BookingInformationActivity extends AppCompatActivity {
         mServiceIntent = new Intent(this, NotificationService.class);
         mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
         mServiceIntent.putExtra("command",false);
-        if (!isMyServiceRunning(NotificationService.class)) {
+        if (!isMyServiceRunning(NotificationService.class) && agent_curr.getNotification_on()) {
             System.out.println("booking information activity: start the notification service");
             ContextCompat.startForegroundService(this,mServiceIntent);
         }
@@ -118,7 +118,7 @@ public class BookingInformationActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
 //        System.out.println("ondestroy in service");
-        if (!isMyServiceRunning(NotificationService.class)) {
+        if (!isMyServiceRunning(NotificationService.class) && agent_curr.getNotification_on()) {
             CustomBroadcastReceiver.setBroadcastReceiverId(agent_curr.getUnique_userid());
             Intent broadcastIntent = new Intent(this, CustomBroadcastReceiver.class);
             sendBroadcast(broadcastIntent);

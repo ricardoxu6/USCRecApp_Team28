@@ -40,7 +40,7 @@ public class NotificationService extends Service {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference reference;
     String unique_userid;
-
+    Boolean stop;
     @Override
     public IBinder onBind(Intent arg0) {
         return null;
@@ -64,11 +64,14 @@ public class NotificationService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
         unique_userid = (String)intent.getExtras().get("userId");
-        Boolean stop = (Boolean)intent.getExtras().get("command");
+        stop = (Boolean)intent.getExtras().get("command");
         // System.out.println("user id in foreground is "+ unique_userid);
         if(!stop){
             createNotificationChannels();
             startTimer();
+        }else{
+            stopForeground(true);
+            stopSelfResult(startId);
         }
         return START_STICKY;
     }
@@ -129,22 +132,22 @@ public class NotificationService extends Service {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate() {
-        String NOTIFICATION_CHANNEL_ID = "channel_1";
-        String channelName = "My Background Service";
-        NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
-        chan.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        assert manager != null;
-        manager.createNotificationChannel(chan);
+            String NOTIFICATION_CHANNEL_ID = "channel_1";
+            String channelName = "My Background Service";
+            NotificationChannel chan = new NotificationChannel(NOTIFICATION_CHANNEL_ID, channelName, NotificationManager.IMPORTANCE_NONE);
+            chan.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
+            NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            assert manager != null;
+            manager.createNotificationChannel(chan);
 
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
-        Notification notification = notificationBuilder.setOngoing(true)
-                .setSmallIcon(R.drawable.phoneicon)
-                .setContentTitle("App is running in background")
-                .setPriority(NotificationManager.IMPORTANCE_MAX)
-                .setCategory(Notification.CATEGORY_SERVICE)
-                .build();
-        startForeground(2, notification);
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID);
+            Notification notification = notificationBuilder.setOngoing(true)
+                    .setSmallIcon(R.drawable.phoneicon)
+                    .setContentTitle("App is running in background")
+                    .setPriority(NotificationManager.IMPORTANCE_MAX)
+                    .setCategory(Notification.CATEGORY_SERVICE)
+                    .build();
+            startForeground(2, notification);
     }
 
     @Override
@@ -152,7 +155,7 @@ public class NotificationService extends Service {
         super.onDestroy();
         stoptimertask();
         stopForeground(true);
-//        stopSelfResult(startId);
+//        stopSelf();
         System.out.println("ondestroy in service");
 //        if (!isMyServiceRunning(NotificationService.class)) {
 //            CustomBroadcastReceiver.setBroadcastReceiverId(unique_userid);
