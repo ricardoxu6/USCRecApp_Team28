@@ -18,6 +18,8 @@ public class Agent extends CommonServiceInterface {
     private String unique_center_id;  // change when click button
     private String unique_timeslot_id;  // change when click button
     private Profile profile = null;
+    private boolean notification_on = true;
+    private Integer notification_time = 10;
 
     public Agent() {}
 
@@ -65,6 +67,14 @@ public class Agent extends CommonServiceInterface {
         return unique_userid;
     }
 
+    public int getNotification_time() {
+        return this.notification_time;
+    }
+
+    public void setNotification_time(int t) {
+        this.notification_time = t;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -103,6 +113,14 @@ public class Agent extends CommonServiceInterface {
 
     public void setUnique_timeslot_id(String unique_timeslot_id) {
         this.unique_timeslot_id = unique_timeslot_id;
+    }
+
+    public void setNotification_on(boolean b) {
+        this.notification_on = b;
+    }
+
+    public boolean getNotification_on() {
+        return this.notification_on;
     }
 
     public void setDevice_id(String device_id) {
