@@ -237,22 +237,13 @@ public class Reservation implements ReservationInterface{
                         while(waitingUserResult.next()){
                             String user_id = waitingUserResult.getString("user_id");
                             //add the user_id to the firedb document
-                            Map<String, Object> user_map= new HashMap<>();
-                            user_map.put(user_id, date[0].toString()+" " + start_time[0]);
-                            db.collection("User").document("User")
-                                    .set(user_map)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            // System.out.println("success");
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            // System.out.println("fail");
-                                        }
-                                    });
+
+                            db.collection("User").document("User").update(user_id,date[0].toString()+" " + start_time[0]).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+
+                                }
+                            });
                         }
                     }
                     connection.close();
