@@ -18,8 +18,8 @@ public class Agent extends CommonServiceInterface {
     private String unique_center_id;  // change when click button
     private String unique_timeslot_id;  // change when click button
     private Profile profile = null;
-    private boolean notification_on = true;
-    private Integer notification_time = 10;
+    private boolean notification_on;
+    private Integer notification_time;
 
     public Agent() {}
 
@@ -36,6 +36,9 @@ public class Agent extends CommonServiceInterface {
         setPhotourl(result.get(4));
         setName(result.get(5));
         setEmail(result.get(6));
+        System.out.println("INIT INFO CALLED !!!!!!!!");
+        setNotification_on(profile.getPNotification_on());
+        setNotification_time(profile.getPNotification_time());
         // System.out.println("AGENT: SET UNIQUE USERID: " + unique_userid);
     }
 
@@ -116,6 +119,7 @@ public class Agent extends CommonServiceInterface {
     }
 
     public void setNotification_on(boolean b) {
+        System.out.println("setNotification_on called!!!, value is: " + b);
         this.notification_on = b;
     }
 

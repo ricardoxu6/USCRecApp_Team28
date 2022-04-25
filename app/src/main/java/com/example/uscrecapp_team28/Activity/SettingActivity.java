@@ -21,6 +21,10 @@ import com.example.uscrecapp_team28.Helper.NotificationService;
 import com.example.uscrecapp_team28.MyApplication;
 import com.example.uscrecapp_team28.R;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
 public class SettingActivity extends AppCompatActivity {
 
     private Agent agent_curr;
@@ -55,6 +59,30 @@ public class SettingActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
                     agent_curr.setNotification_on(true);
+                    // update database
+                    try {
+                        Thread thread_device = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try  {
+                                    Class.forName("com.mysql.jdbc.Driver");
+                                    String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
+                                    Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
+                                    Statement s = connection.createStatement();
+                                    String update = String.format("UPDATE user SET notification_on='%s' WHERE device_id='%s';", "true", agent_curr.getDevice_id());
+                                    int i = s.executeUpdate(update);
+                                    System.out.println("Update Complete");
+                                    connection.close();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        thread_device.start();
+                        thread_device.join();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     TextView message = (TextView) findViewById(R.id.notification_show);
                     message.setText("Currently, you will receive notification " + agent_curr.getNotification_time() + " minutes before your next reservation");
                     switchMain.setText("Notification ON ");  //To change the text near to switch
@@ -69,6 +97,30 @@ public class SettingActivity extends AppCompatActivity {
                 }
                 else {
                     agent_curr.setNotification_on(false);
+                    // update database
+                    try {
+                        Thread thread_device = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try  {
+                                    Class.forName("com.mysql.jdbc.Driver");
+                                    String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
+                                    Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
+                                    Statement s = connection.createStatement();
+                                    String update = String.format("UPDATE user SET notification_on='%s' WHERE device_id='%s';", "false", agent_curr.getDevice_id());
+                                    int i = s.executeUpdate(update);
+                                    System.out.println("Update Complete");
+                                    connection.close();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        thread_device.start();
+                        thread_device.join();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     TextView message = (TextView) findViewById(R.id.notification_show);
                     message.setText("Currently, you will NOT receive notification for upcoming reservations");
                     switchMain.setText("Notification OFF");  //To change the text near to switch
@@ -86,22 +138,9 @@ public class SettingActivity extends AppCompatActivity {
                     startActivity(i);
                     finish();
                     return;
-//                    overridePendingTransition(0, 0);
-//
-//                    overridePendingTransition(0, 0);
                 }
             }
         });
-
-//
-//        yourSwitchButton.setOnCheckedChangeListener((compoundButton, b) -> {
-//            if (b){
-//                //open job.
-//            }
-//            else  {
-//                //close job.
-//            }
-//        });
     }
 
     public void onClickSettingBack(View view) {
@@ -133,6 +172,32 @@ public class SettingActivity extends AppCompatActivity {
             message.setText("Currently, you will receive notification " + new_minute + " minutes before your next reservation");
             System.out.println("SUCCESS");
             agent_curr.setNotification_time(new_minute);
+            // update database
+            // update database
+            try {
+                Thread thread_device = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try  {
+                            Class.forName("com.mysql.jdbc.Driver");
+                            String connectionUrl = "jdbc:mysql://sql3.freemysqlhosting.net:3306/sql3479112?characterEncoding=latin1";
+                            Connection connection = DriverManager.getConnection(connectionUrl,"sql3479112","k1Q9Fq3375");
+                            Statement s = connection.createStatement();
+                            String update = String.format("UPDATE user SET notification_time='%d' WHERE device_id='%s';", new_minute, agent_curr.getDevice_id());
+                            int i = s.executeUpdate(update);
+                            System.out.println("Update Complete");
+                            connection.close();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                thread_device.start();
+                thread_device.join();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             System.out.println(agent_curr.getNotification_time());
         }
         catch (Exception e)

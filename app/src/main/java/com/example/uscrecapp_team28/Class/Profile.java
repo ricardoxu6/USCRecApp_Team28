@@ -16,6 +16,25 @@ public class Profile implements ProfileInterface{
     String email;
     String device_id;
     ResultSet profile_result;
+    boolean notification_on;
+    Integer notification_time;
+
+    public boolean getPNotification_on() {
+        return notification_on;
+    }
+
+    public void setPNotification_on(boolean notification_on) {
+        this.notification_on = notification_on;
+    }
+
+    public Integer getPNotification_time() {
+        return notification_time;
+    }
+
+    public void setPNotification_time(Integer notification_time) {
+        this.notification_time = notification_time;
+    }
+
 
     public Profile(String did) {
         this.device_id = did;
@@ -42,6 +61,13 @@ public class Profile implements ProfileInterface{
                             setPhotourl(result.getString("photourl"));
                             setName(result.getString("name"));
                             setEmail(result.getString("email"));
+                            String noti_on_temp = result.getString("notification_on");
+                            if (noti_on_temp.equals("true")) {
+                                setPNotification_on(true);
+                            } else {
+                                setPNotification_on(false);
+                            }
+                            setPNotification_time(Integer.parseInt(result.getString("notification_time")));
                         }
                         setResult(result);
                         connection.close();
