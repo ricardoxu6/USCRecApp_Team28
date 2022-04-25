@@ -98,7 +98,7 @@ public class NotificationService extends Service {
                                     TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
                                     stackBuilder.addNextIntentWithParentStack(resultIntent);
                                     // Get the PendingIntent containing the entire back stack
-                                    PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                                    PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_IMMUTABLE);
                                     // System.out.println("send notification");
                                     NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext(),"channel_2").setSmallIcon(R.drawable.phoneicon).setContentTitle("USCRecAPP").setContentText("A spot available on "+entry.getValue()+"!").setPriority(NotificationCompat.PRIORITY_MAX).setContentIntent(resultPendingIntent);
                                     NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
