@@ -182,16 +182,28 @@
     </RelativeLayout>
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/main_profile">
 
         <LinearLayout
-            android:layout_width="360dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center|top"
             android:layout_marginTop="40dp"
             android:orientation="vertical">
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/change_pw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:alpha="0.7"
+                android:onClick="onClickChangePW"
+                android:text="Change Password"
+                android:textColor="@color/uscRed"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"

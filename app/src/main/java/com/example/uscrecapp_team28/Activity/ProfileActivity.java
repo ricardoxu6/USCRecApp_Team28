@@ -104,6 +104,19 @@ public class ProfileActivity extends AppCompatActivity {
         finish();
     }
 
+    public void onClickChangePW(View view) {
+        // System.out.println("BACK TO MAP PAGE");
+        if (!this.agent_curr.check_loggedin()) {
+            Intent i = new Intent(ProfileActivity.this, MainActivity.class);
+            startActivity(i);
+            finish();
+            return;
+        }
+        Intent i = new Intent(ProfileActivity.this, ChangePwActivity.class);
+        startActivity(i);
+        finish();
+    }
+
     public void onClickLogout(View view) {
         // System.out.println("LOGOUT");
         if (!this.agent_curr.check_loggedin()) {
