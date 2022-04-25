@@ -25,6 +25,9 @@
             android:exported="true"
             android:label="RestartServiceWhenStopped"></receiver>
 
+        <receiver android:name=".Class.ReminderBroadcast"/>
+
+
         <activity
             android:name=".Activity.WifiActivity"
             android:exported="false"

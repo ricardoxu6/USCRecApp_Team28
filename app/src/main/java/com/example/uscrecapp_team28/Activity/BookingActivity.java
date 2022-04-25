@@ -18,12 +18,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.uscrecapp_team28.Class.Agent;
+import com.example.uscrecapp_team28.Class.BookingItem;
+import com.example.uscrecapp_team28.Class.NotificationUtils;
 import com.example.uscrecapp_team28.Helper.BookingAdapter;
 import com.example.uscrecapp_team28.Helper.CustomBroadcastReceiver;
 import com.example.uscrecapp_team28.MyApplication;
@@ -61,6 +64,45 @@ public class BookingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking);
         this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
+        HashMap<String, ArrayList<BookingItem>> m = agent_curr.view_all_reservations();
+        ArrayList<BookingItem> futureList = (ArrayList<BookingItem>) m.get("future");
+        if(futureList.size() > 0){
+            Date date1 = new Date();
+            long timemilli = date1.getTime();
+            String time1 = futureList.get(0).getText2();
+//            String time1 = "2022-04-22 16:53";
+            time1 = time1+":00";
+            try{
+                Date date2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(time1);
+                int min = agent_curr.getNotification_time();
+                long timemilli2 = date2.getTime();
+                if((timemilli2 - 1000 * 60 * min) < timemilli ){
+                    if(futureList.size() > 1){
+                        System.out.print("Notify the second reservation at: ");
+                        System.out.println(futureList.get(1).getText2());
+                        String time3 = futureList.get(1).getText2();
+                        reminderNotification(time3, min);
+                    }
+                    else{
+                        cancelNotification();
+                    }
+                }
+                else{
+                    System.out.print("Notify the first reservation at: ");
+                    System.out.println(futureList.get(0).getText2());
+                    reminderNotification(futureList.get(0).getText2(), agent_curr.getNotification_time());
+                }
+
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+        else{
+            System.out.println("Cancel the notification");
+            cancelNotification();
+        }
         mServiceIntent = new Intent(this, NotificationService.class);
         mServiceIntent.putExtra("userId",agent_curr.getUnique_userid());
         mServiceIntent.putExtra("command",false);
@@ -112,6 +154,8 @@ public class BookingActivity extends AppCompatActivity {
         }
         tRecyclerView.setLayoutManager(tLayoutManager);
         tRecyclerView.setAdapter(tAdapter);
+
+
     }
 
 //    private final Runnable m_Runnable = new Runnable()
@@ -209,6 +253,30 @@ public class BookingActivity extends AppCompatActivity {
         startActivity(i);
         finish();
     }
+    public void reminderNotification(String time, int minutes)
+    {
+
+        NotificationUtils _notificationUtils = new NotificationUtils(this);
+        Date date1;
+        time = time+":00";
+        try{
+            date1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(time);
+            long millis = date1.getTime();
+            long sixtySeconds = 1000 * minutes * 60;
+            long _triggerReminder = millis - sixtySeconds - 30000;
+            _notificationUtils.setReminder(_triggerReminder);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public void cancelNotification(){
+        NotificationUtils _notificationUtils = new NotificationUtils(this);
+        _notificationUtils.cancelReminder();
+    }
+
     @Override
     protected void onDestroy() {
 //        System.out.println("ondestroy in service");

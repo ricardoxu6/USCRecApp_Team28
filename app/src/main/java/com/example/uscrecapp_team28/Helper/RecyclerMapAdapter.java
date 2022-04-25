@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import android.graphics.Color;
 
 import com.example.uscrecapp_team28.Class.Agent;
 import com.example.uscrecapp_team28.Class.BookingItem;
@@ -54,6 +57,14 @@ public class RecyclerMapAdapter extends RecyclerView.Adapter {
         BookingItem currentItem = mBookingList.get(position);
         ((BookingInformationAdapter.BookingInformationViewHolder) holder).mTextView1.setText(currentItem.getText1());
         ((BookingInformationAdapter.BookingInformationViewHolder) holder).mTextView2.setText(currentItem.getText2());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 1);
+        String today = sdf.format(cal.getTime());
+        System.out.print("Current Item:");
+        if(currentItem.getText2().substring(0,10).equals(today)){
+            ((BookingInformationAdapter.BookingInformationViewHolder) holder).mTextView2.setTextColor(Color.RED);
+        }
     }
 
     @Override

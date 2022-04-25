@@ -8,12 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.graphics.Color;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 
 import com.example.uscrecapp_team28.Activity.BookingInformationActivity;
 import com.example.uscrecapp_team28.Class.Agent;
@@ -68,6 +73,15 @@ public class BookingInformationAdapter<MyActivity> extends RecyclerView.Adapter 
         } else {
             ((BookingInformationViewHolder) holder).backImage.setBackground(ContextCompat.getDrawable(context, R.drawable.village));
         }
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 1);
+        String today = sdf.format(cal.getTime());
+        System.out.print("Current Item:");
+        if(currentItem.getText2().substring(0,10).equals(today)){
+            ((BookingInformationViewHolder) holder).mTextView2.setTextColor(Color.RED);
+        }
+
         ((BookingInformationViewHolder) holder).cancelButton.setTag(currentItem.getmReservationId());
         ((BookingInformationViewHolder) holder).cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
