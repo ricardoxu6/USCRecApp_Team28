@@ -66,7 +66,7 @@ public class BookingActivity extends AppCompatActivity {
         this.agent_curr = ((MyApplication) this.getApplication()).getAgent();
         HashMap<String, ArrayList<BookingItem>> m = agent_curr.view_all_reservations();
         ArrayList<BookingItem> futureList = (ArrayList<BookingItem>) m.get("future");
-        if(futureList.size() > 0){
+        if(futureList.size() > 0 && agent_curr.getNotification_on()){
             Date date1 = new Date();
             long timemilli = date1.getTime();
             String time1 = futureList.get(0).getText2();
@@ -84,6 +84,7 @@ public class BookingActivity extends AppCompatActivity {
                         reminderNotification(time3, min);
                     }
                     else{
+                        System.out.println("Less than the notification minutes set");
                         cancelNotification();
                     }
                 }
@@ -100,6 +101,7 @@ public class BookingActivity extends AppCompatActivity {
 
         }
         else{
+            System.out.println("No reservation");
             System.out.println("Cancel the notification");
             cancelNotification();
         }
@@ -263,8 +265,8 @@ public class BookingActivity extends AppCompatActivity {
             date1 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(time);
             long millis = date1.getTime();
             long sixtySeconds = 1000 * minutes * 60;
-            long _triggerReminder = millis - sixtySeconds - 30000;
-            _notificationUtils.setReminder(_triggerReminder);
+            long _triggerReminder = millis - sixtySeconds - 20000;
+            _notificationUtils.setReminder(_triggerReminder, time);
         }
         catch(Exception e){
             e.printStackTrace();

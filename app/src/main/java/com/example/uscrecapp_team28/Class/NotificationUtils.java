@@ -54,9 +54,10 @@ public class NotificationUtils extends ContextWrapper {
         return _notificationManager;
     }
 
-    public void setReminder(long timeInMillis)
+    public void setReminder(long timeInMillis, String time)
     {
         Intent _intent = new Intent(_context, ReminderBroadcast.class);
+        _intent.putExtra("time", time);
         PendingIntent _pendingIntent = PendingIntent.getBroadcast(_context, 0, _intent, PendingIntent.FLAG_IMMUTABLE);
 
         AlarmManager _alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
