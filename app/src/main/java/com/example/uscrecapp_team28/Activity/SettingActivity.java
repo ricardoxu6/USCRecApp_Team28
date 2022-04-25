@@ -1,6 +1,7 @@
 package com.example.uscrecapp_team28.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.content.ContextCompat;
 
@@ -10,8 +11,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -52,12 +55,20 @@ public class SettingActivity extends AppCompatActivity {
             switchMain.setChecked(false);
             switchMain.setText("Notification OFF");
             message.setText("Currently, you will NOT receive notification for upcoming reservations");
+            AppCompatButton confirm_btn = (AppCompatButton) findViewById(R.id.confirm_noti_change);
+            confirm_btn.setVisibility(View.INVISIBLE);
+            RelativeLayout tb = (RelativeLayout) findViewById(R.id.textblock);
+            tb.setVisibility(View.INVISIBLE);
         }
 
         switchMain.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
+                    AppCompatButton confirm_btn = (AppCompatButton) findViewById(R.id.confirm_noti_change);
+                    confirm_btn.setVisibility(View.VISIBLE);
+                    RelativeLayout tb = (RelativeLayout) findViewById(R.id.textblock);
+                    tb.setVisibility(View.VISIBLE);
                     agent_curr.setNotification_on(true);
                     // update database
                     try {
@@ -96,6 +107,10 @@ public class SettingActivity extends AppCompatActivity {
                     }
                 }
                 else {
+                    AppCompatButton confirm_btn = (AppCompatButton) findViewById(R.id.confirm_noti_change);
+                    confirm_btn.setVisibility(View.INVISIBLE);
+                    RelativeLayout tb = (RelativeLayout) findViewById(R.id.textblock);
+                    tb.setVisibility(View.INVISIBLE);
                     agent_curr.setNotification_on(false);
                     // update database
                     try {
@@ -194,11 +209,14 @@ public class SettingActivity extends AppCompatActivity {
                 });
                 thread_device.start();
                 thread_device.join();
+                minuteView.getText().clear();
+                findViewById(R.id.wrongwrong).setVisibility(View.INVISIBLE);
             } catch (Exception e) {
                 e.printStackTrace();
+                minuteView.getText().clear();
             }
-
             System.out.println(agent_curr.getNotification_time());
+            findViewById(R.id.wrongwrong).setVisibility(View.INVISIBLE);
         }
         catch (Exception e)
         {

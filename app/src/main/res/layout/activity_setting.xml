@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.SettingActivity">
+    tools:context=".Activity.SettingActivity"
+    android:background="@drawable/tommy">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/profile_back"
@@ -24,7 +25,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:background="@color/white"
+        android:alpha="0.8">
 
         <TextView
             android:id="@+id/notification_show"
@@ -36,7 +39,8 @@
             android:layout_marginTop="5dp"
             android:text="Currently, you will receive notification XXX minutes before your next reservation"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="25sp"
+            android:textStyle="bold"
             />
 
         <androidx.appcompat.widget.SwitchCompat
@@ -48,9 +52,11 @@
             android:scaleY="2.5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:textStyle="bold"/>
 
         <RelativeLayout
+            android:id="@+id/textblock"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -64,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="Remind Me "
+                android:text="Remind me "
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -74,9 +80,10 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/textremindbefore"
                 android:backgroundTint="@android:color/darker_gray"
-                android:hint="    10    "
+                android:hint=" enter "
                 android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textremindafter"

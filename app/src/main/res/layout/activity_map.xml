@@ -29,15 +29,15 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/notificationButton"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
             android:layout_gravity="top|right"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/noti_icon"
             android:backgroundTint="@color/uscRed"
-            android:layout_alignParentRight="true"
-            android:onClick="onClickNotification"/>
+            android:onClick="onClickNotification" />
 
         <TextView
             android:id="@+id/profileText"
