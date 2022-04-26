@@ -59,7 +59,6 @@ public class RecyclerMapAdapter extends RecyclerView.Adapter {
         ((BookingInformationAdapter.BookingInformationViewHolder) holder).mTextView2.setText(currentItem.getText2());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, 1);
         String today = sdf.format(cal.getTime());
         System.out.print("Current Item:");
         if(currentItem.getText2().substring(0,10).equals(today)){
